@@ -1,2 +1,3 @@
 # fullstack-uppgift
-Första versionen
+
+Nu har jag lagt till ny info här!
