@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d664fd0-59e1-484c-bbe4-18bb968db79d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fronend/Ara.js" beforeDir="false" afterPath="$PROJECT_DIR$/fronend/Ara.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +41,7 @@
       <workItem from="1651579158859" duration="772000" />
       <workItem from="1651650156447" duration="73000" />
       <workItem from="1651651597455" duration="950000" />
+      <workItem from="1651653903161" duration="352000" />
     </task>
     <servers />
   </component>
