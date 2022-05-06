@@ -1,27 +1,36 @@
+import dotenv from 'dotenv'
 import {Express} from 'express'
 import {connect} from 'mongoose'
+import Logger from '../utils/Logger'
 
-const port = process.env.SERVER_PORT || 3001
-const env = process.env.NODE_ENV;
-const mongodbUrl: string = process.env.MONGODB_URL || 'mongodb://localhost:27017//'
-const dbName = process.env.MONGODB_DB_NAME || 'bookface'
+dotenv.config()
+
+const PORT: number = Number(process.env.PORT) || 3001
+const env: string = process.env.NODE_ENV || 'production'
+
+let uri: string
+
+if (env === 'development') {
+    uri = process.env.MONGODB_URL + process.env.MONGODB_DB_NAME
+} else {
+    uri = process.env.MONGODB_URI
+}
 
 const connectToDatabase = async () => {
-    const uri = mongodbUrl + dbName
     try {
         await connect(uri)
-        console.log('Ansluten till databasen!')
+        Logger.info('Ansluten till databasen!')
     } catch (error) {
-        console.log('Fel vid anslutning till databasen'.toUpperCase(), error)
+        Logger.error('Fel vid anslutning till databasen'.toUpperCase(), error)
         process.exit()
     }
 }
 
-const connectToPort = (app: Express) => {
-    app.listen(port, () => {
-        console.log(`Server startad i port: ${port}`)
+const connectToPort = (server: Express) => {
+    server.listen(PORT, () => {
+        Logger.info(`Server startad i port: ${PORT}`)
         if (env === 'development') {
-            console.log('Server körs i utvecklings läge!')
+            Logger.warn('Server körs i utvecklings läge!'.toUpperCase())
         }
     })
 }
