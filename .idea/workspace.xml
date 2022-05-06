@@ -2,22 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d664fd0-59e1-484c-bbe4-18bb968db79d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/src/config/Config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/controllers/auth/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/controllers/posts/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/controllers/shared/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/controllers/users/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/interfaces/IPost.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/interfaces/IUser.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/meddleware/auth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/models/Post.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/models/User.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/routes/auth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/routes/posts.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/routes/users.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/types/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,17 +20,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/aram1/OneDrive/Skrivbord/GitHub Repo/fullstack-uppgift&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\aram1\\OneDrive\\Skrivbord\\GitHub Repo\\fullstack-uppgift\\server\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,15 +29,6 @@
       <option name="presentableId" value="Default" />
       <updated>1651578749408</updated>
       <workItem from="1651578752967" duration="375000" />
-      <workItem from="1651579158859" duration="772000" />
-      <workItem from="1651650156447" duration="73000" />
-      <workItem from="1651651597455" duration="950000" />
-      <workItem from="1651653903161" duration="1431000" />
-      <workItem from="1651737699644" duration="136000" />
-      <workItem from="1651742236468" duration="1076000" />
-      <workItem from="1651748508028" duration="867000" />
-      <workItem from="1651750844356" duration="113000" />
-      <workItem from="1651750983523" duration="3016000" />
     </task>
     <servers />
   </component>
