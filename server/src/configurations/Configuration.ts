@@ -10,11 +10,11 @@ const env: string = process.env.NODE_ENV || 'production'
 
 let uri: string = process.env.MONGODB_URI || 'http://localhost'
 
-if (env === 'development') {
-	uri = process.env.MONGODB_URL + process.env.MONGODB_DB_NAME
-} else {
-	uri = process.env.MONGODB_URI
-}
+// if (env === 'development') {
+// 	uri = process.env.MONGODB_URL + process.env.MONGODB_DB_NAME
+// } else {
+// 	uri = process.env.MONGODB_URI
+// }
 
 const connectToDatabase = async () => {
 	try {
