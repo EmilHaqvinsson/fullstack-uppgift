@@ -7,9 +7,10 @@ const Alive = () => {
 	const [connected, setConnected] = useState<boolean>(false)
 	
 	const alive = () => {
+		console.log(AliveService.apiConnectionStatus())
 		AliveService.apiConnectionStatus()
 			.then(response => {
-				// console.log(response.data)
+				console.log(response.data)
 				setText(response.data)
 				setConnected(true)
 			})
