@@ -1,17 +1,9 @@
 
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-;
-server/.env,7\4\74c0224311d9cb9feca55cc2c27a2b847c0286e7
-D
-server/.env_templete,d\5\d5bf1818e2fedc1ddbdcd882e42f4e8adc61715e
 D
 server/tsconfig.json,3\d\3d7d95880241a5b8b6b4711c4fa9494745ed9aa3
-K
-server/src/config/Config.ts,3\1\31e3878c9f3c03a955ea01617e60d6930fff860b
 T
 $server/src/controllers/auth/index.ts,5\7\5718267f0920422cf1715503b28ca9e7cb239403
 U
@@ -38,5 +30,3 @@ J
 server/src/routes/users.ts,4\0\40b91238d234230c054ed2d220f4b315db2b4e19
 I
 server/src/types/index.ts,f\f\ff0aeb48df8d9bf7e80723556fff6a93946f820f
-?
-server/index.ts,4\8\485088acb0dccb1042df72cb5f696c4ec52599b6
