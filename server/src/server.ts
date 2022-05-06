@@ -1,7 +1,7 @@
 import express from 'express'
 import Configuration from './configurations/Configuration'
-// import Middleware from './middleware/Middleware/'
-import AliveRoutes from './routes/AliveRoute'
+// import Middleware from './middlewares/Middleware'
+import AliveRoutes from './routes/AliveRoutes'
 // import UserRoutes from './routes/UserRoutes'
 import Logger from './utils/Logger'
 
