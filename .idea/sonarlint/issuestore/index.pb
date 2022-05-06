@@ -7,11 +7,7 @@
 ;
 server/.env,7\4\74c0224311d9cb9feca55cc2c27a2b847c0286e7
 D
-server/.env_templete,d\5\d5bf1818e2fedc1ddbdcd882e42f4e8adc61715e
-D
 server/tsconfig.json,3\d\3d7d95880241a5b8b6b4711c4fa9494745ed9aa3
-K
-server/src/config/Config.ts,3\1\31e3878c9f3c03a955ea01617e60d6930fff860b
 T
 $server/src/controllers/auth/index.ts,5\7\5718267f0920422cf1715503b28ca9e7cb239403
 U
