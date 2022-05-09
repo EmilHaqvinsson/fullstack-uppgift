@@ -1,8 +1,26 @@
-h1 {
+.text {
     margin: 0;
+    text-align: center;
 }
 
 .headerContainer {
+    max-width: 100%;
     height: 100px;
-    background-color: #f04134;
+    background-color: #22577E;
+    margin: 0;
+    padding: 0;
+}
+
+/*tablet*/
+@media only screen and (min-width: 768px) {
+    .headerContainer {
+        max-width: 100%;
+    }
+}
+
+/*desktop*/
+@media only screen and (min-width: 1200px) {
+    .headerContainer {
+max-width: 100%;
+    }
 }
