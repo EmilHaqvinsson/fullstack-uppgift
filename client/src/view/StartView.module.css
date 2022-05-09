@@ -41,7 +41,11 @@ button {
 }
 
 hr {
+<<<<<<< Updated upstream
     width: 250px;
+=======
+    width: 260px;
+>>>>>>> Stashed changes
 }
 
 .buttonCreateNewAccount {
