@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d664fd0-59e1-484c-bbe4-18bb968db79d" name="Changes" comment="">
+<<<<<<< Updated upstream
+=======
+      <change afterPath="$PROJECT_DIR$/server/src/controllers/UController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/models/UModel.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/utils/InterFace.ts" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
