@@ -1,0 +1,171 @@
+/*mobile*/
+.mainGridContainer {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    background-color: #e3efee;
+    height: 200px;
+}
+
+.item {
+    background-color: #e3efee;
+}
+
+.text {
+    text-align: center;
+    color: #5584AC;
+}
+
+.itemOne {
+    background-color: #e3efee;
+}
+
+.textOne {
+    color: grey;
+}
+
+input {
+    border-radius: 7px;
+    padding: 8px;
+    width: 250px;
+    border: grey solid 1px;
+    margin: 0 50px 5px;
+}
+
+button {
+    width: 270px;
+    border-radius: 7px;
+    border: grey solid 1px;
+    padding: 8px;
+    background-color: #22577E;
+    margin: 10px 50px 10px;
+}
+
+hr {
+    width: 250px;
+}
+
+.buttonCreateNewAccount {
+    background-color: #00a854;
+    margin-top: 10px;
+}
+
+/*tablet*/
+@media only screen and (min-width: 768px) {
+    .mainGridContainer {
+        grid-template-columns: repeat(2, 1fr);
+        background-color: #e3efee;
+    }
+
+    .item {
+        margin-top: 70px;
+        background-color: #e3efee;
+    }
+
+    .text {
+        text-align: center;
+        color: #5584AC;
+    }
+
+    .itemOne {
+        background-color: #e3efee;
+    }
+
+    .textOne {
+        color: grey;
+        text-align: center;
+    }
+
+    input {
+        border-radius: 7px;
+        padding: 8px;
+        width: 200px;
+        border: grey solid 1px;
+        margin: 0 100px 5px;
+    }
+
+    button {
+        width: 220px;
+        border-radius: 7px;
+        border: grey solid 1px;
+        padding: 8px;
+        background-color: #22577E;
+        margin: 10px 100px 10px;
+    }
+
+    hr {
+        width: 230px;
+    }
+
+    .buttonCreateNewAccount {
+        background-color: #00a854;
+        margin-top: 10px;
+    }
+
+    section {
+        margin-top: 70px;
+    }
+}
+
+/*desktop*/
+@media only screen and (min-width: 1200px) {
+    .mainGridContainer {
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+        background-color: #e3efee;
+        height: 500px;
+    }
+
+    .item {
+        margin-top: 70px;
+        background-color: #e3efee;
+    }
+
+    .text {
+        text-align: center;
+        color: #5584AC;
+    }
+
+    .itemOne {
+        background-color: #e3efee;
+    }
+
+    .textOne {
+        color: grey;
+        text-align: center;
+    }
+
+    input {
+        border-radius: 7px;
+        padding: 8px;
+        width: 250px;
+        border: grey solid 1px;
+        margin: 0 250px 5px;
+    }
+
+    button {
+        width: 270px;
+        border-radius: 7px;
+        border: grey solid 1px;
+        padding: 8px;
+        background-color: #22577E;
+        margin: 10px 250px 10px;
+    }
+
+    hr {
+        width: 270px;
+    }
+
+    .buttonCreateNewAccount {
+        background-color: #00a854;
+        margin-top: 10px;
+    }
+
+    section {
+        margin-top: 70px;
+    }
+
+}
