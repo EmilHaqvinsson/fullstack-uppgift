@@ -6,15 +6,15 @@ dotenv.config()
 const dbCollection = process.env.MONGODB_COLLECTION_USERS
 
 const USchema = new Schema<CreateU>({
-    name: {
+    fullName: {
         type: String,
         required: true
     },
-    userName: {
+    eMail: {
         type: String,
         required: true,
     },
-    eMail: {
+    pass: {
         type: String,
         required: true,
     }
@@ -22,6 +22,6 @@ const USchema = new Schema<CreateU>({
     timestamps: true
 })
 
-const UModel = model<CreateU>(dbCollection, USchema)
+const UModel = model<CreateU>(String(dbCollection), USchema)
 
 export default UModel
