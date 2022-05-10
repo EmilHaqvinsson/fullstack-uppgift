@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 type Props = { 
-  saveTodo: (e: React.FormEvent, formData: ITodo | any) => void 
+  saveUser: (e: React.FormEvent, formData: | any) => void 
 }
 
-const AddTodo: React.FC<Props> = ({ saveTodo }) => {
-  const [formData, setFormData] = useState<ITodo | {}>()
+const RegisterView: React.FC<Props> = ({ saveUser }) => {
+  const [formData, setFormData] = useState< | {}>()
 
   const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
     setFormData({
@@ -15,7 +15,7 @@ const AddTodo: React.FC<Props> = ({ saveTodo }) => {
   }
 
   return (
-    <form className='Form' onSubmit={(e) => saveTodo(e, formData)}>
+    <form className='Form' onSubmit={(e) => saveUser(e, formData)}>
       <div>
         <div>
           <label htmlFor='name'>Name</label>
@@ -31,4 +31,4 @@ const AddTodo: React.FC<Props> = ({ saveTodo }) => {
   )
 }
 
-export default AddTodo
+export default RegisterView
