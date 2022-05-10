@@ -7,6 +7,7 @@
     background-color: #e3efee;
     height: 200px;
 }
+
 .item {
     background-color: #e3efee;
 }
@@ -15,6 +16,7 @@
     text-align: center;
     color: #5584AC;
 }
+
 .itemOne {
     background-color: #e3efee;
 }
@@ -41,11 +43,8 @@ button {
 }
 
 hr {
-<<<<<<< Updated upstream
     width: 250px;
-=======
     width: 260px;
->>>>>>> Stashed changes
 }
 
 .buttonCreateNewAccount {
@@ -59,6 +58,7 @@ hr {
         grid-template-columns: repeat(2, 1fr);
         background-color: #e3efee;
     }
+
     .item {
         margin-top: 70px;
         background-color: #e3efee;
@@ -68,6 +68,7 @@ hr {
         text-align: center;
         color: #5584AC;
     }
+
     .itemOne {
         background-color: #e3efee;
     }
@@ -118,6 +119,7 @@ hr {
         background-color: #e3efee;
         height: 500px;
     }
+
     .item {
         margin-top: 70px;
         background-color: #e3efee;
@@ -127,6 +129,7 @@ hr {
         text-align: center;
         color: #5584AC;
     }
+
     .itemOne {
         background-color: #e3efee;
     }
