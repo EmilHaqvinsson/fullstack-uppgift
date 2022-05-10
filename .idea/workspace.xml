@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="5d664fd0-59e1-484c-bbe4-18bb968db79d" name="Changes" comment="" />
-=======
-    <list default="true" id="5d664fd0-59e1-484c-bbe4-18bb968db79d" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/client/src/components/navigationBar/NavigationBar.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/client/src/utils/routing/Routing.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/client/src/utils/routing/RoutingPath.ts" afterDir="false" />
@@ -19,8 +15,7 @@
       <change beforePath="$PROJECT_DIR$/client/src/components/header/Header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/header/Header.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/header/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/utils/styles/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/styles/global.css" afterDir="false" />
-    </list>
->>>>>>> Stashed changes
+ </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
