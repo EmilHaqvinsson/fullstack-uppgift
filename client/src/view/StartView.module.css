@@ -168,4 +168,56 @@ hr {
         margin-top: 70px;
     }
 
+    .popup, .overlay {
+        width: 100vw;
+        max-height: 250vh;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: fixed;
+    }
+
+    .overlay {
+        background: rgba(49, 49, 49, 0.8);
+    }
+
+    .popupWindow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #f1f1f1;
+        padding: 15px;
+        border-radius: 5px;
+        width: 300px;
+        height: 400px;
+    }
+
+    .inputPopupWindow {
+        width: 200px;
+        margin-left: 40px;
+    }
+}
+
+.buttonPopupWindow {
+    background-color: #00a854;
+    margin-top: 10px;
+    width: 220px;
+    margin-left: 40px;
+}
+
+.close {
+    width: 30px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: white;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.close:hover {
+    background-color: #ed4e4e;
 }
