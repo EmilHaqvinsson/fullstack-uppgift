@@ -5,9 +5,10 @@ import UserView from '../../view/UserView'
 import MessageView from "../../view/MessageView";
 
 
-function Routing () {
+function Routing ({children}:any) {
     return (
         <BrowserRouter>
+            {children}
             <Routes>
                 <Route path={RoutingPath.home} element={<StartView/>}/>
                 <Route path={RoutingPath.user} element={<UserView/>}/>
