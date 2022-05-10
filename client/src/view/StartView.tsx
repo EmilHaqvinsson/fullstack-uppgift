@@ -36,6 +36,9 @@ function StartView() {
                                     <input className={css.inputPopupWindow} type="text" placeholder="E-mail"/>
                                     <input className={css.inputPopupWindow} type="text" placeholder="Username"/>
                                     <input className={css.inputPopupWindow} type="password" placeholder="Password"/>
+
+                                    // fixat bilden
+
                                     <br/>
                                     <br/>
                                     <button className={css.buttonPopupWindow}>Sign up</button>
