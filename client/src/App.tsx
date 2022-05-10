@@ -10,13 +10,11 @@ function App() {
     return (
         <>
             <Header/>
+            <Routing>
+                <NavigationBar/>
+            </Routing>
             <Alive/>
-            <StartView/>
-            {/*<Routing>*/}
-            {/*    <NavigationBar/>*/}
-            {/*</Routing>*/}
         </>
-
     );
 }
 
