@@ -110,11 +110,12 @@ const updateUserById = (req: Request, res: Response) => {
         }
         Logger.debug(updatedUser)
 
+
         UModel.findByIdAndUpdate(req.params.id, updatedUser,  (error: ErrorCallback, user: ReadU) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
-                    error: 'Fel vid uppdatering av användare'
+                    error: 'Fel vid uppdateriing av användare'
                 })
             } else {
                 Logger.http(user)
