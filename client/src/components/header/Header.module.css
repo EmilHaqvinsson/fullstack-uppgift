@@ -6,10 +6,12 @@
 .headerContainer {
     max-width: 100%;
     height: 100px;
-    background-color: #22577E;
     margin: 0;
     padding: 0;
+    background-color: #A2D8FA;
 }
+
+
 
 /*tablet*/
 @media only screen and (min-width: 768px) {
@@ -21,6 +23,6 @@
 /*desktop*/
 @media only screen and (min-width: 1200px) {
     .headerContainer {
-max-width: 100%;
+        max-width: 100%;
     }
 }
