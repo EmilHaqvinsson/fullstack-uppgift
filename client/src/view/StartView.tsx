@@ -43,6 +43,7 @@ function StartView() {
             </section>
             <section>
                 <img className={css.imageSmurf} src={smurf} alt="smurf"/>
+                <h1>hejhej</h1>
             </section>
         </div>
     )
