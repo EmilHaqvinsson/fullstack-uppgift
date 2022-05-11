@@ -3,7 +3,7 @@ import {model, Schema} from 'mongoose'
 import {CreateU} from "../utils/InterFace";
 
 dotenv.config()
-const dbCollection = process.env.MONGODB_COLLECTION_USERS
+const dbCollection = process.env.MONGODB_COLLECTION_USERS || ''
 
 const USchema = new Schema<CreateU>({
     fullName: {

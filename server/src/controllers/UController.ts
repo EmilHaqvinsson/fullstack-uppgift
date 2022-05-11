@@ -115,27 +115,26 @@ const updateUserById = (req: Request, res: Response) => {
         Logger.debug(error)
     }
 
-//         UModel.findByIdAndUpdate(req.params.id, updatedUser, {new: true}, (error, user: ReadU) => {
-//             if (error) {
-//                 Logger.error(error)
-//                 res.status(StatusCode.BAD_REQUEST).send({
-//                     error: 'Fel vid uppdatering av användare'
-//                 })
-//             } else {
-//                 Logger.http(user)
-//                 res.status(StatusCode.OK).send(user ? user : {
-//                     message: `Användare med id '${req.params.id}' hittades inte`
-//                 })
-//             }
-//         })
-//     } catch (error) {
-//         Logger.error(error)
-//         res.status(StatusCode.BAD_REQUEST).send({
-//             error: 'Fel vid uppdatering av användare'
-//         })
-//     }
-// }
 
+        UModel.findByIdAndUpdate(req.params.id, updatedUser,  (error: ErrorCallback, user: ReadU) => {
+            if (error) {
+                Logger.error(error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Fel vid uppdateriing av användare'
+                })
+            } else {
+                Logger.http(user)
+                res.status(StatusCode.OK).send(user ? user : {
+                    message: `Användare med id '${req.params.id}' hittades inte`
+                })
+            }
+        })
+    } catch (error) {
+        Logger.error(error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Fel vid uppdatering av användare'
+        })
+    }
 const deleteUserById = (req: Request, res: Response) => {
     try {
         UModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, user: ReadU) => {
