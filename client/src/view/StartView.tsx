@@ -5,11 +5,6 @@ import close from '../utils/image/close.png'
 import smurf from '../utils/image/smurf.png'
 
 function StartView() {
-    const [modal, setModal] = useState(false)
-
-    const toggleModal = () => {
-        setModal(!modal);
-    }
 
     return (
         <div className={css.mainGridContainer}>

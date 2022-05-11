@@ -1,14 +1,13 @@
 import {Link} from 'react-router-dom';
 import RoutingPath from "../../utils/routing/RoutingPath";
-import css from './NavigationBar.module.css'
 
 function NavigationBar() {
     return (
-        <nav className={css.nav}>
-            <ul className={css.ul}>
-                <li className={css.li}><Link to={RoutingPath.home}>Home</Link></li>
-                <li className={css.li}><Link to={RoutingPath.user}>User</Link></li>
-                <li className={css.li}><Link to={RoutingPath.message}>Message</Link></li>
+        <nav>
+            <ul>
+                <li><Link to={RoutingPath.home}>Home</Link></li>
+                <li><Link to={RoutingPath.user}>User</Link></li>
+                <li><Link to={RoutingPath.message}>Message</Link></li>
             </ul>
         </nav>
     )
