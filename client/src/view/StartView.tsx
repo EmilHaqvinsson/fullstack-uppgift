@@ -1,45 +1,9 @@
 import css from '../view/StartView.module.css'
-import {findAllByDisplayValue} from "@testing-library/react";
-import {useState} from 'react'
+// import { findAllByDisplayValue } from "@testing-library/react";
+import { useState } from 'react'
 import close from '../utils/image/close.png'
 
-    type Props = { 
-        saveUser: (e: React.FormEvent, formData: | any) => void 
-      }
-      
-    export const RegisterView: React.FC<Props> = ({ saveUser }) => {
-        const [formData, setFormData] = useState< | {}>()
-      
-        const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
-          setFormData({
-            ...formData,
-            [e.currentTarget.id]: e.currentTarget.value,
-          })
-        }
-    console.log(formData)
-
-    return (
-        <form className='Form' onSubmit={(e) => saveUser(e, formData)}>
-          <div>
-            <div>
-              <label htmlFor='userName'>Name</label>
-              <input onChange={ handleForm } type='text' id='userName' />
-            </div>
-            <div>
-              <label htmlFor='eMail'>Description</label>
-              <input onChange={ handleForm } type='email' id='eMail' />
-            </div>
-            <div>
-            <label htmlFor='password'>Description</label>
-              <input onChange={ handleForm } type='password' id='pass' />
-            </div>
-          </div>
-          <button disabled={formData === undefined ? true: false} >Register User</button>
-        </form>
-      )
-    }
-
-    export default function StartView() {
+    function StartView() {
         const [modal, setModal] = useState(false)
     
         const toggleModal = () => {
@@ -69,13 +33,12 @@ import close from '../utils/image/close.png'
                                 <div className={css.popupWindow}>
                                     <img src={close} alt="close" className={css.close} onClick={toggleModal}/>
                                     <h1>Sign up</h1>
-                                    <input className={css.inputPopupWindow} type="text" placeholder="Firstname"/>
                                     <input className={css.inputPopupWindow} type="text" placeholder="E-mail"/>
                                     <input className={css.inputPopupWindow} type="text" placeholder="Username"/>
                                     <input className={css.inputPopupWindow} type="password" placeholder="Password"/>
                                     <br/>
                                     <br/>
-                                    <button className={css.buttonPopupWindow}>Sign up</button>
+                                    <button className={css.buttonPopupWindow} onClick={() => {} }>Sign up</button>
                                 </div>
                             </div>
                         </div>
@@ -85,3 +48,4 @@ import close from '../utils/image/close.png'
         </div>
     )
 }
+export default StartView
