@@ -4,16 +4,16 @@ import {Request, Response} from "express";
 import {CreateU, ReadU} from "../utils/InterFace";
 import UModel from "../models/UModel";
 
-const registerUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response) => {
     try {
         Logger.info('createUser()')
         Logger.http(req.body)
-        const {fullName, eMail, pass} = req.body
-        if (fullName && eMail && pass) {
+        const {name, userName, eMail} = req.body
+        if (name && userName && eMail) {
             const newobject: CreateU = {
-                fullName: fullName,
-                eMail: eMail,
-                pass: pass
+                name: name,
+                userName: userName,
+                eMail: eMail
             }
             Logger.http(newobject)
 
@@ -31,9 +31,7 @@ const registerUser = async (req: Request, res: Response) => {
         Logger.error(error)
         res.status(StatusCode.BAD_REQUEST).send({
             error: 'Det gick inte att skapa användare'
-        }
-        )}
-    
+        })
     }
 }
 
@@ -106,14 +104,11 @@ const updateUserById = (req: Request, res: Response) => {
         Logger.debug(req.params.id)
         Logger.debug(req.body)
         const updatedUser: CreateU = {
-            fullName: req.body.fullName,
-            eMail: req.body.eMail,
-            pass: req.body.pass
+            name: req.body.name,
+            userName: req.body.userName,
+            eMail: req.body.eMail
         }
         Logger.debug(updatedUser)
-    } catch (error: any) {
-        Logger.debug(error)
-    }
 
 
         UModel.findByIdAndUpdate(req.params.id, updatedUser,  (error: ErrorCallback, user: ReadU) => {
@@ -135,6 +130,8 @@ const updateUserById = (req: Request, res: Response) => {
             error: 'Fel vid uppdatering av användare'
         })
     }
+}
+
 const deleteUserById = (req: Request, res: Response) => {
     try {
         UModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, user: ReadU) => {
@@ -159,15 +156,14 @@ const deleteUserById = (req: Request, res: Response) => {
         res.status(StatusCode.BAD_REQUEST).send({
             error: `Fel vid borttagning av användare`
         })
-        }
     }
 }
 
 export default {
-    registerUser,
+    createUser,
     getAllUs,
     getUByName,
     getUserByNameAndEmail,
     updateUserById,
-    // deleteUserById
-}   
+    deleteUserById
+}

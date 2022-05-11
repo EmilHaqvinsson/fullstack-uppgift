@@ -3,7 +3,6 @@ import RoutingPath from "./RoutingPath";
 import StartView from '../../view/StartView';
 import UserView from '../../view/UserView'
 import MessageView from "../../view/MessageView";
-import RegisterView from "../../view/RegisterView";
 
 
 function Routing ({children}:any) {
@@ -14,7 +13,6 @@ function Routing ({children}:any) {
                 <Route path={RoutingPath.home} element={<StartView/>}/>
                 <Route path={RoutingPath.user} element={<UserView/>}/>
                 <Route path={RoutingPath.message} element={<MessageView/>}/>
-                <Route path={RoutingPath.register} element={<RegisterView saveUser={}/>}/>
             </Routes>
         </BrowserRouter>
     )

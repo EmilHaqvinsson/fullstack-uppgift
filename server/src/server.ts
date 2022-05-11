@@ -8,6 +8,7 @@ import Logger from './utils/Logger'
 const server = express()
 Middleware.applyMiddlewares(server)
 
+// Routes
 AliveRoutes(server)
 URoutes(server)
 
