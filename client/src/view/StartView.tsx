@@ -3,12 +3,49 @@ import {findAllByDisplayValue} from "@testing-library/react";
 import {useState} from 'react'
 import close from '../utils/image/close.png'
 
-function StartView() {
-    const [modal, setModal] = useState(false)
+    type Props = { 
+        saveUser: (e: React.FormEvent, formData: | any) => void 
+      }
+      
+    export const RegisterView: React.FC<Props> = ({ saveUser }) => {
+        const [formData, setFormData] = useState< | {}>()
+      
+        const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
+          setFormData({
+            ...formData,
+            [e.currentTarget.id]: e.currentTarget.value,
+          })
+        }
+    console.log(formData)
 
-    const toggleModal = () => {
-        setModal(!modal);
+    return (
+        <form className='Form' onSubmit={(e) => saveUser(e, formData)}>
+          <div>
+            <div>
+              <label htmlFor='userName'>Name</label>
+              <input onChange={ handleForm } type='text' id='userName' />
+            </div>
+            <div>
+              <label htmlFor='eMail'>Description</label>
+              <input onChange={ handleForm } type='email' id='eMail' />
+            </div>
+            <div>
+            <label htmlFor='password'>Description</label>
+              <input onChange={ handleForm } type='password' id='pass' />
+            </div>
+          </div>
+          <button disabled={formData === undefined ? true: false} >Register User</button>
+        </form>
+      )
     }
+
+    export default function StartView() {
+        const [modal, setModal] = useState(false)
+    
+        const toggleModal = () => {
+            setModal(!modal);
+        }
+    
 
     return (
         <div className={css.mainGridContainer}>
@@ -36,9 +73,6 @@ function StartView() {
                                     <input className={css.inputPopupWindow} type="text" placeholder="E-mail"/>
                                     <input className={css.inputPopupWindow} type="text" placeholder="Username"/>
                                     <input className={css.inputPopupWindow} type="password" placeholder="Password"/>
-
-                                    // fixat bilden
-
                                     <br/>
                                     <br/>
                                     <button className={css.buttonPopupWindow}>Sign up</button>
@@ -51,5 +85,3 @@ function StartView() {
         </div>
     )
 }
-
-export default StartView

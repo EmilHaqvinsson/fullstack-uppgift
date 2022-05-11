@@ -35,27 +35,26 @@ const registerUser = async (req: Request, res: Response) => {
         )}
     
     }
-}
 
-const getAllUs = (req: Request, res: Response) => {
+function getAllUs(req: Request, res: Response) {
     try {
         UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
-                Logger.error(error)
+                Logger.error(error);
                 res.status(StatusCode.BAD_REQUEST).send({
                     error: '\n' +
                         'Det gick inte att hämta användare'
-                })
+                });
             } else {
-                Logger.http(users)
-                res.status(StatusCode.OK).send(users)
+                Logger.http(users);
+                res.status(StatusCode.OK).send(users);
             }
-        })
+        });
     } catch (error) {
-        Logger.error(error)
+        Logger.error(error);
         res.status(StatusCode.BAD_REQUEST).send({
             error: 'Det gick inte att hämta användaren'
-        })
+        });
     }
 }
 

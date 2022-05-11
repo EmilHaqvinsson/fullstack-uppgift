@@ -18,7 +18,7 @@ const RegisterView: React.FC<Props> = ({ saveUser }) => {
     <form className='Form' onSubmit={(e) => saveUser(e, formData)}>
       <div>
         <div>
-          <label htmlFor='name'>Name</label>
+          <label htmlFor='userName'>Name</label>
           <input onChange={handleForm} type='text' id='name' />
         </div>
         <div>
