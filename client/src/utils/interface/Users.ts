@@ -1,7 +1,7 @@
 export interface CreateOrUpdateUser {
-	name: string;
-	age: number;
-	gender: string;
+	fullName: string;
+	eMail: string;
+	pass: string; 
 }
 
 export interface ReadUser {

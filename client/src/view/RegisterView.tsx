@@ -4,15 +4,15 @@ import { CreateOrUpdateUser } from "../utils/interface/Users"
 
 const CreateUser = () => {
 	const [text, setText] = useState<string>('')
-	const [name, setName] = useState<string>('Ada')
-	const [age, setAge] = useState<number>(18)
-	const [gender, setGender] = useState<string>('Female')
+	const [fullName, setFullName] = useState<string>('Ada')
+	const [eMail, setEmail] = useState<string>('')
+	const [pass] = useState<string>('')
 	
 	const createUser = () => {
 		const payload: CreateOrUpdateUser = {
-			name: name,
-			'age': age,
-			'gender': gender
+			'fullName': fullName,
+			'eMail': eMail,
+			'pass': pass
 		}
 		UserService.createUser(payload)
 			.then(response => {
@@ -28,20 +28,20 @@ const CreateUser = () => {
     <div>
 			<h1>Create user</h1>
 			Name: <input type='text'
-						 id='name'
-						 value={ name }
-						 onChange={ event => setName( event.target.value ) }/>
+						    id='name'
+						    value={ fullName }
+						    onChange={ event => setFullName( event.target.value ) }/>
 			<br/>
 			
 			Age: <input type='text'
-						id='age'
-						value={ age }
-						onChange={ event => setAge(Number( event.target.value )) }/>
+						id='eMail'
+						value={ eMail }
+						onChange={ event => setEmail( event.target.value ) }/>
 			<br/>
 			
-			Gender: <input type='text'
-						   id='gender'
-						   value={ gender }
+			Gender: <input type='password'
+						   id='pass'
+						   value={ pass }
 						   onChange={ event => setGender( event.target.value ) }/>
 			<br/>
 			
@@ -53,3 +53,7 @@ const CreateUser = () => {
 }
 
 export default CreateUser
+function setGender(value: string): void {
+  throw new Error("Function not implemented.")
+}
+
