@@ -8,16 +8,23 @@ dotenv.config()
 const PORT: number = Number(process.env.SERVER_PORT) || 3001
 const env: string = process.env.NODE_ENV || 'production'
 
-let uri: string = process.env.MONGODB_URI || 'http://localhost'
+
+let uri: string
+
+if (env === 'development') {
+  uri = 'mongodb://localhost:27017/' + process.env.MONGODB_COLLECTION_NAME
+} else {
+  uri = String(process.env.MONGODB_URI)
+}
 
 const connectToDatabase = async () => {
-	try {
-		await connect(uri)
-		Logger.info('Successfully connected to the Database')
-	} catch (error) {
-		Logger.error('Error connecting to the Database'.toUpperCase(), error)
-		process.exit()
-	}
+  try {
+    await connect(uri)
+    Logger.info('Successfully connected to the Database')
+  } catch (error) {
+    Logger.error('Error connecting to the Database'.toUpperCase(), error)
+    process.exit()
+  }
 }
 
 const connectToPort = (server: Express) => {

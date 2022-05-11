@@ -1,7 +1,7 @@
 export interface CreateU {
-    name: string;
-    userName: string;
+    fullName: string;
     eMail: string;
+    pass: string; 
 }
 
 export interface ReadU {
