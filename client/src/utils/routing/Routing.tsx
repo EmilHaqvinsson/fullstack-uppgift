@@ -4,13 +4,13 @@ import StartView from '../../view/StartView';
 import RegisterView from '../../view/RegisterView';
 import UserView from '../../view/UserView'
 import MessageView from "../../view/MessageView";
+import {ReactNode} from 'react'
 
-
-function Routing ({children}:any) {
+const Routing = (props: {children?: ReactNode}) => {
     return (
         <>
         <BrowserRouter>
-            {children}
+            {props.children}
             <Routes>
                 <Route path={RoutingPath.home} element={<StartView />} />
                 <Route path={RoutingPath.user} element={<UserView />} />
