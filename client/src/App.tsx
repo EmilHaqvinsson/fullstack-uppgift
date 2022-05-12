@@ -4,7 +4,6 @@ import Alive from './components/Alive'
 import Header from "./components/header/Header";
 import Routing from "./utils/routing/Routing";
 import NavigationBar from "./components/navigationBar/NavigationBar";
-import StartView from "./view/StartView";
 
 function App() {
     return (
