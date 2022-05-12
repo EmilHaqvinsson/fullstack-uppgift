@@ -35,7 +35,7 @@ const toggleModal = () => {
                                 <input className={css.input} type="password" placeholder="Password"/>
                                 <br/>
                                 <br/>
-                                <button className={css.buttonPopupWindow}>Sign up</button>
+                                <button className={css.buttonPopupWindow} onClick={toggleModal}>Sign up</button>
                             </div>
                         </div>
                     </div>
