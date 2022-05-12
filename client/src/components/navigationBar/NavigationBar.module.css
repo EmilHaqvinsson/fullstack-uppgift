@@ -1,5 +1,5 @@
 .nav {
-    background-color: #788A96;
+    background-color: #eda2a1;
     padding: 10px;
     overflow: hidden;
 }
@@ -7,7 +7,6 @@
 .ul {
     list-style-type: none;
     margin: 0;
-    background-color: #788A96;
     padding: 0 20px 0;
 }
 

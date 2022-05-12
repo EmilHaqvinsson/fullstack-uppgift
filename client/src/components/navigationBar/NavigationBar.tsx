@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import RoutingPath from "../../utils/routing/RoutingPath";
-import css from './NavigationBar.module.css'
+import css from '../navigationBar/NavigationBar.module.css'
 
 function NavigationBar() {
     return (

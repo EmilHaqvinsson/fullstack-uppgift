@@ -11,6 +11,7 @@ const URoutes = (server: Express) => {
     server.put('/user/:id', UController.updateUserById)
 
     server.delete('/user/:id', UController.deleteUserById)
+
 }
 
 export default URoutes
