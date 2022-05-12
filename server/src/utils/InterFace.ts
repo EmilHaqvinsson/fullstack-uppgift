@@ -1,14 +1,14 @@
 export interface CreateU {
-    name: string;
-    userName: string;
-    eMail: string;
+    userName: string,
+    eMail: string,
+    pass: string
 }
 
 export interface ReadU {
     _id: string;
-    name: string;
     userName: string;
     eMail: string;
+    pass: string;
     createdAt: Date,
     updatedAt: Date
 }

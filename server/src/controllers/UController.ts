@@ -8,10 +8,10 @@ const registerUser = async (req: Request, res: Response) => {
     try {
         Logger.info('createUser()')
         Logger.http(req.body)
-        const { fullName, eMail, pass } = req.body
-        if (fullName && eMail && pass) {
+        const { userName, eMail, pass } = req.body
+        if (userName && eMail && pass) {
             const newobject: CreateU = {
-                fullName: fullName,
+                userName: userName,
                 eMail: eMail,
                 pass: pass
             }
@@ -106,7 +106,7 @@ const updateUserById = (req: Request, res: Response) => {
         Logger.debug(req.params.id)
         Logger.debug(req.body)
         const updatedUser: CreateU = {
-            fullName: req.body.fullName,
+            userName: req.body.userName,
             eMail: req.body.eMail,
             pass: req.body.pass
         }
