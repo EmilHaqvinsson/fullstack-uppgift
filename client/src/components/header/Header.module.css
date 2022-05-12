@@ -1,6 +1,5 @@
 .text {
-    margin: 0;
-    text-align: center;
+    margin-left: 150px;
 }
 
 .headerContainer {
@@ -9,8 +8,8 @@
     margin: 0;
     padding: 0;
     background-color: #A2D8FA;
-}
 
+}
 
 
 /*tablet*/
@@ -22,7 +21,26 @@
 
 /*desktop*/
 @media only screen and (min-width: 1200px) {
-    .headerContainer {
-        max-width: 100%;
+    /*.headerContainer {*/
+    /*    max-width: 100%;*/
+    /*}*/
+
+    .containerDiv {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 1fr;
+    }
+
+    .itemA {
+        background-color: #A2D8FA;
+    }
+
+    .itemB {
+        background-color: #A2D8FA;
+    }
+
+    .text {
+margin-left: 400px;
+    padding-right: 30px;
     }
 }
