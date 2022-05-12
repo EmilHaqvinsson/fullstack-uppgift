@@ -1,4 +1,5 @@
 import css from '../view/StartView.module.css'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {findAllByDisplayValue} from "@testing-library/react";
 import {useState} from 'react'
 import close from '../utils/image/close.png'
@@ -14,7 +15,7 @@ const toggleModal = () => {
     return (
         <div className={css.mainGridContainer}>
             <section className={css.section}>
-                <input className={css.input} type="text" placeholder='Username/e-mail'/>
+                <input className={css.input} type="text" placeholder='fullName/e-mail'/>
                 <br/>
                 <article>
                     <input className={css.input} type="text" placeholder='Password'/>
@@ -29,10 +30,9 @@ const toggleModal = () => {
                             <div className={css.popupWindow}>
                                 <img src={close} alt="close" className={css.close} onClick={toggleModal}/>
                                 <h2>Sign up</h2>
-                                <input className={css.input} type="text" placeholder="Firstname"/>
+                                <input className={css.input} type="text" placeholder="fullName"/>
                                 <input className={css.input} type="text" placeholder="E-mail"/>
-                                <input className={css.input} type="text" placeholder="Username"/>
-                                <input className={css.input} type="password" placeholder="Password"/>
+                                <input className={css.input} type="password" placeholder="password"/>
                                 <br/>
                                 <br/>
                                 <button className={css.buttonPopupWindow} onClick={toggleModal}>Sign up</button>

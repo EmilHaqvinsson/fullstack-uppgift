@@ -6,9 +6,9 @@ export interface CreateOrUpdateUser {
 
 export interface ReadUser {
 	_id: string;
-	name: string;
-	age: number;
-	gender: string;
+	fullName: string;
+	eMail: string;
+	pass: string;
 	createdAt: Date,
 	updatedAt: Date,
 	message?: string;
