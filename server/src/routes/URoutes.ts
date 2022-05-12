@@ -2,7 +2,7 @@ import {Express} from "express";
 import UController from "../controllers/UController";
 
 const URoutes = (server: Express) => {
-    server.post('/user/', UController.createUser)
+    server.post('/user/', UController.registerUser)
 
     server.get('/user/all', UController.getAllUs)
     server.get('/user/name/:name', UController.getUByName)
