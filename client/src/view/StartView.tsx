@@ -17,7 +17,7 @@ const toggleModal = () => {
                 <input className={css.input} type="text" placeholder='Username/e-mail'/>
                 <br/>
                 <article>
-                    <input type="text" placeholder='Password'/>
+                    <input className={css.input} type="text" placeholder='Password'/>
                 </article>
                 <br/>
                 <button>Log in</button>
@@ -28,11 +28,11 @@ const toggleModal = () => {
                         <div className={css.overlay}>
                             <div className={css.popupWindow}>
                                 <img src={close} alt="close" className={css.close} onClick={toggleModal}/>
-                                <h1>Sign up</h1>
-                                <input className={css.inputPopupWindow} type="text" placeholder="Firstname"/>
-                                <input className={css.inputPopupWindow} type="text" placeholder="E-mail"/>
-                                <input className={css.inputPopupWindow} type="text" placeholder="Username"/>
-                                <input className={css.inputPopupWindow} type="password" placeholder="Password"/>
+                                <h2>Sign up</h2>
+                                <input className={css.input} type="text" placeholder="Firstname"/>
+                                <input className={css.input} type="text" placeholder="E-mail"/>
+                                <input className={css.input} type="text" placeholder="Username"/>
+                                <input className={css.input} type="password" placeholder="Password"/>
                                 <br/>
                                 <br/>
                                 <button className={css.buttonPopupWindow}>Sign up</button>
