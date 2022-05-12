@@ -53,7 +53,3 @@ const CreateUser = () => {
 }
 
 export default CreateUser
-function setGender(value: string): void {
-  throw new Error("Function not implemented.")
-}
-
