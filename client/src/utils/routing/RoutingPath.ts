@@ -1,7 +1,8 @@
 const RoutingPath = {
     home: '/',
     user: '/user',
-    message: '/message'
+    message: '/message',
+    register: '/register'
 }
 
 export default RoutingPath
