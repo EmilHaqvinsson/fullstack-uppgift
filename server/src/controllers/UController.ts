@@ -8,10 +8,10 @@ const registerUser = async (req: Request, res: Response) => {
     try {
         Logger.info('createUser()')
         Logger.http(req.body)
-        const { userName, eMail, pass } = req.body
-        if (userName && eMail && pass) {
+        const { fullName, eMail, pass } = req.body
+        if (fullName && eMail && pass) {
             const newobject: CreateU = {
-                userName: userName,
+                fullName: fullName,
                 eMail: eMail,
                 pass: pass
             }
@@ -22,7 +22,7 @@ const registerUser = async (req: Request, res: Response) => {
             Logger.http(dbResponse)
             res.status(StatusCode.CREATED).send(dbResponse)
         } else {
-            Logger.error('name, userName or eMail failed')
+            Logger.error('name, fullName or eMail failed')
             res.status(StatusCode.BAD_REQUEST).send({
                 message: 'Faulty body'
             })
@@ -106,7 +106,7 @@ const updateUserById = (req: Request, res: Response) => {
         Logger.debug(req.params.id)
         Logger.debug(req.body)
         const updatedUser: CreateU = {
-            userName: req.body.userName,
+            fullName: req.body.fullName,
             eMail: req.body.eMail,
             pass: req.body.pass
         }

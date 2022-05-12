@@ -4,15 +4,15 @@ import { CreateOrUpdateUser } from "../utils/interface/Users"
 
 const CreateUser = () => {
 	const [text, setText] = useState<string>('')
-	const [fullName, setFullName] = useState<string>('')
+	const [fullName, setfullName] = useState<string>('')
 	const [eMail, setEmail] = useState<string>('')
 	const [pass, setPass] = useState<string>('')
 	
 	const createUser = () => {
 		const payload: CreateOrUpdateUser = {
-			'fullName': fullName,
-			'eMail': eMail,
-			'pass': pass
+			fullName: String(fullName),
+			eMail: eMail,
+			pass: pass
 		}
 		UserService.createUser(payload)
 			.then(response => {
@@ -27,10 +27,10 @@ const CreateUser = () => {
 	return (
     <div>
 			<h1>Create user</h1>
-			userName <input type='text'
-						    id='name'
+			fullName <input type='text'
+						    id='fullName'
 						    value={ fullName }
-						    onChange={ event => setFullName( event.target.value ) }/>
+						    onChange={ event => setfullName( event.target.value ) }/>
 			<br/>
 			
 			eMail: <input type='text'
