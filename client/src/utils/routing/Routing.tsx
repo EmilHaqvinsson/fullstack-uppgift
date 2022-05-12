@@ -18,7 +18,6 @@ const Routing = (props: { children?: ReactNode }) => {
                     <Route path={RoutingPath.register} element={<RegisterView/>}/>
                 </Routes>
             </BrowserRouter>
-            <StartView/>
         </>
     )
 }
