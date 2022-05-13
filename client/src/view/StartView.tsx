@@ -12,6 +12,10 @@ const toggleModal = () => {
     setModal(!modal);
 }
 
+const login = (user: string, pass: string) =>{
+    
+}
+
     return (
         <div className={css.mainGridContainer}>
             <section className={css.section}>

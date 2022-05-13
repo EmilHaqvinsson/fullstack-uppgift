@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import crypto from 'crypto'
+import bcrypt from 'bcrypt'
 import {model, Schema} from 'mongoose'
 import {CreateU} from "../utils/InterFace";
 
@@ -18,27 +18,14 @@ const USchema = new Schema<CreateU>({
     pass: {
         type: String,
         required: true,
-    },
-    hash: String,
-    salt: String
-}, {
-    timestamps: true
+    }
+    // hash: String,
+    // salt: String
+},{
+    timestamps: true,
 })
 
-USchema.methods.setPassword = function(pass: crypto.BinaryLike) {
-    this.salt = crypto.randomBytes(16).toString('hex')
-    this.hash = crypto.pbkdf2Sync(pass, this.salt,
-        1000, 64, `sha512`).toString('hex')
-}
-
-USchema.methods.validPassword = function(pass: crypto.BinaryLike) {
-    const hash = crypto.pbkdf2Sync(pass, this.salt,
-        1000, 64, `sha512`).toString('hex')
-        return this.hash === hash
-}
-
 const UModel = model<CreateU>(dbCollection, USchema)
-
 
 
 export default UModel

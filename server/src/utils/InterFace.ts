@@ -1,9 +1,7 @@
 export interface CreateU {
     fullName: string,
     eMail: string,
-    pass: string,
-    hash: string,
-    salt: string
+    pass: string
 }
 
 export interface ReadU {
@@ -11,8 +9,8 @@ export interface ReadU {
     fullName: string;
     eMail: string;
     pass: string;
-    hash: string;
-    salt: string;
+    // hash?: string;
+    // salt?: string;
     createdAt: Date,
     updatedAt: Date
 }

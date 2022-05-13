@@ -2,29 +2,45 @@ import Logger from "../utils/Logger";
 import StatusCode from "../utils/StatusCode";
 import { Request, Response } from "express";
 import { CreateU, ReadU } from "../utils/InterFace";
-import UModel from "../models/UModel";
-import { Hash } from "crypto";
+import UModel from "../models/UModel"
+import bcrypt from "bcrypt"
+import { loggers } from "winston";
+
+const setPassword = function(pass: string) {
+    const hashedPass = bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(pass, salt, function(err, hash) {
+            return hashedPass
+        })
+    })
+}
+// const validPassword = function(pass: string) {
+//     const hash = crypto.pbkdf2Sync(pass, this.salt,
+//         1000, 64, `sha512`).toString('hex')
+//         return this.hash === hash
+//     }
 
 const registerUser = async (req: Request, res: Response) => {
     try {
         Logger.info('createUser()')
         Logger.http(req.body)
-        const { fullName, eMail, pass, hash, salt } = req.body
-        if (fullName && eMail && pass && hash && salt) {
+        const { fullName, eMail, pass } = req.body
+        if (fullName && eMail && pass ) {
             const newobject: CreateU = {
                 fullName: fullName,
                 eMail: eMail,
-                pass: pass,
-                hash: hash,
-                salt: salt
+                pass: pass
             }
-            Logger.http(newobject)
-            const user = new UModel(newobject)
+            const user = new UModel(newobject)            
+            const hashDatPass = bcrypt.hashSync(pass, 10)
+            Logger.http('hashed pass is: ' + hashDatPass)
+            user.pass = hashDatPass
+
             const dbResponse = await user.save()
+            
             Logger.http(dbResponse)
             res.status(StatusCode.CREATED).send(dbResponse)
         } else {
-            Logger.error('name, fullName or eMail failed')
+            Logger.error('fullName, email or password is needed in the BODY of the request.')
             res.status(StatusCode.BAD_REQUEST).send({
                 message: 'Faulty body'
             })
@@ -110,9 +126,7 @@ const updateUserById = (req: Request, res: Response) => {
         const updatedUser: CreateU = {
             fullName: req.body.fullName,
             eMail: req.body.eMail,
-            pass: req.body.pass,
-            hash: req.body.hash,
-            salt: req.body.salt
+            pass: req.body.pass
         }
         Logger.debug(updatedUser)
         UModel.findByIdAndUpdate(req.params.id, updatedUser, (error: ErrorCallback, user: ReadU) => {
