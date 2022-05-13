@@ -31,7 +31,7 @@ const registerUser = async (req: Request, res: Response) => {
             const user = new UModel(newobject)
             const dbResponse = await user.save()
             Logger.http(dbResponse)
-            res.status(StatusCode.CREATED).send(dbResponse)
+            res.status(StatusCode.CREATED).send('Användare skapad!')
         } else {
             Logger.error('name, fullName or eMail failed')
             res.status(StatusCode.BAD_REQUEST).send({
