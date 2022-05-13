@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import {model, Schema} from 'mongoose'
-import {CreateU} from "../utils/InterFace";
+import {CreateU} from "../interface/InterFace";
 
 dotenv.config()
 const dbCollection = process.env.MONGODB_COLLECTION_USERS || ''

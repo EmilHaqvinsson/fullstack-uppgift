@@ -1,7 +1,7 @@
 import Logger from "../utils/Logger";
 import StatusCode from "../utils/StatusCode";
 import {Request, Response} from "express";
-import {CreateU, ReadU} from "../utils/InterFace";
+import {CreateU, ReadU} from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
 
