@@ -3,20 +3,22 @@ import StatusCode from "../utils/StatusCode";
 import { Request, Response } from "express";
 import { CreateU, ReadU } from "../utils/InterFace";
 import UModel from "../models/UModel";
+import { Hash } from "crypto";
 
 const registerUser = async (req: Request, res: Response) => {
     try {
         Logger.info('createUser()')
         Logger.http(req.body)
-        const { fullName, eMail, pass } = req.body
-        if (fullName && eMail && pass) {
+        const { fullName, eMail, pass, hash, salt } = req.body
+        if (fullName && eMail && pass && hash && salt) {
             const newobject: CreateU = {
                 fullName: fullName,
                 eMail: eMail,
-                pass: pass
+                pass: pass,
+                hash: hash,
+                salt: salt
             }
             Logger.http(newobject)
-
             const user = new UModel(newobject)
             const dbResponse = await user.save()
             Logger.http(dbResponse)
@@ -108,7 +110,9 @@ const updateUserById = (req: Request, res: Response) => {
         const updatedUser: CreateU = {
             fullName: req.body.fullName,
             eMail: req.body.eMail,
-            pass: req.body.pass
+            pass: req.body.pass,
+            hash: req.body.hash,
+            salt: req.body.salt
         }
         Logger.debug(updatedUser)
         UModel.findByIdAndUpdate(req.params.id, updatedUser, (error: ErrorCallback, user: ReadU) => {
@@ -141,7 +145,7 @@ const updateUserById = (req: Request, res: Response) => {
                     Logger.http(user)
                     res.status(StatusCode.OK).json(
                         user ? { message: `Användare med id '${req.params.id}' har tagits bort från databasen!` }
-                             : { message: `Användare med id '${req.params.id}'hittades inte!` })
+                             : { message: `Användare med id '${req.params.id}' hittades inte!` })
                 }
             })
         } catch (error) {
