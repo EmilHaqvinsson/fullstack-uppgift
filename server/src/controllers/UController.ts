@@ -3,12 +3,23 @@ import StatusCode from "../utils/StatusCode";
 import {Request, Response} from "express";
 import {CreateU, ReadU} from "../utils/InterFace";
 import UModel from "../models/UModel";
+import bcrypt from 'bcrypt'
+
+const saltRounds: number = 10
+const encryptedPassword = async (pass: string) => {
+    let newPass: string = ''
+    await bcrypt.hash(pass,saltRounds).then(function (hash: any){
+        newPass = hash;
+    })
+    return newPass
+}
 
 const registerUser = async (req: Request, res: Response) => {
     try {
         Logger.info('createUser()')
         Logger.http(req.body)
-        const {fullName, eMail, pass} = req.body
+        let {fullName, eMail, pass} = req.body
+        pass = await encryptedPassword(pass)
         if (fullName && eMail && pass) {
             const newobject: CreateU = {
                 fullName: fullName,
@@ -20,7 +31,7 @@ const registerUser = async (req: Request, res: Response) => {
             const user = new UModel(newobject)
             const dbResponse = await user.save()
             Logger.http(dbResponse)
-            res.status(StatusCode.CREATED).send('Användaren är skapad!')
+            res.status(StatusCode.CREATED).send(dbResponse)
         } else {
             Logger.error('name, fullName or eMail failed')
             res.status(StatusCode.BAD_REQUEST).send({
