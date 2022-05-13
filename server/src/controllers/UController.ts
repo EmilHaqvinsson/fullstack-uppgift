@@ -48,6 +48,33 @@ const registerUser = async (req: Request, res: Response) => {
 
 }
 
+function login(req: Request, res: Response) {
+    let message: any;
+    if (req.body) {
+    try {
+        UModel.find({eMail: req.body.eMail}, '', (error: ErrorCallback, user: Array<ReadU>) => {
+            if (error) {
+                Logger.error(error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Det gick inte att hitta en användare med email: ' + req.query.eMail
+                })
+            } else {
+                message = ({
+                    message: res.status
+                })    
+            }
+                res.status(StatusCode.OK).send([user])
+            }
+        )
+    } catch (error) {
+        Logger.error(error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Det gick inte att hämta användaren efter namn och eMail'
+        })
+    }
+}
+}
+
 function getAllUsers(req: Request, res: Response) {
     try {
         UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
@@ -167,6 +194,7 @@ const deleteUserById = (req: Request, res: Response) => {
 
 export default {
     registerUser,
+    login,
     getAllUsers,
     getUserById,
     getUserByNameAndEmail,
