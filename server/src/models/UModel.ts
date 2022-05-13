@@ -1,5 +1,4 @@
 import dotenv from 'dotenv'
-import bcrypt from 'bcrypt'
 import {model, Schema} from 'mongoose'
 import {CreateU} from "../utils/InterFace";
 
@@ -18,14 +17,11 @@ const USchema = new Schema<CreateU>({
     pass: {
         type: String,
         required: true,
-    }
-    // hash: String,
-    // salt: String
-},{
-    timestamps: true,
+    },
+}, {
+    timestamps: true
 })
 
 const UModel = model<CreateU>(dbCollection, USchema)
-
 
 export default UModel

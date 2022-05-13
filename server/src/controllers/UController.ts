@@ -1,46 +1,39 @@
 import Logger from "../utils/Logger";
 import StatusCode from "../utils/StatusCode";
-import { Request, Response } from "express";
-import { CreateU, ReadU } from "../utils/InterFace";
-import UModel from "../models/UModel"
-import bcrypt from "bcrypt"
-import { loggers } from "winston";
+import {Request, Response} from "express";
+import {CreateU, ReadU} from "../utils/InterFace";
+import UModel from "../models/UModel";
+import bcrypt from 'bcrypt'
 
-const setPassword = function(pass: string) {
-    const hashedPass = bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(pass, salt, function(err, hash) {
-            return hashedPass
-        })
+const saltRounds: number = 10
+const encryptedPassword = async (pass: string) => {
+    let newPass: string = ''
+    await bcrypt.hash(pass,saltRounds).then(function (hash: any){
+        newPass = hash;
     })
+    return newPass
 }
-// const validPassword = function(pass: string) {
-//     const hash = crypto.pbkdf2Sync(pass, this.salt,
-//         1000, 64, `sha512`).toString('hex')
-//         return this.hash === hash
-//     }
 
 const registerUser = async (req: Request, res: Response) => {
     try {
         Logger.info('createUser()')
         Logger.http(req.body)
-        const { fullName, eMail, pass } = req.body
-        if (fullName && eMail && pass ) {
+        let {fullName, eMail, pass} = req.body
+        pass = await encryptedPassword(pass)
+        if (fullName && eMail && pass) {
             const newobject: CreateU = {
                 fullName: fullName,
                 eMail: eMail,
                 pass: pass
             }
-            const user = new UModel(newobject)            
-            const hashDatPass = bcrypt.hashSync(pass, 10)
-            Logger.http('hashed pass is: ' + hashDatPass)
-            user.pass = hashDatPass
+            Logger.http(newobject)
 
+            const user = new UModel(newobject)
             const dbResponse = await user.save()
-            
             Logger.http(dbResponse)
-            res.status(StatusCode.CREATED).send(dbResponse)
+            res.status(StatusCode.CREATED).send('Användare skapad!')
         } else {
-            Logger.error('fullName, email or password is needed in the BODY of the request.')
+            Logger.error('name, fullName or eMail failed')
             res.status(StatusCode.BAD_REQUEST).send({
                 message: 'Faulty body'
             })
@@ -48,14 +41,41 @@ const registerUser = async (req: Request, res: Response) => {
     } catch (error) {
         Logger.error(error)
         res.status(StatusCode.BAD_REQUEST).send({
-            error: 'Det gick inte att skapa användare'
-        }
+                error: 'Det gick inte att skapa användare'
+            }
         )
     }
 
 }
 
-function getAllUs(req: Request, res: Response) {
+function login(req: Request, res: Response) {
+    let message: any;
+    if (req.body) {
+    try {
+        UModel.find({eMail: req.body.eMail}, '', (error: ErrorCallback, user: Array<ReadU>) => {
+            if (error) {
+                Logger.error(error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Det gick inte att hitta en användare med email: ' + req.query.eMail
+                })
+            } else {
+                message = ({
+                    message: res.status
+                })    
+            }
+                res.status(StatusCode.OK).send([user])
+            }
+        )
+    } catch (error) {
+        Logger.error(error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Det gick inte att hämta användaren efter namn och eMail'
+        })
+    }
+}
+}
+
+function getAllUsers(req: Request, res: Response) {
     try {
         UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
@@ -77,9 +97,9 @@ function getAllUs(req: Request, res: Response) {
     }
 }
 
-const getUByName = (req: Request, res: Response) => {
+const getUserById = (req: Request, res: Response) => {
     try {
-        UModel.find({ name: req.params.name }, '', (error: ErrorCallback, users: Array<ReadU>) => {
+        UModel.findById(req.params.id, (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -100,7 +120,7 @@ const getUByName = (req: Request, res: Response) => {
 
 const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
-        UModel.find({ name: req.params.name, eMail: req.params.eMail }, '', (error: ErrorCallback, user: ReadU) => {
+        UModel.find({fullName: req.params.name, eMail: req.params.eMail}, '', (error: ErrorCallback, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -147,33 +167,36 @@ const updateUserById = (req: Request, res: Response) => {
         res.status(StatusCode.BAD_REQUEST).send({
             error: 'Fel vid uppdatering av användare'
         })
-    }}
-    const deleteUserById = (req: Request, res: Response) => {
-        try {
-            UModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, user: ReadU) => {
-                if (error) {
-                    Logger.error(error)
-                    res.status(StatusCode.BAD_REQUEST).send({
-                        error: 'Fel vid borttagning av användare'
-                    })} else {
-                    Logger.http(user)
-                    res.status(StatusCode.OK).json(
-                        user ? { message: `Användare med id '${req.params.id}' har tagits bort från databasen!` }
-                             : { message: `Användare med id '${req.params.id}' hittades inte!` })
-                }
-            })
-        } catch (error) {
-            Logger.error(error)
-            res.status(StatusCode.BAD_REQUEST).send({
-                error: `Fel vid borttagning av användare`
-            })
-        }
     }
+}
+const deleteUserById = (req: Request, res: Response) => {
+    try {
+        UModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, user: ReadU) => {
+            if (error) {
+                Logger.error(error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Fel vid borttagning av användare'
+                })
+            } else {
+                Logger.http(user)
+                res.status(StatusCode.OK).json(
+                    user ? {message: `Användare med id '${req.params.id}' har tagits bort från databasen!`}
+                        : {message: `Användare med id '${req.params.id}'hittades inte!`})
+            }
+        })
+    } catch (error) {
+        Logger.error(error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: `Fel vid borttagning av användare`
+        })
+    }
+}
 
 export default {
     registerUser,
-    getAllUs,
-    getUByName,
+    login,
+    getAllUsers,
+    getUserById,
     getUserByNameAndEmail,
     updateUserById,
     deleteUserById

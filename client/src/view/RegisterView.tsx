@@ -11,18 +11,16 @@ const CreateUser = () => {
 	const createUser = () => {
 		const payload: CreateOrUpdateUser = {
 			fullName: String(fullName),
-			eMail: String(eMail),
-			pass: String(pass)
+			eMail: eMail,
+			pass: pass
 		}
-		console.log(pass)
 		UserService.createUser(payload)
 			.then(response => {
 				setText(response.statusText)
 				console.log(response.data)
 			})
 			.catch(error => {
-				console.log(error)
-				setText('Something went wrong!')
+				console.error(error)
 			})
 	}
 	

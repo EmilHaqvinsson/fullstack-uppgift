@@ -3,10 +3,11 @@ import UController from "../controllers/UController";
 
 const URoutes = (server: Express) => {
     server.post('/user/', UController.registerUser)
+    server.post('/login/', UController.login)
 
-    server.get('/user/all', UController.getAllUs)
-    server.get('/user/name/:name', UController.getUByName)
-    server.get('/user/name/:email', UController.getUserByNameAndEmail)
+    server.get('/user/all', UController.getAllUsers)
+    server.get('/user/:id', UController.getUserById)
+    server.get('/user/name/:name/:eMail', UController.getUserByNameAndEmail)
 
     server.put('/user/:id', UController.updateUserById)
 
