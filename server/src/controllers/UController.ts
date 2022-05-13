@@ -82,7 +82,7 @@ const getUById = (req: Request, res: Response) => {
 
 const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
-        UModel.find({name: req.params.name, eMail: req.params.eMail}, '', (error: ErrorCallback, user: ReadU) => {
+        UModel.find({fullName: req.params.name, eMail: req.params.eMail}, '', (error: ErrorCallback, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({

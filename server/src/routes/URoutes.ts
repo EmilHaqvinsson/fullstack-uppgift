@@ -5,8 +5,8 @@ const URoutes = (server: Express) => {
     server.post('/user/', UController.registerUser)
 
     server.get('/user/all', UController.getAllUs)
-    server.get('/user/name/:name', UController.getUById)
-    server.get('/user/name/:email', UController.getUserByNameAndEmail)
+    server.get('/user/:id', UController.getUById)
+    server.get('/user/name/:name/:eMail', UController.getUserByNameAndEmail)
 
     server.put('/user/:id', UController.updateUserById)
 
