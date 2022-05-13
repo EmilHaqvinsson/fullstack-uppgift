@@ -37,7 +37,7 @@ const registerUser = async (req: Request, res: Response) => {
 
 }
 
-function getAllUs(req: Request, res: Response) {
+function getAllUsers(req: Request, res: Response) {
     try {
         UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
@@ -59,7 +59,7 @@ function getAllUs(req: Request, res: Response) {
     }
 }
 
-const getUById = (req: Request, res: Response) => {
+const getUserById = (req: Request, res: Response) => {
     try {
         UModel.findById(req.params.id, (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
@@ -156,8 +156,8 @@ const deleteUserById = (req: Request, res: Response) => {
 
 export default {
     registerUser,
-    getAllUs,
-    getUById,
+    getAllUsers,
+    getUserById,
     getUserByNameAndEmail,
     updateUserById,
     deleteUserById
