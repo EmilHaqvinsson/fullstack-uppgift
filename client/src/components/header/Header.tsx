@@ -1,9 +1,17 @@
 import css from './Header.module.css'
+import smurfar from '../../utils/image/smurfar.gif'
 
-function Header () {
+function Header() {
     return (
         <div className={css.headerContainer}>
-            <h1 className={css.text}>Bookface</h1>
+            <div className={css.containerDiv}>
+                <div className={css.itemB}>
+                    <h1 className={css.text}>SmurfBooks</h1>
+                </div>
+                <div className={css.itemA}>
+                    <img className={css.imageSmurfar} src={smurfar} alt="smurfGif"/>
+                </div>
+            </div>
         </div>
     )
 }

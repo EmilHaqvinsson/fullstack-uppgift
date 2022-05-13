@@ -1,0 +1,23 @@
+.section {
+    display: grid;
+    grid-template-columns: auto 55% auto;
+    margin-top: 50px;
+}
+
+.emty {
+    background-color: #edefef;
+}
+
+.userDiv {
+    border: solid 2px grey;
+    border-radius: 15px;
+    margin-top: 50px;
+}
+
+.imageUser {
+    max-width: 100px;
+}
+
+.inputDiv {
+    background-color: yellow;
+}

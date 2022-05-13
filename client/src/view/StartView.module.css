@@ -4,26 +4,20 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(1, 1fr);
-    background-color: #e3efee;
+    background-color: #A2D8FA;
     height: 200px;
-}
-.item {
-    background-color: #e3efee;
 }
 
 .text {
     text-align: center;
     color: #5584AC;
 }
-.itemOne {
-    background-color: #e3efee;
-}
 
 .textOne {
     color: grey;
 }
 
-input {
+.input {
     border-radius: 7px;
     padding: 8px;
     width: 250px;
@@ -42,9 +36,6 @@ button {
 
 hr {
     width: 250px;
-=======
-    width: 260px;
->>>>>>> Stashed changes
 }
 
 .buttonCreateNewAccount {
@@ -52,44 +43,34 @@ hr {
     margin-top: 10px;
 }
 
+.imageSmurf {
+    max-width: 40%;
+    margin-top: 30px;
+    margin-left: 100px;
+}
+
 /*tablet*/
 @media only screen and (min-width: 768px) {
     .mainGridContainer {
         grid-template-columns: repeat(2, 1fr);
-        background-color: #e3efee;
     }
+
     .item {
         margin-top: 70px;
-        background-color: #e3efee;
     }
 
-    .text {
-        text-align: center;
-        color: #5584AC;
-    }
-    .itemOne {
-        background-color: #e3efee;
-    }
 
     .textOne {
-        color: grey;
         text-align: center;
     }
 
-    input {
-        border-radius: 7px;
-        padding: 8px;
+    .input {
         width: 200px;
-        border: grey solid 1px;
         margin: 0 100px 5px;
     }
 
     button {
         width: 220px;
-        border-radius: 7px;
-        border: grey solid 1px;
-        padding: 8px;
-        background-color: #22577E;
         margin: 10px 100px 10px;
     }
 
@@ -97,72 +78,86 @@ hr {
         width: 230px;
     }
 
-    .buttonCreateNewAccount {
-        background-color: #00a854;
-        margin-top: 10px;
+    .section {
+        margin: 70px;
+        border: solid 1px;
+        width: 50%;
+        height: 65%;
+        padding-top: 30px;
+        background-color: whitesmoke;
+        border-radius: 15px;
     }
 
-    section {
-        margin-top: 70px;
+    .imageSmurf {
+        max-width: 80%;
     }
+}
+
+.popup, .overlay {
+    width: 100vw;
+    max-height: 250vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49, 49, 49, 0.8);
+}
+
+.popupWindow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+    width: 300px;
+    height: 330px;
+}
+
+.inputPopupWindow {
+    width: 200px;
+    margin-left: 40px;
+}
+
+.buttonPopupWindow {
+    background-color: #00a854;
+    margin-top: 10px;
+    width: 220px;
+    margin-left: 40px;
+}
+
+.close {
+    width: 30px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: white;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.close:hover {
+    background-color: #ed4e4e;
 }
 
 /*desktop*/
 @media only screen and (min-width: 1200px) {
-    .mainGridContainer {
-        padding: 10px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(1, 1fr);
-        background-color: #e3efee;
-        height: 500px;
-    }
-    .item {
-        margin-top: 70px;
-        background-color: #e3efee;
-    }
-
-    .text {
-        text-align: center;
-        color: #5584AC;
-    }
-    .itemOne {
-        background-color: #e3efee;
-    }
-
-    .textOne {
-        color: grey;
-        text-align: center;
-    }
-
-    input {
-        border-radius: 7px;
-        padding: 8px;
-        width: 250px;
-        border: grey solid 1px;
-        margin: 0 250px 5px;
-    }
-
-    button {
-        width: 270px;
-        border-radius: 7px;
-        border: grey solid 1px;
-        padding: 8px;
-        background-color: #22577E;
-        margin: 10px 250px 10px;
-    }
 
     hr {
-        width: 270px;
+        width: 250px;
     }
 
-    .buttonCreateNewAccount {
-        background-color: #00a854;
-        margin-top: 10px;
+    .imageSmurf {
+        max-width: 40%;
+        margin-top: 30px;
     }
-
-    section {
-        margin-top: 70px;
+    .section {
+        margin-left: 400px;
     }
-
 }
