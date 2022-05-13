@@ -4,13 +4,37 @@ import {findAllByDisplayValue} from "@testing-library/react";
 import {useState} from 'react'
 import close from '../utils/image/close.png'
 import smurf from '../utils/image/smurf.png'
+import {CreateOrUpdateUser} from '../utils/interface/Users';
+import UserService from '../utils/api/service/userService';
 
 function StartView() {
     const [modal, setModal] = useState(false)
+    const [fullName, setFullName] = useState<string>('')
+    const [eMail, setEMail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [text, setText] = useState<string>('')
 
-const toggleModal = () => {
-    setModal(!modal);
-}
+    const toggleModal = () => {
+        setModal(!modal);
+    }
+
+    const createUser = () => {
+        const payload: CreateOrUpdateUser = {
+            fullName: fullName,
+            eMail: eMail,
+            pass: password
+        }
+
+        UserService.createUser(payload)
+            .then(response => {
+                setText(response.data)
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
 
     return (
         <div className={css.mainGridContainer}>
@@ -30,12 +54,22 @@ const toggleModal = () => {
                             <div className={css.popupWindow}>
                                 <img src={close} alt="close" className={css.close} onClick={toggleModal}/>
                                 <h2>Sign up</h2>
-                                <input className={css.input} type="text" placeholder="fullName"/>
-                                <input className={css.input} type="text" placeholder="E-mail"/>
-                                <input className={css.input} type="password" placeholder="password"/>
+                                <input className={css.input}
+                                       type="text"
+                                       placeholder="fullName"
+                                       onChange={event => setFullName(event.target.value)}/>
+                                <input className={css.input}
+                                       type="text"
+                                       placeholder="eMail"
+                                       onChange={event => setEMail(event.target.value)}/>
+                                <input className={css.input}
+                                       type="password"
+                                       placeholder="password"
+                                       onChange={event => setPassword(event.target.value)}/>
                                 <br/>
+                                <p>{text}</p>
                                 <br/>
-                                <button className={css.buttonPopupWindow} onClick={toggleModal}>Sign up</button>
+                                <button className={css.buttonPopupWindow} onClick={createUser}>Sign up</button>
                             </div>
                         </div>
                     </div>
