@@ -1,6 +1,17 @@
 import { IncomingMessage } from "http"
 
 function MessageView() {
+    
+        MessageService.createUser(payload)
+            .then(response => {
+                setText(response.data)
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
         <>
             <h2>MessageView</h2>
