@@ -9,7 +9,7 @@ const registerMessage = async (req: Request, res: Response) => {
         Logger.info('createMessage')
         Logger.http('req.body' + req.body)
         const {message} = req.body
-        if (message){
+        if (message) {
             const newObject: CreateMessage = {
                 message: message
             }
@@ -18,15 +18,13 @@ const registerMessage = async (req: Request, res: Response) => {
             const dbResponse = await newMessage.save()
             Logger.http('dbResponse' + dbResponse)
             res.status(StatusCode.CREATED).send(dbResponse)
-        }
-        else {
+        } else {
             Logger.error('Message faild')
             res.status(StatusCode.BAD_REQUEST).send({
                 message: 'Message faild'
             })
         }
-    }
-    catch (error){
+    } catch (error) {
         Logger.error('error' + error)
         res.status(StatusCode.BAD_REQUEST).send({
             error: 'Error to create message'
@@ -34,6 +32,29 @@ const registerMessage = async (req: Request, res: Response) => {
     }
 }
 
+const getAllMessages = (req: Request, res: Response) => {
+    try {
+        MessageModel.find({}, '', (error: ErrorCallback, messages: Array<ReadMessage>) => {
+            if (error) {
+                Logger.error(error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Error to get message'
+                })
+            } else {
+                Logger.http(messages)
+                res.status(StatusCode.OK).send(messages)
+            }
+        })
+    } catch (error) {
+        Logger.error(error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Error to get message'
+        })
+    }
+}
+
+
 export default {
     registerMessage,
+    getAllMessages,
 }
