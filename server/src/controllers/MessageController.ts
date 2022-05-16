@@ -53,8 +53,57 @@ const getAllMessages = (req: Request, res: Response) => {
     }
 }
 
+const getMessageById = (req: Request, res: Response) => {
+    try {
+        MessageModel.findById(req.params.id, '', (error:ErrorCallback, message: ReadMessage) => {
+            if (error) {
+                Logger.error('error' + error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Error get message by id'
+                })
+            } else {
+                Logger.http('message' + message)
+                res.status(StatusCode.OK).send(message ? message : {
+                    message: `Error getting message with id ${req.params.id}`
+                })
+            }
+        })
+    } catch (error){
+        Logger.error('error' + error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Error get message by id'
+        })
+    }
+}
+
+const deleteMessageById = (req: Request, res: Response) => {
+    try {
+        MessageModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, message: ReadMessage) => {
+            if (error) {
+                Logger.error('error' + error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Error to delete message'
+                })
+            } else {
+                Logger.http('message' + message)
+                res.status(StatusCode.OK).json(message ? {
+                    message: `Message with id ${req.params.id} was deleted`
+                }: {
+                    message: `Message with id not found ${req.params.id}`
+                })
+            }
+        })
+    } catch (error) {
+        Logger.error('error' + error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Error to delete message'
+        })
+    }
+}
 
 export default {
     registerMessage,
     getAllMessages,
+    getMessageById,
+    deleteMessageById,
 }
