@@ -2,7 +2,7 @@ const RoutingPath = {
     home: '/',
     user: '/user',
     message: '/message',
-    register: '/register'
+    login: '/login'
 }
 
 export default RoutingPath

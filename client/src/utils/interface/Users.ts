@@ -4,6 +4,11 @@ export interface CreateOrUpdateUser {
 	pass: string; 
 }
 
+export interface UserLogin {
+	eMail: string;
+	pass: string;
+}
+
 export interface ReadUser {
 	_id: string;
 	fullName: string;
