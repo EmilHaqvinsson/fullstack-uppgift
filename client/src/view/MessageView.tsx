@@ -9,7 +9,7 @@ function MessageView() {
     const [message, setMessage] = useState<Array<ReadMessage>>([])
     const [text, setText] = useState('')
     const [author, setAuthor] = useState('')
-    const [autoGet, setAutoGet] = useState(true)
+    const [autoGet, setAutoGet] = useState(false)
     const [updated, setIsUpdated] = useState(false)
 
     const postMessage = () => {
