@@ -1,3 +1,21 @@
 .cardDiv {
-    background-color: yellow;
+    background-color: rgb(151, 182, 208);
+    margin: .25em;
+    padding: .5em;
+    font-size: large;
+    transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cardMsg {
+    background-color: rgba(44, 48, 50, 0.709);
+    padding: .25em; 
+    font-size: 1.5em;
+    color:rgb(151, 182, 208);
+}
+
+.cardTimestamps {
+    display: flex;
+    place-self: flex-end;
+    border: 2px darkgray double;
+    font-size: 1em;
 }
