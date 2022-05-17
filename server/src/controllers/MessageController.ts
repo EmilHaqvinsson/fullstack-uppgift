@@ -1,17 +1,20 @@
-import {Request, Response} from 'express'
-import {CreateMessage, ReadMessage} from '../interface/IMessage'
+import { Request, Response } from 'express'
+import { CreateMessage, ReadMessage } from '../interface/IMessage'
 import Logger from '../utils/Logger'
 import StatusCode from '../utils/StatusCode'
 import MessageModel from '../models/MessageModel'
+import { Error } from 'mongoose'
 
 const registerMessage = async (req: Request, res: Response) => {
     try {
         Logger.info('createMessage')
-        Logger.http('req.body' + req.body)
-        const {message} = req.body
+        Logger.http('req.body' + req.body.message)
+        Logger.info(req.body.author)
+        const { message, author } = req.body
         if (message) {
             const newObject: CreateMessage = {
-                message: message
+                message: message,
+                author: author
             }
             Logger.http('newObject' + newObject)
             const newMessage = new MessageModel(newObject)
@@ -19,9 +22,9 @@ const registerMessage = async (req: Request, res: Response) => {
             Logger.http('dbResponse' + dbResponse)
             res.status(StatusCode.CREATED).send(dbResponse)
         } else {
-            Logger.error('Message faild')
+            Logger.error('Message failed')
             res.status(StatusCode.BAD_REQUEST).send({
-                message: 'Message faild'
+                message: 'Message failed'
             })
         }
     } catch (error) {
@@ -30,6 +33,29 @@ const registerMessage = async (req: Request, res: Response) => {
             error: 'Error to create message'
         })
     }
+}
+
+const getDateMsg = (req: Request, res: Response) => {
+    MessageModel.find({}).sort([['createdAt']]), ((messages: Array<ReadMessage>) => {
+        try {
+            MessageModel.find({}, '', (error: ErrorCallback, messages: Array<ReadMessage>) => {
+                if (error) {
+                    Logger.error(error)
+                    res.status(StatusCode.BAD_REQUEST).send({
+                        error: 'Failed to get message'
+                    })
+                } else {
+                    Logger.http(messages)
+                    res.status(StatusCode.OK).send(messages)
+                }
+            })
+        } catch (error) {
+            Logger.error(error)
+            res.status(StatusCode.BAD_REQUEST).send({
+                error: 'Failed to get message'
+            });
+        }
+    })
 }
 
 const getAllMessages = (req: Request, res: Response) => {
@@ -55,7 +81,7 @@ const getAllMessages = (req: Request, res: Response) => {
 
 const getMessageById = (req: Request, res: Response) => {
     try {
-        MessageModel.findById(req.params.id, '', (error:ErrorCallback, message: ReadMessage) => {
+        MessageModel.findById(req.params.id, '', (error: ErrorCallback, message: ReadMessage) => {
             if (error) {
                 Logger.error('error' + error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -68,7 +94,7 @@ const getMessageById = (req: Request, res: Response) => {
                 })
             }
         })
-    } catch (error){
+    } catch (error) {
         Logger.error('error' + error)
         res.status(StatusCode.BAD_REQUEST).send({
             error: 'Error get message by id'
@@ -88,7 +114,7 @@ const deleteMessageById = (req: Request, res: Response) => {
                 Logger.http('message' + message)
                 res.status(StatusCode.OK).json(message ? {
                     message: `Message with id ${req.params.id} was deleted`
-                }: {
+                } : {
                     message: `Message with id not found ${req.params.id}`
                 })
             }
