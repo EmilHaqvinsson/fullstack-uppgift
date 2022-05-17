@@ -9,7 +9,6 @@ function NavigationBar() {
                 <li className={css.li}><Link to={RoutingPath.home}>Home</Link></li>
                 <li className={css.li}><Link to={RoutingPath.user}>User</Link></li>
                 <li className={css.li}><Link to={RoutingPath.message}>Message</Link></li>
-                <li className={css.li}><Link to={RoutingPath.register}>Register</Link></li>
             </ul>
         </nav>
     )
