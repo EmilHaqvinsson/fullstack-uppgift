@@ -50,6 +50,7 @@ const registerUser = async (req: Request, res: Response) => {
 
 function getAllUsers(req: Request, res: Response) {
     try {
+        // @ts-ignore
         UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error);
@@ -72,6 +73,7 @@ function getAllUsers(req: Request, res: Response) {
 
 const getUserById = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         UModel.findById(req.params.id, (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
@@ -93,6 +95,7 @@ const getUserById = (req: Request, res: Response) => {
 
 const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         UModel.find({fullName: req.params.name, eMail: req.params.eMail}, '', (error: ErrorCallback, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
@@ -122,6 +125,7 @@ const updateUserById = (req: Request, res: Response) => {
             pass: req.body.pass
         }
         Logger.debug(updatedUser)
+        // @ts-ignore
         UModel.findByIdAndUpdate(req.params.id, updatedUser, (error: ErrorCallback, user: ReadU) => {
             if (error) {
                 Logger.error(error)
@@ -144,6 +148,7 @@ const updateUserById = (req: Request, res: Response) => {
 }
 const deleteUserById = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         UModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, user: ReadU) => {
             if (error) {
                 Logger.error(error)

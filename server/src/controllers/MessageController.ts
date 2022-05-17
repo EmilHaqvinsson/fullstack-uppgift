@@ -38,6 +38,7 @@ const registerMessage = async (req: Request, res: Response) => {
 const getDateMsg = (req: Request, res: Response) => {
     MessageModel.find({}).sort([['createdAt']]), ((messages: Array<ReadMessage>) => {
         try {
+            // @ts-ignore
             MessageModel.find({}, '', (error: ErrorCallback, messages: Array<ReadMessage>) => {
                 if (error) {
                     Logger.error(error)
@@ -60,6 +61,7 @@ const getDateMsg = (req: Request, res: Response) => {
 
 const getAllMessages = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         MessageModel.find({}, '', (error: ErrorCallback, messages: Array<ReadMessage>) => {
             if (error) {
                 Logger.error(error)
@@ -81,6 +83,7 @@ const getAllMessages = (req: Request, res: Response) => {
 
 const getMessageById = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         MessageModel.findById(req.params.id, '', (error: ErrorCallback, message: ReadMessage) => {
             if (error) {
                 Logger.error('error' + error)
@@ -104,6 +107,7 @@ const getMessageById = (req: Request, res: Response) => {
 
 const deleteMessageById = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         MessageModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, message: ReadMessage) => {
             if (error) {
                 Logger.error('error' + error)
