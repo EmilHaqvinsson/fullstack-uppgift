@@ -1,15 +1,15 @@
 import {useState, useEffect} from 'react'
-import MessageService from '../../utils/api/service/MessageService'
+import MessageService from '../..//utils/api/service/MessageService'
 import {ReadMessage} from '../../utils/interface/IMessage'
 import Card from '../../components/card/Card'
-import css from '../messageView/MessageView.module.css'
+import css from './MessageView.module.css'
 
 
 function MessageView() {
     const [message, setMessage] = useState<Array<ReadMessage>>([])
     const [text, setText] = useState('')
     const [author, setAuthor] = useState('')
-    const [autoGet, setAutoGet] = useState(false)
+    const [autoGet, setAutoGet] = useState(true)
     const [updated, setIsUpdated] = useState(false)
 
     const postMessage = () => {
@@ -41,7 +41,7 @@ function MessageView() {
         console.log('Doing the effect')
         const intervalCall = setInterval(() => {
             autoGet && getAllMessage()
-        }, 15000);
+        }, 2000);
         return () => {
             // clean up
             clearInterval(intervalCall);
@@ -51,29 +51,26 @@ function MessageView() {
 
     return (
         <>
-            <h2>All message</h2>
             {autoGet && <span className={css.autoGetON}>AUTOGET IS REAL</span>}
             <section className={css.sectionContainer}>
+                <h1 className={css.h1Text}>DIN SMURFBOX</h1>
+                <div className={css.usernameInput}>Namn: <input className={css.input} id={'author'} onChange={e => setAuthor(e.target.value)}/>
+                </div>
+                <br/>
                 <label htmlFor="description">
-    <textarea id="description" cols={70} rows={10}
-              onChange={event => setText(event.target.value)}></textarea></label>
-                <div>Username: <input id={'author'} onChange={e => setAuthor(e.target.value)}/></div>
+                    <textarea className={css.labelTextArea}
+                              id="description" cols={70} rows={10}
+                              onChange={event => setText(event.target.value)}></textarea></label>
             </section>
-            <section>
-                <button className={css.buttonPost} onClick={postMessage}>Post</button>
-                <button onClick={getAllMessage}
-                        {...autoGet === true ?
-                            `className={${css.autoGetON}}` : `className={${css.autoGetOFF}}`}>Get All
-                </button>
+            <section className={css.sectionButton}>
+                <button className={css.buttonPost} onClick={postMessage}>Skicka</button>
+                {/*<label htmlFor={'autoget'}>AUTOGET</label>*/}
+                {/*<input type={"checkbox"} onChange={() => {*/}
+                {/*    setAutoGet(!autoGet)*/}
+                {/*}} name={'autoget'} value={String(autoGet)}/>*/}
             </section>
 
-            <label htmlFor={'autoget'}>AUTOGET</label>
-            <input type={"checkbox"} onChange={() => {
-                setAutoGet(!autoGet)
-            }} name={'autoget'} value={String(autoGet)}/>
-
-
-            <div>
+            <div className={css.messageWrap}>
                 {message.map(msg => (
                     <Card message={msg.message}
                           author={msg.author}
