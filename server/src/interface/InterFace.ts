@@ -4,6 +4,11 @@ export interface CreateU {
     pass: string
 }
 
+export interface LoginU {
+    email: string,
+    pass: string,
+}
+
 export interface ReadU {
     _id: string;
     fullName: string;
