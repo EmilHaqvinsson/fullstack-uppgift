@@ -1,7 +1,13 @@
 import {useState, useEffect} from 'react'
+<<<<<<< Updated upstream:client/src/view/MessageView.tsx
 import MessageService from '../utils/api/service/MessageService'
 import {ReadMessage} from '../utils/interface/IMessage'
 import Card from '../components/card/Card'
+=======
+import MessageService from '../../utils/api/service/MessageService'
+import {ReadMessage} from '../../utils/interface/IMessage'
+import Card from '../../components/card/Card'
+>>>>>>> Stashed changes:client/src/view/messageView/MessageView.tsx
 import css from './MessageView.module.css'
 
 
@@ -31,7 +37,7 @@ function MessageView() {
     }
     const getAllMessage = () => {
         MessageService.getAllMessages()
-            .then(response=> {
+            .then(response => {
                 setMessage(response.data)
                 console.log(message)
             })
@@ -50,6 +56,7 @@ function MessageView() {
 
 
     return (
+<<<<<<< Updated upstream:client/src/view/MessageView.tsx
         <><>
             <h2>MessageView</h2>
             {autoGet && <span className={css.autoGetON}>AUTOGET IS REAL</span>}
@@ -74,6 +81,27 @@ function MessageView() {
                         updated={msg.updatedAt} />
                 ))}
             </div></>
+=======
+        <>
+            <h2>All Message</h2>
+            <section>
+                <article className={css.articleTextarea}>
+                    <label htmlFor="description"></label>
+                    <textarea id="description" cols={60} rows={10}
+                              onChange={event => setText(event.target.value)}
+                              value="Skriv din komentar här.."></textarea>
+                </article>
+                <article className={css.articleButton}>
+                    <button onClick={postMessage}>Post</button>
+                    <button onClick={getAllMessage}>Get All</button>
+                </article>
+            </section>
+
+
+            {message.map(msg => (
+                <Card message={msg.message}/>
+            ))}
+>>>>>>> Stashed changes:client/src/view/messageView/MessageView.tsx
         </>
     )
 }
