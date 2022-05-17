@@ -1,7 +1,7 @@
-.articleTextarea {
+.sectionContainer {
     text-align: center;
 }
 
-.articleButton {
-    text-align: center;
+.buttonPost {
+    background-color: green;
 }

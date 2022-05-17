@@ -14,6 +14,7 @@ const Routing = (props: { children?: ReactNode }) => {
                     <Route path={RoutingPath.home} element={<StartView/>}/>
                     <Route path={RoutingPath.user} element={<UserView/>}/>
                     <Route path={RoutingPath.message} element={<MessageView/>}/>
+                    <Route path={RoutingPath.login} element={<StartView/>}/>
                 </Routes>
             </BrowserRouter>
         </>
