@@ -53,7 +53,7 @@ function MessageView() {
         <>
             {autoGet && <span className={css.autoGetON}>AUTOGET IS REAL</span>}
             <section className={css.sectionContainer}>
-                <h1 className={css.h1Text}>DIN SMURFBOX</h1>
+                <h2 className={css.h1Text}>Lämna en smurfs</h2>
                 <div className={css.usernameInput}>Namn: <input className={css.input} id={'author'} onChange={e => setAuthor(e.target.value)}/>
                 </div>
                 <br/>
