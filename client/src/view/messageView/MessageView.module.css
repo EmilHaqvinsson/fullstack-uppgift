@@ -13,6 +13,7 @@
 .sectionButton {
     text-align: center;
     margin-right: 290px;
+    margin-bottom: 100px;
 }
 
 .usernameInput {
@@ -32,4 +33,5 @@
 
 .h1Text {
     color: #4682B4;
+    font-family: "Quicksand Light", sans-serif;
 }
