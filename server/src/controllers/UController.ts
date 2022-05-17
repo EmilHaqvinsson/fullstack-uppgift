@@ -58,13 +58,22 @@ async function login(req: Request, res: Response) {
         if (pass && eMail) {
             Logger.http('"' + eMail + '" and "' + pass + '" are users email and pass.')
             const foundUser = await UModel.findOne({eMail})
-            const hashIt = bcrypt.hashSync(pass, 10)
-            let isAuth: boolean
+            const hashIt = bcrypt.hashSync(JSON.stringify(foundUser), 10)
+            let isAuth: boolean | string 
+            let authToken: string = hashIt
             foundUser ? isAuth = bcrypt.compareSync(pass, foundUser.pass) : isAuth = false
+            isAuth ? isAuth = authToken : isAuth = false
+            const whoIsUser = await UModel.findOne({eMail})
+
+            resultOfLogin = {
+                authenticated: isAuth, 
+                fullName: whoIsUser?.fullName ,
+                email: whoIsUser?.eMail
+            }
             const tryLogin = foundUser ? resultOfLogin = {authenticated: isAuth, message: 'User was authenticated! Welcome.'}
                                         : resultOfLogin = {authenticated: isAuth, message: 'No user could be found with that email.'}
 
-            tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: foundUser}
+            tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: resultOfLogin}
                                     : resultOfLogin = {authenticated: false, message: 'Login didnt work.'}
 
             Logger.info(resultOfLogin)
