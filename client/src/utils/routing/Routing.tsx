@@ -2,7 +2,7 @@ import {BrowserRouter, BrowserRouter as Router, Route, Routes} from 'react-route
 import RoutingPath from "./RoutingPath";
 import StartView from '../../view/StartView';
 import UserView from '../../view/UserView'
-import MessageView from "../../view/MessageView";
+import MessageView from "../../view/messageView/MessageView";
 import {ReactNode} from 'react'
 
 const Routing = (props: { children?: ReactNode }) => {

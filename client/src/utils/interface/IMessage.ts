@@ -1,8 +1,10 @@
 export interface CreateMessage {
-    message: string
+    message: string,
+    author: string
 }
 
 export interface ReadMessage {
+    author: string,
     _id: string,
     message: string,
     createdAt: Date,
