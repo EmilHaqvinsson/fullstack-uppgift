@@ -4,6 +4,7 @@ import {Request, Response} from "express";
 import {CreateU, ReadU} from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
+import { ReadMessage } from "../interface/IMessage";
 
 const saltRounds: number = 10
 const encryptedPassword = async (pass: string) => {
@@ -176,7 +177,7 @@ const updateUserById = (req: Request, res: Response) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
-                    error: 'Fel vid uppdateriing av användare'
+                    error: 'Fel vid uppdatering av användare'
                 })
             } else {
                 Logger.http(user)

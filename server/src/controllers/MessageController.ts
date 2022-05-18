@@ -3,9 +3,6 @@ import { CreateMessage, ReadMessage } from '../interface/IMessage'
 import Logger from '../utils/Logger'
 import StatusCode from '../utils/StatusCode'
 import MessageModel from '../models/MessageModel'
-import { Error } from 'mongoose'
-import { CreateU, ReadU } from '../interface/InterFace'
-import UModel from '../models/UModel'
 
 const registerMessage = async (req: Request, res: Response) => {
     try {
@@ -72,7 +69,7 @@ const getAllMessages = (req: Request, res: Response) => {
                 Logger.http(messages)
                 res.status(StatusCode.OK).send(messages)
             }
-        })
+        }
     } catch (error) {
         Logger.error(error)
         res.status(StatusCode.BAD_REQUEST).send({
@@ -130,22 +127,23 @@ const deleteMessageById = (req: Request, res: Response) => {
 }
 const updateMessageById = (req: Request, res: Response) => {
     try {
+        const thisId = req.params.id
         Logger.debug(req.params.id)
         Logger.debug(req.body)
         const updatedMessage: CreateMessage = {
-            message: req.body.fullName,
+            message: req.body.message,
             author: req.body.author
         }
         Logger.debug(updatedMessage)
-        UModel.findByIdAndUpdate(req.body.id, updatedMessage, (error: ErrorCallback, message: ReadU) => {
+        MessageModel.findByIdAndUpdate(thisId, updatedMessage, (error: ErrorCallback, message: ReadMessage) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
-                    error: 'Fel vid uppdateriing av meddelande'
+                    error: 'Fel vid uppdatering av meddelande'
                 })
             } else {
                 Logger.http(message)
-                res.status(StatusCode.OK).send(message ? message : {
+                res.status(StatusCode.BAD_REQUEST).send(message ? message : {
                     message: `Meddelande med id '${req.params.id}' hittades inte`
                 })
             }
