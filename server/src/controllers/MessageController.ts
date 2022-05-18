@@ -4,6 +4,8 @@ import Logger from '../utils/Logger'
 import StatusCode from '../utils/StatusCode'
 import MessageModel from '../models/MessageModel'
 import { Error } from 'mongoose'
+import { CreateU, ReadU } from '../interface/InterFace'
+import UModel from '../models/UModel'
 
 const registerMessage = async (req: Request, res: Response) => {
     try {
@@ -59,8 +61,8 @@ const getDateMsg = (req: Request, res: Response) => {
 }
 
 const getAllMessages = (req: Request, res: Response) => {
-    try {
-        MessageModel.find({}, '', (error: ErrorCallback, messages: Array<ReadMessage>) => {
+   try {
+        MessageModel.find({}).sort([['date', -1]]), (error: ErrorCallback, messages: Array<ReadMessage>) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -126,10 +128,40 @@ const deleteMessageById = (req: Request, res: Response) => {
         })
     }
 }
+const updateMessageById = (req: Request, res: Response) => {
+    try {
+        Logger.debug(req.params.id)
+        Logger.debug(req.body)
+        const updatedMessage: CreateMessage = {
+            message: req.body.fullName,
+            author: req.body.author
+        }
+        Logger.debug(updatedMessage)
+        UModel.findByIdAndUpdate(req.body.id, updatedMessage, (error: ErrorCallback, message: ReadU) => {
+            if (error) {
+                Logger.error(error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Fel vid uppdateriing av meddelande'
+                })
+            } else {
+                Logger.http(message)
+                res.status(StatusCode.OK).send(message ? message : {
+                    message: `Meddelande med id '${req.params.id}' hittades inte`
+                })
+            }
+        })
+    } catch (error) {
+        Logger.error(error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Fel vid uppdatering av meddelande'
+        })
+    }
+}
 
 export default {
     registerMessage,
     getAllMessages,
     getMessageById,
     deleteMessageById,
+    updateMessageById
 }
