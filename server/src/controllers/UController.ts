@@ -58,13 +58,22 @@ async function login(req: Request, res: Response) {
         if (pass && eMail) {
             Logger.http('"' + eMail + '" and "' + pass + '" are users email and pass.')
             const foundUser = await UModel.findOne({eMail})
-            const hashIt = bcrypt.hashSync(pass, 10)
-            let isAuth: boolean
+            const hashIt = bcrypt.hashSync(JSON.stringify(foundUser), 10)
+            let isAuth: boolean | string 
+            let authToken: string = hashIt
             foundUser ? isAuth = bcrypt.compareSync(pass, foundUser.pass) : isAuth = false
+            isAuth ? isAuth = authToken : isAuth = false
+            const whoIsUser = await UModel.findOne({eMail})
+
+            resultOfLogin = {
+                authenticated: isAuth, 
+                fullName: whoIsUser?.fullName ,
+                email: whoIsUser?.eMail
+            }
             const tryLogin = foundUser ? resultOfLogin = {authenticated: isAuth, message: 'User was authenticated! Welcome.'}
                                         : resultOfLogin = {authenticated: isAuth, message: 'No user could be found with that email.'}
 
-            tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: foundUser}
+            tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: resultOfLogin}
                                     : resultOfLogin = {authenticated: false, message: 'Login didnt work.'}
 
             Logger.info(resultOfLogin)
@@ -116,7 +125,7 @@ function getAllUsers(req: Request, res: Response) {
 const getUserById = (req: Request, res: Response) => {
     try {
         // @ts-ignore
-        UModel.findById(req.params.id, (error: ErrorCallback, users: Array<ReadU>) => {
+        UModel.findById(req.params.id, (error: ErrorCallback, users: ReadU) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -137,6 +146,7 @@ const getUserById = (req: Request, res: Response) => {
 
 const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         UModel.find({ fullName: req.params.name, eMail: req.params.eMail }, '', (error: ErrorCallback, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
@@ -199,7 +209,7 @@ const deleteUserById = (req: Request, res: Response) => {
             } else {
                 Logger.http(user)
                 res.status(StatusCode.OK).json(
-                    user ? { message: `Användare med id '${req.params.id}' har tagits bort från databasen!` }
+                    user ? { message: `Användare med id ${req.params.id} har tagits bort från databasen!` }
                         : { message: `Användare med id '${req.params.id}'hittades inte!` })
             }
         })
