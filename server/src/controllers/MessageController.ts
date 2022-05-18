@@ -3,7 +3,6 @@ import { CreateMessage, ReadMessage } from '../interface/IMessage'
 import Logger from '../utils/Logger'
 import StatusCode from '../utils/StatusCode'
 import MessageModel from '../models/MessageModel'
-import { Error } from 'mongoose'
 
 const registerMessage = async (req: Request, res: Response) => {
     try {
@@ -34,6 +33,8 @@ const registerMessage = async (req: Request, res: Response) => {
         })
     }
 }
+
+
 
 const getDateMsg = (req: Request, res: Response) => {
     MessageModel.find({}).sort([['createdAt']]), ((messages: Array<ReadMessage>) => {
