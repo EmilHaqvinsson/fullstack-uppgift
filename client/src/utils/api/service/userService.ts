@@ -1,9 +1,13 @@
 import http from '../MyApi'
-import { CreateOrUpdateUser } from '../../interface/Users'
+import { CreateOrUpdateUser, UserLogin } from '../../interface/Users'
 
 const UserService = {
 	createUser: (payload: CreateOrUpdateUser) => {
 		return http.post('/user', payload)
+	},
+
+	userLogin: (payload: UserLogin) => {
+		return http.post('/login', payload)
 	},
 	
 	getAll: () => {

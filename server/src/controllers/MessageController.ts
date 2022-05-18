@@ -3,7 +3,6 @@ import { CreateMessage, ReadMessage } from '../interface/IMessage'
 import Logger from '../utils/Logger'
 import StatusCode from '../utils/StatusCode'
 import MessageModel from '../models/MessageModel'
-import { Error } from 'mongoose'
 
 const registerMessage = async (req: Request, res: Response) => {
     try {
@@ -36,8 +35,8 @@ const registerMessage = async (req: Request, res: Response) => {
 }
 
 const getAllMessages = (req: Request, res: Response) => {
-    try {
-        MessageModel.find({}, '', (error: ErrorCallback, messages: Array<ReadMessage>) => {
+   try {
+        MessageModel.find({}).sort([['date', -1]]), (error: ErrorCallback, messages: Array<ReadMessage>) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -47,7 +46,7 @@ const getAllMessages = (req: Request, res: Response) => {
                 Logger.http(messages)
                 res.status(StatusCode.OK).send(messages)
             }
-        })
+        }
     } catch (error) {
         Logger.error(error)
         res.status(StatusCode.BAD_REQUEST).send({
@@ -103,10 +102,41 @@ const deleteMessageById = (req: Request, res: Response) => {
         })
     }
 }
+const updateMessageById = (req: Request, res: Response) => {
+    try {
+        const thisId = req.params.id
+        Logger.debug(req.params.id)
+        Logger.debug(req.body)
+        const updatedMessage: CreateMessage = {
+            message: req.body.message,
+            author: req.body.author
+        }
+        Logger.debug(updatedMessage)
+        MessageModel.findByIdAndUpdate(thisId, updatedMessage, (error: ErrorCallback, message: ReadMessage) => {
+            if (error) {
+                Logger.error(error)
+                res.status(StatusCode.BAD_REQUEST).send({
+                    error: 'Fel vid uppdatering av meddelande'
+                })
+            } else {
+                Logger.http(message)
+                res.status(StatusCode.BAD_REQUEST).send(message ? message : {
+                    message: `Meddelande med id '${req.params.id}' hittades inte`
+                })
+            }
+        })
+    } catch (error) {
+        Logger.error(error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Fel vid uppdatering av meddelande'
+        })
+    }
+}
 
 export default {
     registerMessage,
     getAllMessages,
     getMessageById,
     deleteMessageById,
+    updateMessageById
 }

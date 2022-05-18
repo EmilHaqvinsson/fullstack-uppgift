@@ -18,7 +18,7 @@ function UserView() {
 
                 </div>
 
-                <div className={css.emty}></div>
+                <div className={css.empty}></div>
             </section>
         </>
     )
