@@ -35,29 +35,6 @@ const registerMessage = async (req: Request, res: Response) => {
     }
 }
 
-const getDateMsg = (req: Request, res: Response) => {
-    MessageModel.find({}).sort([['createdAt']]), ((messages: Array<ReadMessage>) => {
-        try {
-            MessageModel.find({}, '', (error: ErrorCallback, messages: Array<ReadMessage>) => {
-                if (error) {
-                    Logger.error(error)
-                    res.status(StatusCode.BAD_REQUEST).send({
-                        error: 'Failed to get message'
-                    })
-                } else {
-                    Logger.http(messages)
-                    res.status(StatusCode.OK).send(messages)
-                }
-            })
-        } catch (error) {
-            Logger.error(error)
-            res.status(StatusCode.BAD_REQUEST).send({
-                error: 'Failed to get message'
-            });
-        }
-    })
-}
-
 const getAllMessages = (req: Request, res: Response) => {
     try {
         MessageModel.find({}, '', (error: ErrorCallback, messages: Array<ReadMessage>) => {

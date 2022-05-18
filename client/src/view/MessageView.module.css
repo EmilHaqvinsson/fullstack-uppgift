@@ -7,7 +7,6 @@
 }
 
 .messageWrap {
-    background-color: hsla(green, 234, 24, .45);
     padding: 2em;
     display: flex;
     flex-direction: column-reverse;

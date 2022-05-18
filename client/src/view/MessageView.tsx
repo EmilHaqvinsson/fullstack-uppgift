@@ -26,8 +26,8 @@ function MessageView() {
             .catch(error => {
                 console.log(error)
             })
-            setAuthor('')
-            setText('')
+            setAuthor('INPUT AUTHOR')
+            setText('MAKE NEW MESSAGE')
     }
     const getAllMessage = () => {
         MessageService.getAllMessages()
@@ -60,7 +60,7 @@ function MessageView() {
                 <div>by: <input id={'author'} onChange={e => setAuthor(e.target.value)} /> </div>
                 <button onClick={postMessage}>Post</button>
                 <label htmlFor={'autoget'}>AUTOGET</label>
-                <input type={"checkbox"} onChange={() => { setAutoGet(!autoGet) } } name={'autoget'} value={String(autoGet)} />
+                <input type={"checkbox"} onChange={() => { setAutoGet(!autoGet) } } name={'autoget'} checked={(autoGet)} />
                 <button
                     onClick={getAllMessage}
                     {...autoGet === true ?
