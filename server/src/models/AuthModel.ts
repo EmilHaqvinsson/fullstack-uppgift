@@ -1,16 +1,12 @@
 import dotenv from 'dotenv'
 import { model, Schema } from 'mongoose'
-import { LoginU } from "../interface/InterFace";
+import { CheckLogin, LoginU } from "../interface/InterFace";
 
 dotenv.config()
 const authCollection = process.env.MONGODB_COLLECTION_AUTH || ''
 
-const AuthSchema = new Schema<LoginU>({
-    eMail: {
-        type: String,
-        required: true
-    },
-    pass: {
+const AuthSchema = new Schema<CheckLogin>({
+    _id: {
         type: String,
         required: true,
     },
@@ -22,6 +18,6 @@ const AuthSchema = new Schema<LoginU>({
     timestamps: true
 })
 
-const AuthModel = model<LoginU>(authCollection, AuthSchema)
+const AuthModel = model<CheckLogin>(authCollection, AuthSchema)
 
 export default AuthModel

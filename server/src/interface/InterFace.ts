@@ -7,7 +7,11 @@ export interface CreateU {
 export interface LoginU {
     eMail: string,
     pass: string,
-    authenticated: string | boolean,
+}
+
+export interface CheckLogin {
+    _id: string,
+    authenticated: string | boolean
 }
 
 export interface ReadU {

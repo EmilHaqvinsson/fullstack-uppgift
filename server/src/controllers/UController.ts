@@ -5,7 +5,6 @@ import {CreateU, ReadU} from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
 import { ReadMessage } from "../interface/IMessage";
-import AuthModel from "../models/AuthModel";
 
 const saltRounds: number = 10
 const encryptedPassword = async (pass: string) => {
@@ -63,37 +62,28 @@ async function login(req: Request, res: Response) {
             let isAuth: boolean | string 
             let authToken: string = hashIt
             foundUser ? isAuth = bcrypt.compareSync(pass, foundUser.pass) : isAuth = false
-            isAuth 
-                ? isAuth = authToken 
-                : isAuth = 'Could not log in user ' + foundUser?.eMail + ' with that pass . Please try again.'
-            const whoIsUser = await AuthModel.findOne({eMail})
+            isAuth ? isAuth = authToken : isAuth = 'Could not log in user ' + foundUser?.eMail + ' with that pass . Please try again.'
+            const whoIsUser = await UModel.findOne({eMail})
 
             resultOfLogin = {
                 authenticated: isAuth,
-                userId: whoIsUser?.id,
+                fullName: whoIsUser?.fullName,
                 email: whoIsUser?.eMail
-            }
-
-            const isAuthenticated = new AuthModel(resultOfLogin)
-            isAuthenticated.save()
+            } 
             // const tryLogin = foundUser ? resultOfLogin = {authenticated: isAuth, message: 'User was authenticated! Welcome.'}
             //                             : resultOfLogin = {authenticated: isAuth, message: 'No user could be found with that email.'}
 
             // tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: resultOfLogin}
             //                         : resultOfLogin = {authenticated: false, message: 'Login didnt work.'}
-            
+
             Logger.info(resultOfLogin)
-            res.send(
-                {
-                status: StatusCode,
-                isAuth: JSON.stringify(resultOfLogin)
-            })
+            res.send(resultOfLogin)
         } else if (!eMail) {
-            res.status(StatusCode.METHOD_NOT_ALLOWED)
+            res.status(StatusCode.BAD_REQUEST)
             resultOfLogin = {authenticated: false, message:`You need to provide an email.`}
             res.send(message)
         } else if (!pass) {
-            res.status(StatusCode.METHOD_NOT_ALLOWED)
+            res.status(StatusCode.BAD_REQUEST)
             message = `You need to provide a password.`
             res.send(message)
         } else {
@@ -111,7 +101,6 @@ async function login(req: Request, res: Response) {
 
 function getAllUsers(req: Request, res: Response) {
     try {
-        // @ts-ignore
         UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error);
@@ -134,8 +123,7 @@ function getAllUsers(req: Request, res: Response) {
 
 const getUserById = (req: Request, res: Response) => {
     try {
-        // @ts-ignore
-        UModel.findById(req.params.id, (error: ErrorCallback, users: ReadU) => {
+        UModel.findById(req.params.id, (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -156,7 +144,6 @@ const getUserById = (req: Request, res: Response) => {
 
 const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
-        // @ts-ignore
         UModel.find({ fullName: req.params.name, eMail: req.params.eMail }, '', (error: ErrorCallback, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
@@ -186,7 +173,6 @@ const updateUserById = (req: Request, res: Response) => {
             pass: req.body.pass
         }
         Logger.debug(updatedUser)
-        // @ts-ignore
         UModel.findByIdAndUpdate(req.params.id, updatedUser, (error: ErrorCallback, user: ReadU) => {
             if (error) {
                 Logger.error(error)
@@ -209,7 +195,6 @@ const updateUserById = (req: Request, res: Response) => {
 }
 const deleteUserById = (req: Request, res: Response) => {
     try {
-        // @ts-ignore
         UModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, user: ReadU) => {
             if (error) {
                 Logger.error(error)
@@ -219,7 +204,7 @@ const deleteUserById = (req: Request, res: Response) => {
             } else {
                 Logger.http(user)
                 res.status(StatusCode.OK).json(
-                    user ? { message: `Användare med id ${req.params.id} har tagits bort från databasen!` }
+                    user ? { message: `Användare med id '${req.params.id}' har tagits bort från databasen!` }
                         : { message: `Användare med id '${req.params.id}'hittades inte!` })
             }
         })
