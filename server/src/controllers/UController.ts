@@ -4,7 +4,7 @@ import {Request, Response} from "express";
 import {CreateU, ReadU} from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
-import { findSourceMap } from "module";
+import { ReadMessage } from "../interface/IMessage";
 
 const saltRounds: number = 10
 const encryptedPassword = async (pass: string) => {
@@ -58,23 +58,23 @@ async function login(req: Request, res: Response) {
         if (pass && eMail) {
             Logger.http('"' + eMail + '" and "' + pass + '" are users email and pass.')
             const foundUser = await UModel.findOne({eMail})
-            const hashIt = bcrypt.hashSync(JSON.stringify(foundUser), 10)
+            const hashIt = bcrypt.hashSync(JSON.stringify(Date.now()), 10)
             let isAuth: boolean | string 
             let authToken: string = hashIt
             foundUser ? isAuth = bcrypt.compareSync(pass, foundUser.pass) : isAuth = false
-            isAuth ? isAuth = authToken : isAuth = false
+            isAuth ? isAuth = authToken : isAuth = 'Could not log in user ' + foundUser?.eMail + ' with that pass . Please try again.'
             const whoIsUser = await UModel.findOne({eMail})
 
             resultOfLogin = {
-                authenticated: isAuth, 
-                fullName: whoIsUser?.fullName ,
+                authenticated: isAuth,
+                fullName: whoIsUser?.fullName,
                 email: whoIsUser?.eMail
             }
-            const tryLogin = foundUser ? resultOfLogin = {authenticated: isAuth, message: 'User was authenticated! Welcome.'}
-                                        : resultOfLogin = {authenticated: isAuth, message: 'No user could be found with that email.'}
+            // const tryLogin = foundUser ? resultOfLogin = {authenticated: isAuth, message: 'User was authenticated! Welcome.'}
+            //                             : resultOfLogin = {authenticated: isAuth, message: 'No user could be found with that email.'}
 
-            tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: resultOfLogin}
-                                    : resultOfLogin = {authenticated: false, message: 'Login didnt work.'}
+            // tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: resultOfLogin}
+            //                         : resultOfLogin = {authenticated: false, message: 'Login didnt work.'}
 
             Logger.info(resultOfLogin)
             res.send(resultOfLogin)
@@ -181,7 +181,7 @@ const updateUserById = (req: Request, res: Response) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
-                    error: 'Fel vid uppdateriing av användare'
+                    error: 'Fel vid uppdatering av användare'
                 })
             } else {
                 Logger.http(user)
