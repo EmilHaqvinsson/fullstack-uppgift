@@ -22,3 +22,16 @@
     border: 2px darkgray double;
     font-size: 1em;
 }
+
+.username {
+    background-color: #4682B4;
+    padding: 10px;
+}
+
+.message {
+    padding: 10px;
+}
+
+.timestamps {
+    padding: 10px;
+}

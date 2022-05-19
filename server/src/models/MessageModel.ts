@@ -7,8 +7,15 @@ const dbCollection = process.env.MONGODB_COLLECTION_MESSAGE || ''
 
 const MessageSchema = new Schema<CreateMessage>(
     {
-        message: String,
-        author: String
+        message: {
+            type: String,
+            required: true
+        },
+        author: {
+            type: String,
+            required: true
+        },
+
     },{
         timestamps: true
 })

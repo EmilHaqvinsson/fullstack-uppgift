@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import {FC} from 'react'
 import css from './Card.module.css'
 
 interface Props {
@@ -8,18 +8,21 @@ interface Props {
     updated: Date
 }
 
-const Card: FC<Props> = ({ message, author, created, updated }) => {
-    return (<>
-        <div className={css.cardDiv} key={String(created)}>
-            {author ? `${author}` : 'Unknown: '}
-            <div className={css.cardMsg}>
-                {message}
-            </div>
-            <div className={css.cardTimeStamps}>
-                <span>{String(`${created}`)}</span><span>{!(created === updated) ? String(`| UPDATED AT: ${updated}`) : null}</span>
-            </div>
-        </div>
-    </>
+const Card: FC<Props> = ({message, author, created, updated}) => {
+    return (
+        <>
+            <section>
+                <div className={css.cardDiv} key={String(created)}>
+                    <p className={css.username}>{author ? `${author}` : 'Unknown: '}</p>
+                    <div>
+                        <p className={css.message}>{message}</p>
+                    </div>
+                    <p className={css.timestamps}>
+                        <span>{String(`${created}`)}</span><span>{!(created === updated) ? String(`| UPDATED AT: ${updated}`) : null}</span>
+                    </p>
+                </div>
+            </section>
+        </>
     )
 }
 

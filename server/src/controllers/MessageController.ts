@@ -57,6 +57,7 @@ const getAllMessages = (req: Request, res: Response) => {
 
 const getMessageById = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         MessageModel.findById(req.params.id, '', (error: ErrorCallback, message: ReadMessage) => {
             if (error) {
                 Logger.error('error' + error)
@@ -80,6 +81,7 @@ const getMessageById = (req: Request, res: Response) => {
 
 const deleteMessageById = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         MessageModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, message: ReadMessage) => {
             if (error) {
                 Logger.error('error' + error)

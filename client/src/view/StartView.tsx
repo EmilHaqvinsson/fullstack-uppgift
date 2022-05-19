@@ -7,7 +7,7 @@ import smurf from '../utils/image/smurf.png'
 import {CreateOrUpdateUser} from '../utils/interface/Users';
 import { LoginU } from '../utils/interface/Users'
 import UserService from '../utils/api/service/userService';
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 
 function StartView() {
     const [modal, setModal] = useState(false)
@@ -86,7 +86,7 @@ function StartView() {
                             required={true}/>
                 </article>
                 <br/>
-                <button onClick={ userLogin }>Log in</button>
+                <button className={css.button} onClick={ userLogin }>Log in</button>
                 <hr/>
                 <p>{text && `${JSON.stringify(text)}`}</p>
                 <hr/>

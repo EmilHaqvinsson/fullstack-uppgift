@@ -1,0 +1,37 @@
+.sectionContainer {
+    text-align: center;
+}
+
+.buttonPost {
+    background-color: #EDA2A1;
+    width: 80px;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 160px;
+}
+
+.sectionButton {
+    text-align: center;
+    margin-right: 290px;
+    margin-bottom: 100px;
+}
+
+.usernameInput {
+    margin-right: 315px;
+}
+
+.input {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.labelTextArea {
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+.h1Text {
+    color: #4682B4;
+    font-family: "Quicksand Light", sans-serif;
+}
