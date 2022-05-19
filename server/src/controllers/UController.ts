@@ -57,7 +57,7 @@ async function login(req: Request, res: Response) {
     try {
         if (pass && eMail) {
             Logger.http('"' + eMail + '" and "' + pass + '" are users email and pass.')
-            const foundUser = await AuthModel.findOne({eMail})
+            const foundUser = await UModel.findOne({eMail})
             const hashIt = bcrypt.hashSync(JSON.stringify(Date.now()), 10)
             let isAuth: boolean | string 
             let authToken: string = hashIt
