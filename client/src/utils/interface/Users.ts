@@ -4,9 +4,10 @@ export interface CreateOrUpdateUser {
 	pass: string; 
 }
 
-export interface UserLogin {
-	eMail: string;
-	pass: string;
+export interface LoginU {
+    email: string,
+    pass: string,
+    authenticated: string | boolean,
 }
 
 export interface ReadUser {

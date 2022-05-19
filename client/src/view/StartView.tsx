@@ -4,7 +4,8 @@ import {findAllByDisplayValue} from "@testing-library/react";
 import {SetStateAction, useState} from 'react'
 import close from '../utils/image/close.png'
 import smurf from '../utils/image/smurf.png'
-import {CreateOrUpdateUser, UserLogin} from '../utils/interface/Users';
+import {CreateOrUpdateUser} from '../utils/interface/Users';
+import { LoginU } from '../utils/interface/Users'
 import UserService from '../utils/api/service/userService';
 // import bcrypt from 'bcrypt';
 
@@ -12,6 +13,7 @@ function StartView() {
     const [modal, setModal] = useState(false)
     const [fullName, setFullName] = useState<string>('')
     const [eMail, setEMail] = useState<string>('')
+    const [isAuth, setIsAuth] = useState('')
     const [password, setPassword] = useState<string>('')
     const [text, setText] = useState<string>('')
 
@@ -21,15 +23,17 @@ function StartView() {
 
     // const saltRounds: number = 10
     async function userLogin() {
-        const payload: UserLogin = {
-            eMail: eMail,
-            pass: password
+        const payload: LoginU = {
+            email: eMail,
+            pass: password,
+            authenticated: isAuth
         };
         
         UserService.userLogin(payload)
             .then((
-                response: { data: SetStateAction<object> }) => {
-                    sessionStorage.setItem('AUTH', 'response.data')
+
+                response: { data: object }) => {
+                    sessionStorage.setItem('AUTH', JSON.stringify(response.data))
                     setText(JSON.stringify(response.data))
                     console.log(response.data)
                 console.log((text))
