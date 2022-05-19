@@ -5,8 +5,9 @@ export interface CreateU {
 }
 
 export interface LoginU {
-    email: string,
+    eMail: string,
     pass: string,
+    authenticated: string | boolean,
 }
 
 export interface ReadU {
@@ -14,6 +15,7 @@ export interface ReadU {
     fullName: string;
     eMail: string;
     pass: string;
-    createdAt: Date,
+    authenticated: string | boolean;
+    createdAt: Date
     updatedAt: Date
 }

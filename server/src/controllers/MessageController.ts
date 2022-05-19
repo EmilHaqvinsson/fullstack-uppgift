@@ -87,7 +87,7 @@ const deleteMessageById = (req: Request, res: Response) => {
                     error: 'Error to delete message'
                 })
             } else {
-                Logger.http('message' + message)
+                Logger.info('message' + message)
                 res.status(StatusCode.OK).json(message ? {
                     message: `Message with id ${req.params.id} was deleted`
                 } : {
@@ -120,7 +120,9 @@ const updateMessageById = (req: Request, res: Response) => {
                 })
             } else {
                 Logger.http(message)
-                res.status(StatusCode.BAD_REQUEST).send(message ? message : {
+                const updatedMsg = MessageModel.findOne({thisId})
+                Logger.info(updatedMsg.find())
+                res.status(StatusCode.OK).send(String(message) ? message : {
                     message: `Meddelande med id '${req.params.id}' hittades inte`
                 })
             }

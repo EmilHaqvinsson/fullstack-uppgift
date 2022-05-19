@@ -5,6 +5,7 @@ import {CreateU, ReadU} from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
 import { ReadMessage } from "../interface/IMessage";
+import AuthModel from "../models/AuthModel";
 
 const saltRounds: number = 10
 const encryptedPassword = async (pass: string) => {
@@ -57,33 +58,42 @@ async function login(req: Request, res: Response) {
     try {
         if (pass && eMail) {
             Logger.http('"' + eMail + '" and "' + pass + '" are users email and pass.')
-            const foundUser = await UModel.findOne({eMail})
+            const foundUser = await AuthModel.findOne({eMail})
             const hashIt = bcrypt.hashSync(JSON.stringify(Date.now()), 10)
             let isAuth: boolean | string 
             let authToken: string = hashIt
             foundUser ? isAuth = bcrypt.compareSync(pass, foundUser.pass) : isAuth = false
-            isAuth ? isAuth = authToken : isAuth = 'Could not log in user ' + foundUser?.eMail + ' with that pass . Please try again.'
-            const whoIsUser = await UModel.findOne({eMail})
+            isAuth 
+                ? isAuth = authToken 
+                : isAuth = 'Could not log in user ' + foundUser?.eMail + ' with that pass . Please try again.'
+            const whoIsUser = await AuthModel.findOne({eMail})
 
             resultOfLogin = {
                 authenticated: isAuth,
-                fullName: whoIsUser?.fullName,
+                userId: whoIsUser?.id,
                 email: whoIsUser?.eMail
             }
+
+            const isAuthenticated = new AuthModel(resultOfLogin)
+            isAuthenticated.save()
             // const tryLogin = foundUser ? resultOfLogin = {authenticated: isAuth, message: 'User was authenticated! Welcome.'}
             //                             : resultOfLogin = {authenticated: isAuth, message: 'No user could be found with that email.'}
 
             // tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: resultOfLogin}
             //                         : resultOfLogin = {authenticated: false, message: 'Login didnt work.'}
-
+            
             Logger.info(resultOfLogin)
-            res.send(resultOfLogin)
+            res.send(
+                {
+                status: StatusCode,
+                isAuth: JSON.stringify(resultOfLogin)
+            })
         } else if (!eMail) {
-            res.status(StatusCode.BAD_REQUEST)
+            res.status(StatusCode.METHOD_NOT_ALLOWED)
             resultOfLogin = {authenticated: false, message:`You need to provide an email.`}
             res.send(message)
         } else if (!pass) {
-            res.status(StatusCode.BAD_REQUEST)
+            res.status(StatusCode.METHOD_NOT_ALLOWED)
             message = `You need to provide a password.`
             res.send(message)
         } else {
