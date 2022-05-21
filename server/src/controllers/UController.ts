@@ -32,7 +32,7 @@ const registerUser = async (req: Request, res: Response) => {
             const user = new UModel(newobject)
             const dbResponse = await user.save()
             Logger.http(dbResponse)
-            res.status(StatusCode.CREATED).send(dbResponse)
+            res.status(StatusCode.CREATED).send('Användare skapad!')
         } else {
             Logger.error('name, fullName or eMail failed')
             res.status(StatusCode.BAD_REQUEST).send({
@@ -51,9 +51,9 @@ const registerUser = async (req: Request, res: Response) => {
 async function login(req: Request, res: Response) {
     let message: any
     let resultOfLogin: object
-    let eMail = req.body.email
+    let eMail = req.body.eMail
     let pass = req.body.pass
-    Logger.info(`\nTRYING LOGIN.. User is using credentials:\nemail: ${eMail}\npass: ${pass}\n`)
+    Logger.info('ENDPOINT REACHED; TRYING LOGIN..')
     try {
         if (pass && eMail) {
             Logger.http('"' + eMail + '" and "' + pass + '" are users email and pass.')
@@ -69,7 +69,7 @@ async function login(req: Request, res: Response) {
                 authenticated: isAuth,
                 fullName: whoIsUser?.fullName,
                 email: whoIsUser?.eMail
-            }
+            } 
             // const tryLogin = foundUser ? resultOfLogin = {authenticated: isAuth, message: 'User was authenticated! Welcome.'}
             //                             : resultOfLogin = {authenticated: isAuth, message: 'No user could be found with that email.'}
 
@@ -101,7 +101,6 @@ async function login(req: Request, res: Response) {
 
 function getAllUsers(req: Request, res: Response) {
     try {
-        // @ts-ignore
         UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error);
@@ -124,8 +123,7 @@ function getAllUsers(req: Request, res: Response) {
 
 const getUserById = (req: Request, res: Response) => {
     try {
-        // @ts-ignore
-        UModel.findById(req.params.id, (error: ErrorCallback, users: ReadU) => {
+        UModel.findById(req.params.id, (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -146,7 +144,6 @@ const getUserById = (req: Request, res: Response) => {
 
 const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
-        // @ts-ignore
         UModel.find({ fullName: req.params.name, eMail: req.params.eMail }, '', (error: ErrorCallback, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
@@ -176,7 +173,7 @@ const updateUserById = (req: Request, res: Response) => {
             pass: req.body.pass
         }
         Logger.debug(updatedUser)
-        UModel.findByIdAndUpdate(req.params.id, updatedUser, {new : true }, (error: any , user: any) => {
+        UModel.findByIdAndUpdate(req.params.id, updatedUser, (error: ErrorCallback, user: ReadU) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -196,10 +193,8 @@ const updateUserById = (req: Request, res: Response) => {
         })
     }
 }
-
 const deleteUserById = (req: Request, res: Response) => {
     try {
-        // @ts-ignore
         UModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, user: ReadU) => {
             if (error) {
                 Logger.error(error)
@@ -209,7 +204,7 @@ const deleteUserById = (req: Request, res: Response) => {
             } else {
                 Logger.http(user)
                 res.status(StatusCode.OK).json(
-                    user ? { message: `Användare med id ${req.params.id} har tagits bort från databasen!` }
+                    user ? { message: `Användare med id '${req.params.id}' har tagits bort från databasen!` }
                         : { message: `Användare med id '${req.params.id}'hittades inte!` })
             }
         })

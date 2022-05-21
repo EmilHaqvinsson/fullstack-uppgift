@@ -1,5 +1,6 @@
 import http from '../MyApi'
 import { CreateOrUpdateUser, LoginU } from '../../interface/Users'
+import { AuthModel } from '../../../utils/'
 
 const UserService = {
 	createUser: (payload: CreateOrUpdateUser) => {
@@ -8,6 +9,10 @@ const UserService = {
 
 	userLogin: (payload: LoginU) => {
 		return http.post('/login', payload)
+	},
+
+	checkLogin: (userId: string) => {
+		return http.get(`/login/${userId}`)
 	},
 	
 	getAll: () => {

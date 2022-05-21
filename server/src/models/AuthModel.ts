@@ -6,13 +6,12 @@ dotenv.config()
 const authCollection = process.env.MONGODB_COLLECTION_AUTH || ''
 
 const AuthSchema = new Schema<CheckLogin>({
-    _id: {
+    userId: {
         type: String,
-        required: true,
     },
-    authenticated: {
+    token: {
         type: String,
-        required: true
+        
     }
 }, {
     timestamps: true
