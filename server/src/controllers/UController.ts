@@ -7,96 +7,12 @@ import bcrypt from 'bcrypt'
 import { ReadMessage } from "../interface/IMessage";
 
 const saltRounds: number = 10
-const encryptedPassword = async (pass: string) => {
+export const encryptedPassword = async (pass: string) => {
     let newPass: string = ''
     await bcrypt.hash(pass,saltRounds).then(function (hash: any){
         newPass = hash;
     })
     return newPass
-}
-
-const registerUser = async (req: Request, res: Response) => {
-    try {
-        Logger.info('createUser()')
-        Logger.http(req.body)
-        let {fullName, eMail, pass} = req.body
-        pass = await encryptedPassword(pass)
-        if (fullName && eMail && pass) {
-            const newobject: CreateU = {
-                fullName: fullName,
-                eMail: eMail,
-                pass: pass
-            }
-            Logger.http(newobject)
-
-            const user = new UModel(newobject)
-            const dbResponse = await user.save()
-            Logger.http(dbResponse)
-            res.status(StatusCode.CREATED).send('Användare skapad!')
-        } else {
-            Logger.error('name, fullName or eMail failed')
-            res.status(StatusCode.BAD_REQUEST).send({
-                message: 'Faulty body'
-            })
-        }
-    } catch (error) {
-        Logger.error(error)
-        res.status(StatusCode.BAD_REQUEST).send({
-                error: 'Det gick inte att skapa användare'
-            }
-        )
-    }
-}
-
-async function login(req: Request, res: Response) {
-    let message: any
-    let resultOfLogin: object
-    let eMail = req.body.eMail
-    let pass = req.body.pass
-    Logger.info('ENDPOINT REACHED; TRYING LOGIN..')
-    try {
-        if (pass && eMail) {
-            Logger.http('"' + eMail + '" and "' + pass + '" are users email and pass.')
-            const foundUser = await UModel.findOne({eMail})
-            const hashIt = bcrypt.hashSync(JSON.stringify(Date.now()), 10)
-            let isAuth: boolean | string 
-            let authToken: string = hashIt
-            foundUser ? isAuth = bcrypt.compareSync(pass, foundUser.pass) : isAuth = false
-            isAuth ? isAuth = authToken : isAuth = 'Could not log in user ' + foundUser?.eMail + ' with that pass . Please try again.'
-            const whoIsUser = await UModel.findOne({eMail})
-
-            resultOfLogin = {
-                authenticated: isAuth,
-                fullName: whoIsUser?.fullName,
-                email: whoIsUser?.eMail
-            } 
-            // const tryLogin = foundUser ? resultOfLogin = {authenticated: isAuth, message: 'User was authenticated! Welcome.'}
-            //                             : resultOfLogin = {authenticated: isAuth, message: 'No user could be found with that email.'}
-
-            // tryLogin.authenticated ? resultOfLogin = {authenticated: tryLogin.authenticated, message: resultOfLogin}
-            //                         : resultOfLogin = {authenticated: false, message: 'Login didnt work.'}
-
-            Logger.info(resultOfLogin)
-            res.send(resultOfLogin)
-        } else if (!eMail) {
-            res.status(StatusCode.BAD_REQUEST)
-            resultOfLogin = {authenticated: false, message:`You need to provide an email.`}
-            res.send(message)
-        } else if (!pass) {
-            res.status(StatusCode.BAD_REQUEST)
-            message = `You need to provide a password.`
-            res.send(message)
-        } else {
-            message += '\n'
-            res.status(StatusCode.BAD_REQUEST)
-            res.send(res.status + message)
-        }
-    } catch (error) {
-        Logger.error(error)
-        res.status(StatusCode.BAD_REQUEST).send({
-            error: 'Det gick inte att hämta användaren efter namn och eMail'
-        })
-    }
 }
 
 function getAllUsers(req: Request, res: Response) {
@@ -217,8 +133,6 @@ const deleteUserById = (req: Request, res: Response) => {
 }
 
 export default {
-    registerUser,
-    login,
     getAllUsers,
     getUserById,
     getUserByNameAndEmail,

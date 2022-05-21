@@ -10,8 +10,8 @@ export interface LoginU {
 }
 
 export interface CheckLogin {
-    _id: string,
-    authenticated: string | boolean
+    userId: string,
+    token: string | boolean
 }
 
 export interface ReadU {
