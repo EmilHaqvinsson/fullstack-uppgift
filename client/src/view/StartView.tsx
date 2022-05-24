@@ -87,9 +87,9 @@ function StartView() {
                 </article>
                 <br/>
                 <button className={css.button} onClick={ userLogin }>Log in</button>
-                <hr/>
+
                 <p>{text && `${JSON.stringify(text)}`}</p>
-                <hr/>
+
                 <button onClick={ toggleModal } className={css.buttonCreateNewAccount}>Create new account</button>
 
                 {modal && (
