@@ -9,27 +9,27 @@ import { CreateOrUpdateUser, LoginU } from '../src/utils/interface/Users'
 function isLoggedIn() {
     const hasToken = sessionStorage.getItem('AUTH');
     console.log(hasToken);
-    isAuth = createOrUpdateUser()
+    return hasToken
 }
 
 // const LoggedIn = useContext(LoggedIn)
 function App() {
-    const [user, setUser] = useState("Jesse Hall");
+    const [user, setUser] = useState(isLoggedIn);
 
     
     
     const UserContext = createContext(user)
-    
+    const loggedIn = useContext(UserContext)
     return (
-    <><Header />
-        <UserContext.Provider value={user}>
-            <h1>{`Hello ${user}!`}</h1>
-            </UserContext.Provider>
-                <Routing>
-            <NavigationBar />
-        </Routing>
-        <Alive /></>
-            );
+    <><Header /><UserContext.Provider value={user}>
+            <h1>
+                {`You're: ${loggedIn}!`}
+            </h1>
+            <Routing>
+                <NavigationBar />
+            </Routing>
+        </UserContext.Provider><Alive /></>
+    );
 }
 
 export default App;
