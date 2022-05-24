@@ -1,3 +1,24 @@
+/*mobile*/
+.myDIV {
+    height: 300px;
+    display: grid;
+    gap: 10px;
+    background: whitesmoke;
+    padding: 10px;
+    grid-template-areas: 'myArea myArea .' 'myArea myArea .';
+}
+
+.myDIV div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.item1 {
+    grid-area: myArea;
+}
+
 .section {
     display: grid;
     grid-template-columns: auto 55% auto;
@@ -5,19 +26,24 @@
 }
 
 .emty {
-    background-color: #edefef;
+    background-color: #A2D8FA;
 }
 
 .userDiv {
     border: solid 2px grey;
     border-radius: 15px;
     margin-top: 50px;
+    background: whitesmoke;
 }
 
 .imageUser {
-    max-width: 100px;
+    max-width: 25%;
 }
 
 .inputDiv {
-    background-color: yellow;
+    /*    background-color: yellow;*/
 }
+
+/*tablet*/
+
+/*desktop*/

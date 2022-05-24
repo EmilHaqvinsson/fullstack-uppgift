@@ -81,8 +81,6 @@ hr {
     .section {
         margin: 70px;
         border: solid 1px;
-        width: 50%;
-        height: 65%;
         padding-top: 30px;
         background-color: whitesmoke;
         border-radius: 15px;
@@ -90,6 +88,8 @@ hr {
 
     .imageSmurf {
         max-width: 80%;
+        margin-left: 0;
+
     }
 }
 
@@ -118,7 +118,6 @@ hr {
     width: 300px;
     height: 330px;
 }
-
 .inputPopupWindow {
     width: 200px;
     margin-left: 40px;
@@ -128,7 +127,7 @@ hr {
     background-color: #00a854;
     margin-top: 10px;
     width: 220px;
-    margin-left: 40px;
+/*    margin-left: 40px;*/
 }
 
 .close {
@@ -157,6 +156,7 @@ hr {
         max-width: 40%;
         margin-top: 30px;
     }
+
     .section {
         margin-left: 400px;
     }
