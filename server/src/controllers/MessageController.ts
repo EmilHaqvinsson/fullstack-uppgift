@@ -34,31 +34,32 @@ const registerMessage = async (req: Request, res: Response) => {
     }
 }
 
-const getAllMessages = (req: Request, res: Response) => {
-   try {
-        MessageModel.find({}).sort([['date', -1]]), (error: ErrorCallback, messages: Array<ReadMessage>) => {
+function getAllMessages(req: Request, res: Response) {
+    try {
+        // @ts-ignore
+        MessageModel.find({}, '', (error: ErrorCallback, message: Array<ReadMessage>) => {
             if (error) {
-                Logger.error(error)
+                Logger.error(error);
                 res.status(StatusCode.BAD_REQUEST).send({
-                    error: 'Error to get message'
-                })
+                    error: '\n' +
+                        'Det gick inte att hämta användare'
+                });
             } else {
-                Logger.http(messages)
-                res.status(StatusCode.OK).send(messages)
+                Logger.http(message);
+                res.status(StatusCode.OK).send(message);
             }
-        }
+        });
     } catch (error) {
-        Logger.error(error)
+        Logger.error(error);
         res.status(StatusCode.BAD_REQUEST).send({
-            error: 'Error to get message'
-        })
+            error: 'Det gick inte att hämta användaren'
+        });
     }
 }
 
 const getMessageById = (req: Request, res: Response) => {
     try {
-        // @ts-ignore
-        MessageModel.findById(req.params.id, '', (error: ErrorCallback, message: ReadMessage) => {
+        MessageModel.findById(req.params.id, '', (error: TypeError, message: ReadMessage) => {
             if (error) {
                 Logger.error('error' + error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -81,8 +82,7 @@ const getMessageById = (req: Request, res: Response) => {
 
 const deleteMessageById = (req: Request, res: Response) => {
     try {
-        // @ts-ignore
-        MessageModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, message: ReadMessage) => {
+        MessageModel.findByIdAndRemove(req.params.id, (error: TypeError, message: ReadMessage) => { //testa any
             if (error) {
                 Logger.error('error' + error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -107,28 +107,28 @@ const deleteMessageById = (req: Request, res: Response) => {
 const updateMessageById = (req: Request, res: Response) => {
     try {
         const thisId = req.params.id
-        Logger.debug(req.params.id)
-        Logger.debug(req.body)
+        Logger.debug('req.params.id'+ req.params.id)
+        Logger.debug('req.body'+ req.body)
         const updatedMessage: CreateMessage = {
             message: req.body.message,
             author: req.body.author
         }
-        Logger.debug(updatedMessage)
-        MessageModel.findByIdAndUpdate(thisId, updatedMessage, (error: ErrorCallback, message: ReadMessage) => {
+        Logger.debug('updateMessage' + updatedMessage)
+        MessageModel.findByIdAndUpdate(thisId, updatedMessage,  {new : true }, (error: any, message: any) => {
             if (error) {
-                Logger.error(error)
+                Logger.error('error'+error)
                 res.status(StatusCode.BAD_REQUEST).send({
                     error: 'Fel vid uppdatering av meddelande'
                 })
             } else {
-                Logger.http(message)
-                res.status(StatusCode.BAD_REQUEST).send(message ? message : {
+                Logger.http('message'+ message)
+                res.status(StatusCode.OK).send(message ? message : {
                     message: `Meddelande med id '${req.params.id}' hittades inte`
                 })
             }
         })
     } catch (error) {
-        Logger.error(error)
+        Logger.error('error' +error)
         res.status(StatusCode.BAD_REQUEST).send({
             error: 'Fel vid uppdatering av meddelande'
         })

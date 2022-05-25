@@ -32,7 +32,7 @@ const registerUser = async (req: Request, res: Response) => {
             const user = new UModel(newobject)
             const dbResponse = await user.save()
             Logger.http(dbResponse)
-            res.status(StatusCode.CREATED).send('Användare skapad!')
+            res.status(StatusCode.CREATED).send(dbResponse)
         } else {
             Logger.error('name, fullName or eMail failed')
             res.status(StatusCode.BAD_REQUEST).send({
@@ -176,8 +176,7 @@ const updateUserById = (req: Request, res: Response) => {
             pass: req.body.pass
         }
         Logger.debug(updatedUser)
-        // @ts-ignore
-        UModel.findByIdAndUpdate(req.params.id, updatedUser, (error: ErrorCallback, user: ReadU) => {
+        UModel.findByIdAndUpdate(req.params.id, updatedUser, {new : true }, (error: any , user: any) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -197,6 +196,7 @@ const updateUserById = (req: Request, res: Response) => {
         })
     }
 }
+
 const deleteUserById = (req: Request, res: Response) => {
     try {
         // @ts-ignore

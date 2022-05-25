@@ -64,10 +64,10 @@ function MessageView() {
             </section>
             <section className={css.sectionButton}>
                 <button className={css.buttonPost} onClick={postMessage}>Skicka</button>
-                {/*<label htmlFor={'autoget'}>AUTOGET</label>*/}
-                {/*<input type={"checkbox"} onChange={() => {*/}
-                {/*    setAutoGet(!autoGet)*/}
-                {/*}} name={'autoget'} value={String(autoGet)}/>*/}
+                <label htmlFor={'autoget'}>AUTOGET</label>
+                <input type={"checkbox"} onChange={() => {
+                    setAutoGet(!autoGet)
+                }} name={'autoget'} value={String(autoGet)}/>
             </section>
 
             <div className={css.messageWrap}>
