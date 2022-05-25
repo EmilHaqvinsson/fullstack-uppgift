@@ -29,10 +29,10 @@ const registerMessage = () => {
             Chai.request(server)
                 .post('/message')
                 .send(newMessage)
-                .then((responese) => {
-                    expect(responese).to.have.a.status(StatusCode.CREATED)
-                    expect(responese.body.message).to.equal('God dag')
-                    global_id = responese.body.id
+                .then((response) => {
+                    expect(response).to.have.a.status(StatusCode.CREATED)
+                    expect(response.body.message).to.equal('God dag')
+                    global_id = response.body._id
                     done()
                 })
         })
@@ -59,13 +59,13 @@ const getMessageById = () => {
     describe('Testing to get a message by id', () => {
         test('Get a message by id', (done) => {
             Chai.request(server)
-                .get('/message/628df4801e0ddeca09160027')
+                .get(`/message/${global_id}`)
                 .end((error, response) => {
                     expect(response).to.have.a.status(StatusCode.OK)
                     const body = response.body
                     expect(body).to.be.an('object')
-                    expect(body.message).to.equal('God kväll')
-                    expect(body.author).to.equal('Michaela')
+                    expect(body.message).to.equal('God dag')
+                    expect(body.author).to.equal('Aram')
                     done()
                 })
         })
@@ -76,7 +76,7 @@ const updateMessageById = () => {
     describe('Update message with id', () => {
         test('Update a message with a id', (done) => {
             Chai.request(server)
-                .put(`/message/628df4801e0ddeca09160027`)
+                .put(`/message/${global_id}`)
                 .send(updatedMessage)
                 .end((error, response) => {
                     expect(response).to.have.a.status(StatusCode.OK)
@@ -93,10 +93,10 @@ const deleteMessageById = () => {
     describe('Testing to delete a message by id', () => {
         test('Delete a message by id', (done) => {
             Chai.request(server)
-                .delete('/message/628df4801e0ddeca09160027')
+                .delete(`/message/${global_id}`)
                 .end((error, response) => {
                     expect(response).to.have.a.status(StatusCode.OK)
-                    expect(response.body.message).to.equal('Message with id 628df4801e0ddeca09160027 was deleted')
+                    expect(response.body.message).to.equal(`Message with id ${global_id} was deleted`)
                     done()
                 })
         })
@@ -104,8 +104,8 @@ const deleteMessageById = () => {
 }
 
 describe('Testing message routes', () => {
-    registerMessage(),
-    getAllMessages(),
+    registerMessage()
+    getAllMessages()
     getMessageById()
     updateMessageById()
     deleteMessageById()
