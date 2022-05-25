@@ -13,7 +13,7 @@ function StartView() {
     const [modal, setModal] = useState(false)
     const [fullName, setFullName] = useState<string>('')
     const [eMail, setEMail] = useState<string>('')
-    const [isAuth, setIsAuth] = useState('')
+    const [isAuth, setIsAuth] = useState(false)
     const [password, setPassword] = useState<string>('')
     const [text, setText] = useState<string>('')
 
@@ -35,6 +35,7 @@ function StartView() {
                 response: { data: object }) => {
                     sessionStorage.setItem('AUTH', JSON.stringify(response.data))
                     setText(JSON.stringify(response.data))
+                    setIsAuth(true)
                     console.log(response.data)
                 console.log((text))
             })
@@ -116,7 +117,7 @@ function StartView() {
                                         {solved}
                                         </p>
                                             <br />
-                                            <button className={css.buttonPopupWindow} onClick={createUser}>Sign up</button>
+                                            <button className={css.button} onClick={() => createUser}>Sign up</button>
                                         </div>
                                     </div>
                             </div>

@@ -13,6 +13,7 @@ const USchema = new Schema<CreateU>({
     eMail: {
         type: String,
         required: true,
+        unique: true
     },
     pass: {
         type: String,

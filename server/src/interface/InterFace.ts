@@ -11,7 +11,7 @@ export interface LoginU {
 
 export interface CheckLogin {
     userId: string,
-    token: string | boolean
+    token: string | object
 }
 
 export interface ReadU {

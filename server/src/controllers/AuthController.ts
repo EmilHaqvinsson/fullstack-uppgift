@@ -6,8 +6,9 @@ import UModel from "../models/UModel";
 import bcrypt from 'bcrypt';
 import AuthModel from "../models/AuthModel";
 import { encryptedPassword } from "./UController";
+import jwt from 'jsonwebtoken'
 
-const registerUser = async (req: Request, res: Response) => {
+async function registerUser(req: Request, res: Response): Promise<void> {
     try {
         Logger.info('createUser()');
         Logger.http(req.body);
@@ -38,11 +39,12 @@ const registerUser = async (req: Request, res: Response) => {
         }
         );
     }
-};
+}
 
 async function checkLogin(req: Request, res: Response) {
     const isUserLoggedIn = await AuthModel.find({userId: AuthModel})
     const allLoggedIn = await AuthModel.find({})
+    console.log(isUserLoggedIn)
     return {isUserLoggedIn, allLoggedIn}
 }
 
@@ -52,6 +54,7 @@ async function login(req: Request, res: Response) {
     let email = req.body.email;
     let pass = req.body.pass;
     Logger.info('ENDPOINT REACHED; TRYING LOGIN..');
+    console.log(checkLogin(email, pass))
     try {
         if (pass && email) {
             Logger.http('"' + email + '" and "' + pass + '" are users email and pass.');
@@ -63,14 +66,33 @@ async function login(req: Request, res: Response) {
             isAuth ? isAuth = authToken : isAuth = 'Could not log in user ' + foundUser?.eMail + ' with that pass. Please try again.';
             const whoIsUser = await UModel.findOne({ email });
 
+            const token = jwt.sign(
+                { email: whoIsUser?.eMail, userId: whoIsUser?._id },
+                "secret_this_should_be_longer",
+                { expiresIn: "1h" }
+              )
+              
+            //   res.status(200).json({
+            //     token: token,
+            //     expiresIn: 3600,
+            //     userId: whoIsUser?._id
+            //   });
+
             resultOfLogin = {
                 userId: whoIsUser?.id,
                 token: isAuth,
             };
 
-            Logger.info(resultOfLogin);
             const saveLogin = new AuthModel(resultOfLogin);
-            res.send(JSON.stringify(saveLogin));
+
+            const welcomeObj = {
+                welcomeString: `Welcome back ${whoIsUser?.fullName}`,
+                // resultOfLogin: resultOfLogin,
+                saveLogin: saveLogin
+            }
+
+            Logger.info(resultOfLogin);
+            res.send(String(welcomeObj.welcomeString))
 
         } else if (!email) {
             res.status(StatusCode.BAD_REQUEST);
@@ -87,10 +109,13 @@ async function login(req: Request, res: Response) {
         }
     } catch (error) {
         Logger.error(error);
-        res.status(StatusCode.BAD_REQUEST).send({
+        // res.status(StatusCode.BAD_REQUEST)
+        message += ({
             error: 'Det gick inte att hämta användaren efter namn och eMail'
         });
+        // res.send([res.status, message])
     }
+
 }
 
 export default {
