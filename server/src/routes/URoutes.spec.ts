@@ -1,5 +1,5 @@
 // Kolla varför inte global_id funkar i testerna. Nu är testerna hårdkodade med befintliga id:n
-
+import Logger from '../utils/Logger'
 import server from '../server'
 import chaiHttp from 'chai-http'
 import Chai from 'chai'
@@ -17,7 +17,8 @@ const newU = {
     pass: 'Lars10'
 };
 
-let global_id = '';
+let global_id = ''
+Logger.http(global_id)
 
 const updatedU = {
     fullName: 'Alexis',
@@ -30,8 +31,10 @@ const registerUser = () => {
         test('Check if new user is created', (done) => {
             Chai.request(server)
                 .post('/user/')
+                .send(newU)
                 .then((response) => {
                     expect(response).to.have.a.status(StatusCode.CREATED)
+                    expect(response.body.fullName).to.equal('Lars')
                     global_id = response.body._id
                     done()
                 })
@@ -64,8 +67,8 @@ const getUserById = () => {
                     expect(response).to.have.a.status(StatusCode.OK)
                     const body = response.body
                     expect(body).to.be.an('object')
-                    expect(body.fullName).to.equal('Alexis')
-                    expect(body.eMail).to.equal('alexis@alexis.com')
+                    expect(body.fullName).to.equal('Lars')
+                    expect(body.eMail).to.equal('lars@lars.com')
                     done()
                 })
         })
@@ -93,7 +96,7 @@ const updateUserById = () => {
     describe('Update user with id', () => {
         test('Update a user with a id', (done) => {
             Chai.request(server)
-                .put(`/user/628c8bd0244f24d4000262ad`)
+                .put(`/user/${global_id}`)
                 .send(updatedU)
                 .end((error, response) => {
                     expect(response).to.have.a.status(StatusCode.OK)
@@ -110,10 +113,10 @@ const deleteUserById = () => {
     describe('Testing to delete a user with id', () => {
         test('Delete a user with a id', (done) => {
             Chai.request(server)
-                .delete('/user/628c8f301b14b6894854b716')
+                .delete(`/user/${global_id}`)
                 .end((error, response) => {
                     expect(response).to.have.a.status(StatusCode.OK)
-                    expect(response.body.message).to.equal(`Användare med id 628c8f301b14b6894854b716 har tagits bort från databasen!`)
+                    expect(response.body.message).to.equal(`Användare med id ${global_id} har tagits bort från databasen!`)
                     done()
                 })
         })
