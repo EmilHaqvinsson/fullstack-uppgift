@@ -96,7 +96,7 @@ function StartView() {
                     <div className={css.popup}>
                             <div className={css.overlay}>
                                 <div className={css.popupWindow}>
-                                    <img src={close} alt="close" className={css.close} onClick={() => toggleModal} />
+                                    <img src={close} alt="close" className={css.close} onClick={toggleModal} />
                                     <h2>Sign up</h2>
                                     <input className={css.input}
                                         type="text"
