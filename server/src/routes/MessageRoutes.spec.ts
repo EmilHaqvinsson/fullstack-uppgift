@@ -59,13 +59,30 @@ const getMessageById = () => {
     describe('Testing to get a message by id', () => {
         test('Get a message by id', (done) => {
             Chai.request(server)
-                .get('/message/6284b50b94a0197318c48e1b')
+                .get('/message/628df4801e0ddeca09160027')
                 .end((error, response) => {
                     expect(response).to.have.a.status(StatusCode.OK)
                     const body = response.body
                     expect(body).to.be.an('object')
-                    expect(body.message).to.equal('God dag')
-                    expect(body.author).to.equal('Aram')
+                    expect(body.message).to.equal('God kväll')
+                    expect(body.author).to.equal('Michaela')
+                    done()
+                })
+        })
+    })
+}
+
+const updateMessageById = () => {
+    describe('Update message with id', () => {
+        test('Update a message with a id', (done) => {
+            Chai.request(server)
+                .put(`/message/628df4801e0ddeca09160027`)
+                .send(updatedMessage)
+                .end((error, response) => {
+                    expect(response).to.have.a.status(StatusCode.OK)
+                    const body = response.body
+                    expect(body).to.be.an('object')
+                    expect(body.author).to.equal('Emil')
                     done()
                 })
         })
@@ -76,10 +93,10 @@ const deleteMessageById = () => {
     describe('Testing to delete a message by id', () => {
         test('Delete a message by id', (done) => {
             Chai.request(server)
-                .delete('/message/6284b97fa0139e63ee4c2f40')
+                .delete('/message/628df4801e0ddeca09160027')
                 .end((error, response) => {
                     expect(response).to.have.a.status(StatusCode.OK)
-                    expect(response.body.message).to.equal('Message with id 6284b97fa0139e63ee4c2f40 was deleted')
+                    expect(response.body.message).to.equal('Message with id 628df4801e0ddeca09160027 was deleted')
                     done()
                 })
         })
@@ -90,5 +107,6 @@ describe('Testing message routes', () => {
     registerMessage(),
     getAllMessages(),
     getMessageById()
+    updateMessageById()
     deleteMessageById()
 })
