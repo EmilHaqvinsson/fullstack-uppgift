@@ -4,7 +4,7 @@ import Header from "./components/header/Header";
 import Routing from "./utils/routing/Routing";
 import NavigationBar from "./components/navigationBar/NavigationBar";
 import React, { createContext, useContext, useState } from 'react'
-import { CreateOrUpdateUser, LoginU } from '../src/utils/interface/Users'
+import { CreateOrUpdateUser, LoginU } from './utils/interface/Users'
 
 function isLoggedIn() {
     const hasToken = sessionStorage.getItem('AUTH');
@@ -12,23 +12,20 @@ function isLoggedIn() {
     return hasToken
 }
 
-// const LoggedIn = useContext(LoggedIn)
+const LoggedIn = createContext({isLoggedIn})
 function App() {
-    const [user, setUser] = useState(isLoggedIn);
-
     
-    
-    const UserContext = createContext(user)
-    const loggedIn = useContext(UserContext)
     return (
-    <><Header /><UserContext.Provider value={user}>
-            <h1>
-                {`You're: ${loggedIn}!`}
-            </h1>
+    <>
+    <Header />
+            <h4>
+                {`You're: ${isLoggedIn()}!`}
+            </h4>
             <Routing>
-                <NavigationBar />
+                { isLoggedIn() && <NavigationBar /> }
             </Routing>
-        </UserContext.Provider><Alive /></>
+        <Alive />
+        </>
     );
 }
 
