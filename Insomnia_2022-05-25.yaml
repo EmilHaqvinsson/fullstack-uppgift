@@ -1,8 +1,149 @@
 _type: export
 __export_format: 4
-__export_date: 2022-05-25T10:13:00.019Z
+__export_date: 2022-05-25T11:59:49.454Z
 __export_source: insomnia.desktop.app:v2022.3.0
 resources:
+  - _id: req_31831ae79a4243fea4c2a535e64f1320
+    parentId: fld_a336e46635c047528bf92ba557727eb5
+    modified: 1653479836060
+    created: 1653478943060
+    url: http://localhost:8080/message/628e198b5827ea8416d899c7
+    name: DeleteMessageById
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1653478725023
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_a336e46635c047528bf92ba557727eb5
+    parentId: wrk_b9a48e13681e4622942407a2fece0e30
+    modified: 1653478573040
+    created: 1653478573040
+    name: Message
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1653478573040
+    _type: request_group
+  - _id: wrk_b9a48e13681e4622942407a2fece0e30
+    parentId: null
+    modified: 1653471582309
+    created: 1653471582309
+    name: FullStack project - tester
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_f66b447ef19241d7a201bcab4ccda6a9
+    parentId: fld_a336e46635c047528bf92ba557727eb5
+    modified: 1653479832667
+    created: 1653478843122
+    url: http://localhost:8080/message/628e198b5827ea8416d899c7
+    name: UpdateMessageById
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"message": "Skapa NYTT meddelande",
+        	"author": "Christoffer"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_f10104ee10084276baa44c4e0d57c708
+    authentication: {}
+    metaSortKey: -1653478724973
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6bd5b6161281434db53afaa94e03d730
+    parentId: fld_a336e46635c047528bf92ba557727eb5
+    modified: 1653479817764
+    created: 1653478600563
+    url: http://localhost:8080/message
+    name: CreateMessage
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        "message": "Skapa ett meddelande",
+        "author": "Alexis"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_1eaf4d315f8344989b1fc9a302dc74af
+    authentication: {}
+    metaSortKey: -1653478724923
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4376d76b220445f58c13f408fb2db059
+    parentId: fld_a336e46635c047528bf92ba557727eb5
+    modified: 1653479827624
+    created: 1653478794953
+    url: http://localhost:8080/message/628e198b5827ea8416d899c7
+    name: getMessageById
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1653478724898
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_53ab918c64884c25883bf1e76096dc59
+    parentId: fld_a336e46635c047528bf92ba557727eb5
+    modified: 1653478762689
+    created: 1653478724873
+    url: http://localhost:8080/message/all
+    name: GetAllMessage
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1653478724873
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_1f39e1ebdded4f7291eb6e8aad5c6549
     parentId: wrk_b9a48e13681e4622942407a2fece0e30
     modified: 1653472115147
@@ -24,14 +165,6 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: wrk_b9a48e13681e4622942407a2fece0e30
-    parentId: null
-    modified: 1653471582309
-    created: 1653471582309
-    name: FullStack project - tester
-    description: ""
-    scope: design
-    _type: workspace
   - _id: req_bb770b2479744ca0a6190ae84d4c7ba9
     parentId: fld_a0fb94ffd6d3486aa34fc29bcbd97292
     modified: 1653472081431
@@ -65,9 +198,9 @@ resources:
     _type: request_group
   - _id: req_269a9dcadafc4747920aa6e3da6c7f8d
     parentId: fld_a0fb94ffd6d3486aa34fc29bcbd97292
-    modified: 1653473401044
+    modified: 1653479805274
     created: 1653472057694
-    url: http://localhost:8080/user/628e00685827ea8416d89991
+    url: http://localhost:8080/user/628e19705827ea8416d899c5
     name: deleteUserById
     description: ""
     method: DELETE
@@ -86,9 +219,9 @@ resources:
     _type: request
   - _id: req_225a77ece70a4be99a000b29bfef6135
     parentId: fld_a0fb94ffd6d3486aa34fc29bcbd97292
-    modified: 1653473397304
+    modified: 1653479801648
     created: 1653471952433
-    url: http://localhost:8080/user/628e00685827ea8416d89991
+    url: http://localhost:8080/user/628e19705827ea8416d899c5
     name: updateUserById
     description: ""
     method: PUT
@@ -117,9 +250,9 @@ resources:
     _type: request
   - _id: req_bdb4bfaac4604585948a551a7951e2b7
     parentId: fld_a0fb94ffd6d3486aa34fc29bcbd97292
-    modified: 1653473394127
+    modified: 1653479798358
     created: 1653471839858
-    url: http://localhost:8080/user/628e00685827ea8416d89991
+    url: http://localhost:8080/user/628e19705827ea8416d899c5
     name: getUserById
     description: ""
     method: GET
@@ -138,7 +271,7 @@ resources:
     _type: request
   - _id: req_f487df05641f41fba47f880e51062846
     parentId: fld_a0fb94ffd6d3486aa34fc29bcbd97292
-    modified: 1653473390871
+    modified: 1653479789365
     created: 1653471639165
     url: http://localhost:8080/user
     name: CreateUser
@@ -233,7 +366,7 @@ resources:
     _type: unit_test
   - _id: ut_d0006c71ea584f13a6a3d0206320860c
     parentId: uts_f65e934a5e85410f84648b3e1528a410
-    modified: 1653472468283
+    modified: 1653479010452
     created: 1653472295362
     requestId: req_f487df05641f41fba47f880e51062846
     name: CreateUser
@@ -247,7 +380,7 @@ resources:
     _type: unit_test
   - _id: ut_e6bce5d6ab8b43478eaa7abd4a3ffb17
     parentId: uts_f65e934a5e85410f84648b3e1528a410
-    modified: 1653472554479
+    modified: 1653479097277
     created: 1653472501261
     requestId: req_e78f63a1f43d4a9da6a92a0421713e44
     name: GetAllUsers
@@ -304,7 +437,7 @@ resources:
     _type: unit_test
   - _id: ut_909093f3eb714af1afc367f68d0092e3
     parentId: uts_f65e934a5e85410f84648b3e1528a410
-    modified: 1653473408243
+    modified: 1653479812413
     created: 1653473268538
     requestId: req_269a9dcadafc4747920aa6e3da6c7f8d
     name: DeleteUserById
@@ -316,5 +449,78 @@ resources:
       expect(response1.status).to.equal(200);
 
 
-      expect(body.message).to.equal('Användare med id 628e00685827ea8416d89991 har tagits bort från databasen!')
+      expect(body.message).to.equal('Användare med id 628e19705827ea8416d899c5 har tagits bort från databasen!')
+    _type: unit_test
+  - _id: ut_d624a6ada8a1407b8a6a83ff55aed8c5
+    parentId: uts_f65e934a5e85410f84648b3e1528a410
+    modified: 1653479078081
+    created: 1653478990999
+    requestId: req_6bd5b6161281434db53afaa94e03d730
+    name: CreateMessage
+    code: |-
+      const response1 = await insomnia.send();
+      const body = JSON.parse(response1.data)
+      expect(response1.status).to.equal(201);
+
+      expect(body).to.be.an('object')
+      expect(body.message).to.equal('Skapa ett meddelande')
+    _type: unit_test
+  - _id: ut_66d717aeff93402ba4406c9e26cff3b5
+    parentId: uts_f65e934a5e85410f84648b3e1528a410
+    modified: 1653479121749
+    created: 1653479094920
+    requestId: req_53ab918c64884c25883bf1e76096dc59
+    name: GetAllMessage
+    code: |-
+      const response1 = await insomnia.send();
+      const body = JSON.parse(response1.data)
+      expect(response1.status).to.equal(200);
+
+      expect(body).to.be.an('array')
+    _type: unit_test
+  - _id: ut_504e8633ffe94725809c21444449f176
+    parentId: uts_f65e934a5e85410f84648b3e1528a410
+    modified: 1653479313432
+    created: 1653479138702
+    requestId: req_4376d76b220445f58c13f408fb2db059
+    name: GetMessageById
+    code: |-
+      const response1 = await insomnia.send();
+      const body = JSON.parse(response1.data)
+      expect(response1.status).to.equal(200);
+
+      expect(body).to.be.an('object')
+      expect(body.message).to.equal('Skapa ett meddelande')
+      expect(body.author).to.equal('Alexis')
+    _type: unit_test
+  - _id: ut_c70c5fb4f3ba49bb8c966d6a58dd2de1
+    parentId: uts_f65e934a5e85410f84648b3e1528a410
+    modified: 1653479465877
+    created: 1653479305294
+    requestId: req_f66b447ef19241d7a201bcab4ccda6a9
+    name: UpdateMessageById
+    code: |-
+      const response1 = await insomnia.send();
+      const body = JSON.parse(response1.data)
+      expect(response1.status).to.equal(200);
+
+      expect(body).to.be.an('object')
+      expect(body.message).to.equal('Skapa NYTT meddelande')
+      expect(body.author).to.equal('Christoffer')
+    _type: unit_test
+  - _id: ut_2eff45e3406c4080bed59264b04f7612
+    parentId: uts_f65e934a5e85410f84648b3e1528a410
+    modified: 1653479842912
+    created: 1653479454342
+    requestId: req_31831ae79a4243fea4c2a535e64f1320
+    name: DeleteMessage
+    code: >-
+      const response1 = await insomnia.send();
+
+      const body = JSON.parse(response1.data)
+
+      expect(response1.status).to.equal(200);
+
+
+      expect(body.message).to.equal('Message with id 628e198b5827ea8416d899c7 was deleted')
     _type: unit_test
