@@ -4,7 +4,7 @@ import {Request, Response} from "express";
 import {CreateU, ReadU} from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
-import { ReadMessage } from "../interface/IMessage";
+// import { ReadMessage } from "../interface/IMessage";
 
 const saltRounds: number = 10
 export const encryptedPassword = async (pass: string) => {
@@ -17,6 +17,7 @@ export const encryptedPassword = async (pass: string) => {
 
 function getAllUsers(req: Request, res: Response) {
     try {
+        // @ts-ignore
         UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error);
@@ -39,7 +40,8 @@ function getAllUsers(req: Request, res: Response) {
 
 const getUserById = (req: Request, res: Response) => {
     try {
-        UModel.findById(req.params.id, (error: ErrorCallback, users: Array<ReadU>) => {
+        // @ts-ignore
+        UModel.findById(req.params.id, (error: ErrorCallback, users: ReadU) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -60,6 +62,7 @@ const getUserById = (req: Request, res: Response) => {
 
 const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         UModel.find({ fullName: req.params.name, eMail: req.params.eMail }, '', (error: ErrorCallback, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
@@ -89,28 +92,30 @@ const updateUserById = (req: Request, res: Response) => {
             pass: req.body.pass
         }
         Logger.debug(updatedUser)
-        UModel.findByIdAndUpdate(req.params.id, updatedUser, (error: ErrorCallback, user: ReadU) => {
+        UModel.findByIdAndUpdate(req.params.id, updatedUser, {new : true }, (error: any , user: any) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
                     error: 'Fel vid uppdatering av användare'
                 })
             } else {
-                Logger.http(user)
-                res.status(StatusCode.OK).send(user ? user : {
+                Logger.debug(user)
+                res.status(StatusCode.NOT_FOUND).send(user ? user : {
                     message: `Användare med id '${req.params.id}' hittades inte`
                 })
             }
         })
     } catch (error) {
         Logger.error(error)
-        res.status(StatusCode.BAD_REQUEST).send({
+        res.status(StatusCode.).send({
             error: 'Fel vid uppdatering av användare'
         })
     }
 }
+
 const deleteUserById = (req: Request, res: Response) => {
     try {
+        // @ts-ignore
         UModel.findByIdAndRemove(req.params.id, (error: ErrorCallback, user: ReadU) => {
             if (error) {
                 Logger.error(error)
@@ -120,7 +125,7 @@ const deleteUserById = (req: Request, res: Response) => {
             } else {
                 Logger.http(user)
                 res.status(StatusCode.OK).json(
-                    user ? { message: `Användare med id '${req.params.id}' har tagits bort från databasen!` }
+                    user ? { message: `Användare med id ${req.params.id} har tagits bort från databasen!` }
                         : { message: `Användare med id '${req.params.id}'hittades inte!` })
             }
         })
