@@ -1,12 +1,14 @@
-import { useState, useEffect, SetStateAction } from 'react'
+import { useState, useEffect, SetStateAction, useContext } from 'react'
 import MessageService from '../..//utils/api/service/MessageService'
 import { ReadMessage } from '../../utils/interface/IMessage'
 import Card from '../../components/card/Card'
 import css from './MessageView.module.css'
+import { AuthContext } from '../../utils/context/AuthContext'
 
 
 
 function MessageView() {
+    const loggedIn = useContext(AuthContext)
     const [message, setMessage] = useState<Array<ReadMessage>>([])
     const [text, setText] = useState('')
     const [author, setAuthor] = useState('')
@@ -40,8 +42,8 @@ function MessageView() {
 
     useEffect(() => {
         console.log(`The timeout between checks for new messages is: ${countdown / 1000}s. Starting..`)
-        const intervalCall = setInterval(async () => {
-            autoGet && await getAllMessage()
+        const intervalCall = setInterval(() => {
+            autoGet && getAllMessage()
         }, countdown);
         const getAllMessage = () => {
             setIsLoading(true)
@@ -75,7 +77,9 @@ function MessageView() {
         <>
             <section className={css.sectionContainer}>
                 <h2 className={css.h1Text}>Lämna en smurfs</h2>
-                <div className={css.usernameInput}>Namn:<br/><input className={css.input} id={'author'} onChange={e => setAuthor(e.target.value)}/>
+                <div className={css.usernameInput}>Namn:
+                    <input className={css.input} id={'author'} onChange={e => setAuthor(e.target.value)} placeholder={String(loggedIn.fullName)}/>
+
                 </div>
                 <br/>
                 <label htmlFor="description">

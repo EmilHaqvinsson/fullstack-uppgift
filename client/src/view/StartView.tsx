@@ -13,7 +13,7 @@ function StartView() {
     const [modal, setModal] = useState(false)
     const [fullName, setFullName] = useState<string>('')
     const [eMail, setEMail] = useState<string>('')
-    const [isAuth, setIsAuth] = useState(false)
+    const [isAuth] = useState(false)
     const [password, setPassword] = useState<string>('')
     const [text, setText] = useState<string>('')
 

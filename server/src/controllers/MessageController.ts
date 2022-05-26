@@ -37,22 +37,22 @@ const registerMessage = async (req: Request, res: Response) => {
 function getAllMessages(req: Request, res: Response) {
     try {
         // @ts-ignore
-        MessageModel.find({}, '', (error: ErrorCallback, message: Array<ReadMessage>) => {
+        MessageModel.find({}, date, (error: ErrorCallback, message: Array<ReadMessage>) => {
             if (error) {
                 Logger.error(error);
                 res.status(StatusCode.BAD_REQUEST).send({
                     error: '\n' +
-                        'Det gick inte att hämta användare'
+                        'Det gick inte att hämta meddelanden.'
                 });
             } else {
-                Logger.http(message);
+                Logger.http(message.length);
                 res.status(StatusCode.OK).send(message);
             }
         });
     } catch (error) {
         Logger.error(error);
         res.status(StatusCode.BAD_REQUEST).send({
-            error: 'Det gick inte att hämta användaren'
+            error: 'Det gick inte att hämta meddelanden.'
         });
     }
 }

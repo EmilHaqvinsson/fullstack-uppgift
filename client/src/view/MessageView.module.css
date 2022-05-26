@@ -1,9 +1,9 @@
 .autoGetON {
-    background-color: aquamarine;
+    background-color: rgb(122, 206, 114);
 }
 
 .autoGetOFF {
-    background-color: brown;
+    background-color: rgb(203, 22, 22);
 }
 
 .messageWrap {
