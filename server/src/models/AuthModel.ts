@@ -10,7 +10,7 @@ const AuthSchema = new Schema<CheckLogin>({
         type: String,
     },
     token: {
-        type: String,
+        type: String || Object,
         
     }
 }, {
