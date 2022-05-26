@@ -51,9 +51,9 @@ const registerUser = async (req: Request, res: Response) => {
 async function login(req: Request, res: Response) {
     let message: any
     let resultOfLogin: object
-    let eMail = req.body.eMail
+    let eMail = req.body.email
     let pass = req.body.pass
-    Logger.info('ENDPOINT REACHED; TRYING LOGIN..')
+    Logger.info(`\nTRYING LOGIN.. User is using credentials:\nemail: ${eMail}\npass: ${pass}\n`)
     try {
         if (pass && eMail) {
             Logger.http('"' + eMail + '" and "' + pass + '" are users email and pass.')

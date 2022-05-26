@@ -29,9 +29,15 @@
 .labelTextArea {
     background-color: whitesmoke;
     border-radius: 5px;
+    border: none;
 }
 
 .h1Text {
     color: #4682B4;
     font-family: "Quicksand Light", sans-serif;
+}
+
+.statusOfMessages {
+    font-size: smaller;
+    place-self: flex-end;
 }

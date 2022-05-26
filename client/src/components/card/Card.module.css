@@ -7,7 +7,7 @@
 }
 
 .cardDiv:hover {
-    padding: .75em;
+    margin: .75em;
 }
 .cardMsg {
     background-color: rgba(44, 48, 50, 0.709);
