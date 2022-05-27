@@ -7,7 +7,7 @@ import MessageModel from '../models/MessageModel'
 const registerMessage = async (req: Request, res: Response) => {
     try {
         Logger.info('createMessage')
-        Logger.http('req.body' + req.body.message)
+        Logger.http('req.body.message: ' + req.body.message)
         Logger.info(req.body.author)
         const { message, author } = req.body
         if (message) {
@@ -37,7 +37,7 @@ const registerMessage = async (req: Request, res: Response) => {
 function getAllMessages(req: Request, res: Response) {
     try {
         // @ts-ignore
-        MessageModel.find({}, '', (error: ErrorCallback, message: Array<ReadMessage>) => {
+        MessageModel.find({}, null, {sort: {createdAt: -1}}, (error: ErrorCallback, message: Array<ReadMessage>) => {
             if (error) {
                 Logger.error(error);
                 res.status(StatusCode.BAD_REQUEST).send({

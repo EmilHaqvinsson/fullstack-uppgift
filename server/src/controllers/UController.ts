@@ -18,7 +18,7 @@ export const encryptedPassword = async (pass: string) => {
 function getAllUsers(req: Request, res: Response) {
     try {
         // @ts-ignore
-        UModel.find({}, '', (error: ErrorCallback, users: Array<ReadU>) => {
+        UModel.find({}, [['createdAt', -1]], (error: ErrorCallback, users: Array<ReadU>) => {
             if (error) {
                 Logger.error(error);
                 res.status(StatusCode.BAD_REQUEST).send({

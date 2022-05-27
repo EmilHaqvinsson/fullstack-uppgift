@@ -34,7 +34,8 @@ function MessageView() {
         setText('')
     }
 
-    const countdown: number = 30000
+    const countdown: number = 30000 // OBS OBS OBS => => => Ändra här om du vill ändra hur ofta 
+                                    // frontend letar efter nya messages!
 
     function handleChange(e: { target: { value: SetStateAction<string> } }) {
         setText(e.target.value)
