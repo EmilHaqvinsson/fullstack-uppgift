@@ -1,7 +1,7 @@
 import Logger from "../utils/Logger";
 import StatusCode from "../utils/StatusCode";
-import { Request, Response } from "express";
-import { CreateU, ReadU } from "../interface/InterFace";
+import {Request, Response} from "express";
+import {CreateU, ReadU} from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
 // import { ReadMessage } from "../interface/IMessage";
@@ -9,10 +9,40 @@ import bcrypt from 'bcrypt'
 const saltRounds: number = 10
 export const encryptedPassword = async (pass: string) => {
     let newPass: string = ''
-    await bcrypt.hash(pass,saltRounds).then(function (hash: any){
+    await bcrypt.hash(pass, saltRounds).then(function (hash: any) {
         newPass = hash;
     })
     return newPass
+}
+
+const registerUser = async (req: Request, res: Response) => {
+    try {
+        Logger.http(req.body)
+        let {fullName, pass, eMail}: CreateU = req.body
+        pass = await encryptedPassword(pass)
+        if (fullName && pass && eMail) {
+            const newObject: CreateU = {
+                fullName,
+                pass,
+                eMail: eMail
+            }
+            Logger.http(newObject)
+            const user = new UModel(newObject)
+            const dbResponse = await user.save()
+            Logger.http(dbResponse)
+            res.status(StatusCode.CREATED).send(dbResponse)
+        } else {
+            Logger.error('fullName, pass or eMail faild')
+            res.status(StatusCode.BAD_REQUEST).send({
+                message: 'Incorect body'
+            })
+        }
+    } catch (error) {
+        Logger.error(error)
+        res.status(StatusCode.BAD_REQUEST).send({
+            error: 'Error creating user'
+        })
+    }
 }
 
 function getAllUsers(req: Request, res: Response) {
@@ -63,7 +93,10 @@ const getUserById = (req: Request, res: Response) => {
 const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
         // @ts-ignore
-        UModel.find({ fullName: req.params.name, eMail: req.params.eMail }, '', (error: ErrorCallback, user: Array<ReadU>) => {
+        UModel.find({
+            fullName: req.params.name,
+            eMail: req.params.eMail
+        }, '', (error: any, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -92,7 +125,7 @@ const updateUserById = (req: Request, res: Response) => {
             pass: req.body.pass
         }
         Logger.debug(updatedUser)
-        UModel.findByIdAndUpdate(req.params.id, updatedUser, {new : true }, (error: any , user: any) => {
+        UModel.findByIdAndUpdate(req.params.id, updatedUser, {new: true}, (error: any, user: any) => {
             if (error) {
                 Logger.error(error)
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -100,7 +133,7 @@ const updateUserById = (req: Request, res: Response) => {
                 })
             } else {
                 Logger.debug(user)
-                res.status(StatusCode.NOT_FOUND).send(user ? user : {
+                res.status(StatusCode.OK).send(user ? user : {
                     message: `Användare med id '${req.params.id}' hittades inte`
                 })
             }
@@ -125,8 +158,8 @@ const deleteUserById = (req: Request, res: Response) => {
             } else {
                 Logger.http(user)
                 res.status(StatusCode.OK).json(
-                    user ? { message: `Användare med id ${req.params.id} har tagits bort från databasen!` }
-                        : { message: `Användare med id '${req.params.id}'hittades inte!` })
+                    user ? {message: `Användare med id ${req.params.id} har tagits bort från databasen!`}
+                        : {message: `Användare med id '${req.params.id}'hittades inte!`})
             }
         })
     } catch (error) {
@@ -138,6 +171,7 @@ const deleteUserById = (req: Request, res: Response) => {
 }
 
 export default {
+    registerUser,
     getAllUsers,
     getUserById,
     getUserByNameAndEmail,

@@ -124,10 +124,10 @@ const deleteUserById = () => {
 }
 
 describe('Test user routes', () => {
-    // registerUser()
-    // getAllUsers()
-    // getUserById()
-    // getUserByNameAndEmail()
-    // updateUserById()
-    // deleteUserById()
+    registerUser()
+    getAllUsers()
+    getUserById()
+    getUserByNameAndEmail()
+    updateUserById()
+    deleteUserById()
 })
