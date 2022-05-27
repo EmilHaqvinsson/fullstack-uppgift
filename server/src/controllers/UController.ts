@@ -1,7 +1,7 @@
 import Logger from "../utils/Logger";
 import StatusCode from "../utils/StatusCode";
-import {Request, Response} from "express";
-import {CreateU, ReadU} from "../interface/InterFace";
+import { Request, Response } from "express";
+import { CreateU, ReadU } from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
 // import { ReadMessage } from "../interface/IMessage";
@@ -107,7 +107,7 @@ const updateUserById = (req: Request, res: Response) => {
         })
     } catch (error) {
         Logger.error(error)
-        res.status(StatusCode.).send({
+        res.status(StatusCode.INTERNAL_SERVER_ERROR).send({
             error: 'Fel vid uppdatering av användare'
         })
     }

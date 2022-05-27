@@ -7,6 +7,8 @@ import smurf from '../utils/image/smurf.png'
 import { CreateOrUpdateUser } from '../utils/interface/Users';
 import { LoginU } from '../utils/interface/Users'
 import UserService from '../utils/api/service/userService';
+import RoutingPath from '../utils/routing/RoutingPath';
+import { useNavigate } from 'react-router-dom';
 // import bcrypt from 'bcrypt';
 
 function StartView() {
@@ -21,6 +23,7 @@ function StartView() {
         setModal(!modal);
     }
 
+    const navigate = useNavigate()
     // const saltRounds: number = 10
     async function userLogin() {
         const payload: LoginU = {
@@ -36,6 +39,7 @@ function StartView() {
                 setText(JSON.stringify(response.data))
                 console.log(response.data)
                 console.log((text))
+                navigate(RoutingPath.message)
             })
             .catch((error: any) => {
                 console.error(error)

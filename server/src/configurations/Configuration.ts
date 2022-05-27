@@ -22,7 +22,7 @@ const connectToDatabase = async () => {
 
 const connectToPort = (server: Express) => {
 	server.listen(PORT, () => {
-		Logger.info(`⚡️[server]: Server is running at http://localhost:${ PORT }`)
+		Logger.info(`⚡️[server]: Server is running at http://localhost:${ PORT }⚡️`)
 		if (env === 'development') {
 			Logger.warn('Server running in development mode!'.toUpperCase())
 		}
