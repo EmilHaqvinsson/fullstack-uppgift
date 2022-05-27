@@ -74,7 +74,8 @@ function StartView() {
     return (
         <div className={css.mainGridContainer}>
             <section className={css.section}>
-                <input className={css.input}
+                <input
+                       className={css.input}
                     type="text"
                     placeholder='fullName/e-mail'
                     name='user'
