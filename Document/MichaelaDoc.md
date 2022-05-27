@@ -55,7 +55,7 @@ testerna. För att det ska vara enklare att se om testerna går igenom om tex da
 
 ### Lämna förslag på förbättringar av din kod.
 
-Jag har följt koden som vi fått ut av Lars. Men jag behöver bli lära mig mer om TypeScript.
+Jag har följt koden som vi fått ut av Lars. Men jag behöver lära mig mer om TypeScript.
 
 ### Lämna exempel på lösningar du valde att inte implementera
 
