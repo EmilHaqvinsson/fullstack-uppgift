@@ -107,7 +107,7 @@ const updateUserById = (req: Request, res: Response) => {
         })
     } catch (error) {
         Logger.error(error)
-        res.status(StatusCode.INTERNAL_SERVER_ERROR).send({
+        res.status(StatusCode.BAD_REQUEST).send({
             error: 'Fel vid uppdatering av användare'
         })
     }
