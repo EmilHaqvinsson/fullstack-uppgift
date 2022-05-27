@@ -9,6 +9,10 @@ const UserService = {
 	userLogin: (payload: LoginU) => {
 		return http.post('/login', payload)
 	},
+
+	checkLogin: (userId: string) => {
+		return http.get(`/login/${ userId }`)
+	},
 	
 	getAll: () => {
 		return http.get('/user/all')

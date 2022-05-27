@@ -1,17 +1,21 @@
-import {useState, useEffect} from 'react'
+/* eslint-disable no-lone-blocks */
+import {useState, useEffect, useContext } from 'react'
 import MessageService from '../utils/api/service/MessageService'
 import {ReadMessage} from '../utils/interface/IMessage'
 import Card from '../components/card/Card'
 import css from './MessageView.module.css'
-
+import { userInfo } from 'os'
+import { AuthContext } from '../utils/context/AuthContext'
 
 function MessageView() {
+    const loggedIn = useContext(AuthContext)
     const [message, setMessage] = useState<Array<ReadMessage>>([])
     const [text, setText] = useState('')
-    const [author, setAuthor] = useState('')
+    const [author, setAuthor] = useState(String(loggedIn.fullName))
     const [autoGet, setAutoGet] = useState(false)
 
     const postMessage = () => {
+        
         const newMessage = {
             "message": text,
             "author": author
@@ -25,8 +29,6 @@ function MessageView() {
             .catch(error => {
                 console.log(error)
             })
-            setAuthor('INPUT AUTHOR')
-            setText('MAKE NEW MESSAGE')
     }
     const getAllMessage = () => {
         MessageService.getAllMessages()
@@ -44,26 +46,32 @@ function MessageView() {
         return () => {
           // clean up
           clearInterval(intervalCall);
-        };
-      });
+        }})
+
+        function isAutoGet() {
+            if (autoGet === true) {
+                return `autoGetON`
+            } else {
+                return `autoGetOFF`
+            }
+        }
 
 
     return (
         <><>
             <h2>MessageView</h2>
-            {autoGet && <span className={css.autoGetON}>AUTOGET IS REAL</span>}
             <div className={css.inputAreaWrap}>
                 <label htmlFor="description">
                     <textarea id="description" cols={30} rows={10}
                         onChange={event => setText(event.target.value)}></textarea></label>
-                <div>by: <input id={'author'} onChange={e => setAuthor(e.target.value)} /> </div>
+                <div>by: <input id={'author'} onChange={e => setAuthor(e.target.value)} /></div>
                 <button onClick={postMessage}>Post</button>
                 <label htmlFor={'autoget'}>AUTOGET</label>
                 <input type={"checkbox"} onChange={() => { setAutoGet(!autoGet) } } name={'autoget'} checked={(autoGet)} />
                 <button
                     onClick={getAllMessage}
-                    {...autoGet === true ?
-                        `className={${css.autoGetON}}` : `className={${css.autoGetOFF}}`}>Get All</button>
+                    className={'css.' + {...isAutoGet}}>
+                        Get All</button>
             </div>
             <div className={css.messageWrap}>
                 {message.map(msg => (

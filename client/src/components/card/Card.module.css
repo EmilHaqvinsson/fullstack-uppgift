@@ -1,13 +1,15 @@
 .cardDiv {
     background-color: rgb(151, 182, 208);
-    margin: .25em;
+    margin: .75em;
     padding: .5em;
     font-size: large;
-    transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: grid;
+    filter: drop-shadow(2px 2px 12px rgba(51, 51, 51, 0.541));
+    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .cardDiv:hover {
-    margin: .75em;
+    filter: drop-shadow(2px 2px 4px rgba(51, 51, 51, 0.541));
 }
 .cardMsg {
     background-color: rgba(44, 48, 50, 0.709);
@@ -17,8 +19,8 @@
 }
 
 .cardTimestamps {
-    display: flex;
-    place-self: flex-end;
+    display: grid;
+    place-self: flex-start;
     border: 2px darkgray double;
     font-size: 1em;
 }

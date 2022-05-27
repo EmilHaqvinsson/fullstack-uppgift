@@ -1,18 +1,30 @@
-import React from 'react';
 import './utils/styles/global.css';
 import Alive from './components/Alive'
 import Header from "./components/header/Header";
 import Routing from "./utils/routing/Routing";
 import NavigationBar from "./components/navigationBar/NavigationBar";
+import React, { createContext, useContext, useState } from 'react'
+import { CreateOrUpdateUser, LoginU } from './utils/interface/Users'
 
+function isLoggedIn() {
+    const hasToken = sessionStorage.getItem('AUTH');
+    console.log(hasToken);
+    return hasToken
+}
+
+const LoggedIn = createContext({isLoggedIn})
 function App() {
+    
     return (
-        <>
-            <Header/>
+    <>
+    <Header />
+            <h4>
+                {`You're: ${isLoggedIn()}!`}
+            </h4>
             <Routing>
-                <NavigationBar/>
+                { isLoggedIn() && <NavigationBar /> }
             </Routing>
-            <Alive/>
+        <Alive />
         </>
     );
 }
