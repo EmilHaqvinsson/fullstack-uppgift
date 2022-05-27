@@ -3,8 +3,6 @@
 Jag valde att skapa en ny messageController istället för att lägga dom funktionerna i userController. För mig är det
 enklare att ha dom i två filer för att inte ha för mycket kod i varje fil.
 
-
-
 ### Beskriv något som var besvärligt att få till.
 
 Det har varit krångligt att få ihop de automatiska testerna i Backend. Jag hade mycket problem med att få det globala
@@ -18,6 +16,9 @@ På Frontend har jag haft problem med att css har läckt över i andra filer, ä
 jag hade glömt att skriva en . framför tex .button.
 
 ### Beskriv om du fått byta lösning och varför i sådana fall.
+
+Jag har inte behövt ändra några lösningar i projektet. Det jag har påbörjat har jag avslutat. Sen kn de va så att någon
+annan har arbetat vidare med tex frontend. Men i backend har jag inte behövt ändra något som jag jobbat med.
 
 ### Beskriv hur du felsökt ditt program när det uppstått problem.
 
