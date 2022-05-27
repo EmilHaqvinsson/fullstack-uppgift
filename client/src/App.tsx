@@ -18,11 +18,8 @@ function App() {
     return (
     <>
     <Header />
-            <h4>
-                {`You're: ${isLoggedIn()}!`}
-            </h4>
             <Routing>
-                { isLoggedIn() && <NavigationBar /> }
+                { LoggedIn && <NavigationBar /> }
             </Routing>
         <Alive />
         </>
