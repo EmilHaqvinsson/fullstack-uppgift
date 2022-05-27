@@ -37,7 +37,7 @@ const registerMessage = async (req: Request, res: Response) => {
 function getAllMessages(req: Request, res: Response) {
     try {
         // @ts-ignore
-        MessageModel.find({}, date, (error: ErrorCallback, message: Array<ReadMessage>) => {
+        MessageModel.find({}, '', (error: ErrorCallback, message: Array<ReadMessage>) => {
             if (error) {
                 Logger.error(error);
                 res.status(StatusCode.BAD_REQUEST).send({
@@ -63,19 +63,19 @@ const getMessageById = (req: Request, res: Response) => {
             if (error) {
                 Logger.error('error' + error)
                 res.status(StatusCode.BAD_REQUEST).send({
-                    error: 'Error get message by id'
+                    error: 'Error while trying to get message by id'
                 })
             } else {
                 Logger.http('message' + message)
                 res.status(StatusCode.OK).send(message ? message : {
-                    message: `Error getting message with id ${req.params.id}`
+                    message: `Found message with id: ${req.params.id}`
                 })
             }
         })
     } catch (error) {
         Logger.error('error' + error)
         res.status(StatusCode.BAD_REQUEST).send({
-            error: 'Error get message by id'
+            error: 'Error while trying to get message by id'
         })
     }
 }
