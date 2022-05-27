@@ -76,20 +76,20 @@ function MessageView() {
     return (
         <>
             <section className={css.sectionContainer}>
-                <h2 className={css.h1Text}>Lämna en smurfs</h2>
+                <h2 data-testid='messageText' className={css.h1Text}>Lämna en smurfs</h2>
                 <div className={css.usernameInput}>Namn:
                     <input className={css.input} id={'author'} onChange={e => setAuthor(e.target.value)} placeholder={String(loggedIn.fullName)}/>
 
                 </div>
                 <br/>
                 <label htmlFor="description">
-                    <textarea className={css.labelTextArea}
+                    <textarea data-testid='textArea' className={css.labelTextArea}
                               id="description" cols={70} rows={5}
                               onChange={event => handleChange(event)}></textarea></label>
             </section>
             <section className={css.sectionButton}>
-                <button className={css.buttonPost} onClick={postMessage}>Skicka</button>
-                <label htmlFor={'autoget'}>AUTOGET</label>
+                <button data-testid='buttonText' className={css.buttonPost} onClick={postMessage}>Skicka</button>
+                <label data-testid='labelText' htmlFor={'autoget'}>AUTOGET</label>
                 <input type={"checkbox"} checked={autoGet} onChange={() => {
                     setAutoGet(!autoGet)
                 }} name={'autoget'} value={String(autoGet)}/>
