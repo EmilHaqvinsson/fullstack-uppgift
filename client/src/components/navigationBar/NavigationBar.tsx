@@ -17,7 +17,6 @@ function NavigationBar() {
             </nav>
             )
         } else {
-
             return (
                 <nav className={css.nav}>
                     <ul className={css.ul}>
