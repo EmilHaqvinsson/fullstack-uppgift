@@ -23,6 +23,8 @@ Startsida: Här skapar du din användare eller vill logga in.
 ![](imageDoc/startview.JPG)
 Log in / profil sidan. Den kommer se likadan ut i desktop och table.
 ![](imageDoc/login-profile.JPG)
+Samma i meddelande funktionen, den ser likadan ut i desktop som i table.
+![](imageDoc/messageview.JPG)
 Vi har tagit hjälp av draw.io för att skapa våra wireframes. Nedan kan man se hur projektet ser ut i olika lägen. (
 mobile, table och desktop.)
 
