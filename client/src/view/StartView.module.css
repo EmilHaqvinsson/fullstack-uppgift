@@ -25,22 +25,23 @@
     margin: 0 50px 5px;
 }
 
-button {
+.button {
+    background-color: #22577E;
     width: 270px;
     border-radius: 7px;
     border: grey solid 1px;
     padding: 8px;
-    background-color: #22577E;
     margin: 10px 50px 10px;
-}
 
-hr {
-    width: 250px;
 }
 
 .buttonCreateNewAccount {
     background-color: #00a854;
-    margin-top: 10px;
+    width: 270px;
+    border-radius: 7px;
+    border: grey solid 1px;
+    padding: 8px;
+    margin: 10px 50px 10px;
 }
 
 .imageSmurf {
@@ -68,16 +69,7 @@ hr {
         width: 200px;
         margin: 0 100px 5px;
     }
-
-    button {
-        width: 220px;
-        margin: 10px 100px 10px;
-    }
-
-    hr {
-        width: 230px;
-    }
-
+    
     .section {
         margin: 70px;
         border: solid 1px;
@@ -118,17 +110,16 @@ hr {
     width: 300px;
     height: 330px;
 }
+
 .inputPopupWindow {
     width: 200px;
     margin-left: 40px;
 }
 
-.buttonPopupWindow {
+/*.buttonCreateNewAccount {
     background-color: #00a854;
     margin-top: 10px;
-    width: 220px;
-/*    margin-left: 40px;*/
-}
+}*/
 
 .close {
     width: 30px;
@@ -148,9 +139,6 @@ hr {
 /*desktop*/
 @media only screen and (min-width: 1200px) {
 
-    hr {
-        width: 250px;
-    }
 
     .imageSmurf {
         max-width: 40%;

@@ -4,11 +4,22 @@ export interface CreateU {
     pass: string
 }
 
+export interface LoginU {
+    eMail: string,
+    pass: string,
+}
+
+export interface CheckLogin {
+    userId: string,
+    token: string | object
+}
+
 export interface ReadU {
     _id: string;
     fullName: string;
     eMail: string;
     pass: string;
-    createdAt: Date,
+    authenticated: string | boolean;
+    createdAt: Date
     updatedAt: Date
 }
