@@ -14,10 +14,10 @@ Vår projektplan hittar du nedan på länken.
 Vi har använt oss av följande npm-paket till vårt arbete:
 
 ## Personas:
-
 Projektet är uppbyggt från figurerna "Smurfarna", så vi har inriktat oss till barn upp till 10år. Den ska fungera som en
 första sociala medier sida, där det inte finnas mer än att kunna skriva inlägg som delas med andra.
 
+![](imageDoc/personas.JPG)
 ## Wireframes:
 
 Vi har tagit hjälp av draw.io för att skapa våra wireframes. Nedan kan man se hur projektet ser ut i olika lägen. (
@@ -37,11 +37,11 @@ Projektet har vi delat upp i olika delar, men alla har arbetat på både backend
 finns i den individuella dokumentationen.
 
 ## Tester:
+
 Testerna för Insomnia, backend och frontend.
 ![](imageDoc/userTestInsomnia.JPG)
 ![](imageDoc/testBackendUser.JPG)
 ![](imageDoc/testBackendMessage.JPG)
-
 
 ### Svårigheter/hinder:
 
@@ -52,4 +52,18 @@ flera gånger.
 Det har även vart krångligt att inplementera kod på frontend, då den inte alltid har velat skrivas ut. Så mycket
 felsökande har det blivit.
 
+På backend har det varit svårt att få till login funktionen, så den ska fungera som den ska. Ett tag kunde man logga in
+med användare som inte fanns. Men det beslutades att vi skulle följa kod vi har fått ta del av, av Lars.
+
 ### Reflektioner:
+
+Arbetet har gått relativt bra. Det har varit svårt att få till våra srum möten ibland och då har vi fått skriva i
+Discord istället för att ingen ska behöva stå stilla i sitt arbete. Vi har även fått dela upp backend då vi alla har
+velat jobba i backend sen har vi fått hjälpas åt så gott vi kan med frontend biten. Testerna har tex bara en person
+gjort. Allt annat har vi fått dela upp och hjälpas åt med, så man har fått ta en fil åt gången så inte fler sitter och
+jobbar med samma. Namngivandet har varit lite förvirrande i både filer och funktioner då dom varit "förkortade" tex
+uController, det är inte så beskrivande vad den innehåller.
+
+Sen har vi fått arbeta mer med GitHub hur man anväder det i en grupp. Oftast har det gått smärtfritt, men ibland har vi
+stött på konflikter. Det har varit lärorikt och man har fått tänka både en oh två gånger och se till så man står i rätt
+branch.
