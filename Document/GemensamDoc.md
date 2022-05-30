@@ -19,7 +19,10 @@ första sociala medier sida, där det inte finnas mer än att kunna skriva inlä
 
 ![](imageDoc/personas.JPG)
 ## Wireframes:
-
+Startsida: Här skapar du din användare eller vill logga in.
+![](imageDoc/startview.JPG)
+Log in / profil sidan. Den kommer se likadan ut i desktop och table.
+![](imageDoc/login-profile.JPG)
 Vi har tagit hjälp av draw.io för att skapa våra wireframes. Nedan kan man se hur projektet ser ut i olika lägen. (
 mobile, table och desktop.)
 
