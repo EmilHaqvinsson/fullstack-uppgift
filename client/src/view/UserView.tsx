@@ -1,7 +1,7 @@
 import css from '../view/UserView.module.css'
 import ARAM from '../utils/image/ARAM.jpg'
 
-function UserView(): JSX.Element {
+function UserView() {
     return (
         <>
             <div className={css.myDIV}>
@@ -16,22 +16,18 @@ function UserView(): JSX.Element {
             <section className={css.section}>
                 <div className={css.emty}></div>
                 <div className={css.userDiv}>
-                    <h2 data-testid='textH2'>Welcome.. {}</h2>
+                    <h2>Welcome.. (Lägg in användare som är inloggad?)</h2>
                     <img className={css.imageUser} src={ARAM} alt="user"/>
                     <div className={css.inputDiv}>
-                        <input data-testid='inputFullName'
-                               type="text" placeholder="FirstName"/>
-                        <input data-testid='inputLastName'
-                               type="text" placeholder="LastName"/>
-                        <input data-testid='inputEmpty'
-                               type="text"/>
-                        <input data-testid='inputEmptyTwo'
-                               type="text"/>
+                        <input type="text" placeholder="FirstName"/>
+                        <input type="text" placeholder="LastName"/>
+                        <input type="text"/>
+                        <input type="text"/>
                     </div>
 
                 </div>
 
-                <div className={css.empty}></div>
+                <div className={css.emty}></div>
             </section>
         </>
     )
