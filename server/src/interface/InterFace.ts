@@ -1,24 +1,14 @@
 export interface CreateU {
-    fullName: string,
-    eMail: string,
-    pass: string
-}
-
-export interface LoginU {
-    eMail: string,
-    pass: string,
-}
-
-export interface CheckLogin {
-    userId: string,
-    token: string | object
+    fullname: string,
+    username: string,
+    password: string
 }
 
 export interface ReadU {
     _id: string;
-    fullName: string;
-    eMail: string;
-    pass: string;
+    fullname: string;
+    username: string;
+    password: string;
     authenticated: string | boolean;
     createdAt: Date
     updatedAt: Date

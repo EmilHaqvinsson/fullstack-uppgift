@@ -1,29 +1,32 @@
 import './utils/styles/global.css';
-import Alive from './components/Alive'
-import Header from "./components/header/Header";
+// import Alive from './components/Alive'
+// import Header from "./components/header/Header";
 import Routing from "./utils/routing/Routing";
 import NavigationBar from "./components/navigationBar/NavigationBar";
-import React, { createContext, useContext, useState } from 'react'
-import { CreateOrUpdateUser, LoginU } from './utils/interface/Users'
+import React, { useEffect, useState } from 'react'
+import { UserContext } from '../src/utils/context/UserProvider'
 
-function isLoggedIn() {
-    const hasToken = sessionStorage.getItem('AUTH');
-    console.log(hasToken);
-    return hasToken
-}
-
-const LoggedIn = createContext({isLoggedIn})
 function App() {
-    
-    return (
-    <>
-    <Header />
-            <Routing>
-                { LoggedIn && <NavigationBar /> }
-            </Routing>
-        <Alive />
-        </>
-    );
+	const [authenticatedUser, setAuthenticatedUser] = useState<string>('')
+
+	const checkIfUserIsAuthenticatedInBrowser = () => {
+		const username = localStorage.getItem('username')
+		if (typeof username === 'string') {
+			setAuthenticatedUser(username)
+		}
+	}
+	
+	useEffect(() => {
+		checkIfUserIsAuthenticatedInBrowser()
+	}, [])
+	
+	return (
+		<UserContext.Provider value={{ authenticatedUser, setAuthenticatedUser}}>
+			<Routing>
+				<NavigationBar/>
+			</Routing>
+		</UserContext.Provider>
+	)
 }
 
-export default App;
+export default App

@@ -229,9 +229,9 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"fullName": "Lars",
-        	"eMail": "lars@lars.com",
-        	"pass": "lars10"
+        	"fullname": "Lars",
+        	"username": "lars@lars.com",
+        	"password:": "lars10"
         }
     parameters: []
     headers:
@@ -281,9 +281,9 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"fullName": "Alexis",
-        	"eMail": "alexis@alexis.com",
-        	"pass": "alexis10"
+        	"fullname": "Alexis",
+        	"username": "alexis@alexis.com",
+        	"password:": "alexis10"
         }
     parameters: []
     headers:
@@ -376,7 +376,7 @@ resources:
       expect(response1.status).to.equal(201);
 
       expect(body).to.be.an('object')
-      expect(body.fullName).to.equal('Alexis')
+      expect(body.fullname).to.equal('Alexis')
     _type: unit_test
   - _id: ut_e6bce5d6ab8b43478eaa7abd4a3ffb17
     parentId: uts_f65e934a5e85410f84648b3e1528a410
@@ -403,7 +403,7 @@ resources:
       expect(response1.status).to.equal(200);
 
       expect(body).to.be.an('object')
-      expect(body.fullName).to.equal('Alexis')
+      expect(body.fullname).to.equal('Alexis')
     _type: unit_test
   - _id: ut_4133cc01997d4f6fb96281f4983d392c
     parentId: uts_f65e934a5e85410f84648b3e1528a410
@@ -419,7 +419,7 @@ resources:
       const user = body[0]
 
       expect(user).to.be.an('object')
-      expect(user.eMail).to.equal('alexis@alexis.com')
+      expect(user.username).to.equal('alexis@alexis.com')
     _type: unit_test
   - _id: ut_dc4b164ea6c24a1889a0d9571b105ed6
     parentId: uts_f65e934a5e85410f84648b3e1528a410
@@ -433,7 +433,7 @@ resources:
       expect(response1.status).to.equal(200);
 
       expect(body).to.be.an('object')
-      expect(body.fullName).to.equal('Lars')
+      expect(body.fullname).to.equal('Lars')
     _type: unit_test
   - _id: ut_909093f3eb714af1afc367f68d0092e3
     parentId: uts_f65e934a5e85410f84648b3e1528a410

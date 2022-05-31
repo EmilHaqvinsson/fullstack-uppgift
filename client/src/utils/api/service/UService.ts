@@ -1,30 +1,36 @@
 import http from '../MyApi'
-import {CreateOrUpdateUser} from '../../interface/Users'
+import { CreateOrUpdateUser, LoginU } from '../../interface/Users'
 
-const UserService = {
-    createUser: (payload: CreateOrUpdateUser) => {
-        return http.post('/user', payload)
-    },
+const verifyUserUrl = '/verifyUser'
 
-    getAll: () => {
-        return http.get('/user/all')
-    },
-
-    getByNameAndEmail: (name: string, eMail: string) => {
-        return http.get(`/user/name/${name}/${eMail}`)
-    },
-
-    updateUserById: (id: string, payload: CreateOrUpdateUser) => {
-        return http.put(`/user/${id}`, payload)
-    },
-
-    getById: (id: string) => {
-        return http.get(`/user/${id}`)
-    },
-
-    deleteUserById: (id: string) => {
-        return http.delete(`/user/${id}`)
-    }
+const UService = {
+	createUser: (newUserPayload: CreateOrUpdateUser) => {
+		return http.post('/user/', newUserPayload)
+	},
+	
+	verifyUser: (payload: LoginU) => {
+		return http.post(verifyUserUrl, payload)
+	},
+	
+	getAll: () => {
+		return http.get('/user/all')
+	},
+	
+	getByName: (name: string) => {
+		return http.get(`/user/name/${ name }`)
+	},
+	
+	getById: (id: string) => {
+		return http.get(`/user/${ id }`)
+	},
+	
+	updateUserById: (id: string, payload: CreateOrUpdateUser) => {
+		return http.put(`/user/${ id }`, payload)
+	},
+	
+	deleteUserById: (id: string) => {
+		return http.delete(`/user/${ id }`)
+	}
 }
 
-export default UserService
+export default UService

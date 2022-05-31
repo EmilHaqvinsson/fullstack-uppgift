@@ -1,17 +1,15 @@
 import http from '../MyApi'
 import { CreateOrUpdateUser, LoginU } from '../../interface/Users'
 
+const verifyUserUrl = '/verifyUser'
+
 const UserService = {
-	createUser: (payload: CreateOrUpdateUser) => {
-		return http.post('/user', payload)
+	createUser: (newUserPayload: CreateOrUpdateUser) => {
+		return http.post('/user/', newUserPayload)
 	},
-
-	userLogin: (payload: LoginU) => {
-		return http.post('/login', payload)
-	},
-
-	checkLogin: (userId: string) => {
-		return http.get(`/login/${ userId }`)
+	
+	verifyUser: (payload: CreateOrUpdateUser) => {
+		return http.post(verifyUserUrl, payload)
 	},
 	
 	getAll: () => {
