@@ -4,7 +4,6 @@ import RoutingPath from '../utils/routing/RoutingPath'
 import UserService from '../utils/api/service/UService'
 import { useUserContext } from '../utils/context/UserProvider'
 import { LoginU } from '../utils/interface/Users'
-import UService from '../utils/api/service/UService'
 
 export const SignInView = () => {
 	const [username, setUsername] = useState<string>('')
@@ -30,12 +29,10 @@ export const SignInView = () => {
 			})
 	}
 	
-	const login = (apiResponse: boolean) => {
+	function login(apiResponse: boolean) {
 		if (apiResponse) {
 			setAuthenticatedUser(username)
 			localStorage.setItem('username', username)
-            const usersInfo = UService.getByName(username)
-            localStorage.setItem('userID', String(usersInfo))
 			navigate(RoutingPath.home)
 		} else {
 			setLoginText('Wrong username or password')
