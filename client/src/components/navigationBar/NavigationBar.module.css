@@ -1,7 +1,10 @@
+/*Mobile*/
 .nav {
     background-color: #eda2a1;
-    padding: 5px;
     overflow: hidden;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .ul {
@@ -30,6 +33,24 @@ li a:hover:not(.active) {
 
 li:last-child {
     place-self: flex-end;
-    border-left: 5px solid white;
-    padding-left: 10px;
+
+}
+
+/*Tablet*/
+
+/*Desktop*/
+@media screen and (min-width: 1200px) {
+    .nav {
+        background-color: #eda2a1;
+        margin: 100px 0;
+        padding: 15px;
+    }
+    li {
+        float: left;
+    }
+    a {
+        display: block;
+        padding: 8px;
+        background-color: #eda2a1;
+    }
 }
