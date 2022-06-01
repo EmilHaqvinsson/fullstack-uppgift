@@ -7,7 +7,7 @@ import css from './MessageView.module.css'
 function MessageView() {
     const [message, setMessage] = useState<Array<ReadMessage>>([])
     const [text, setText] = useState('')
-    const [author, setAuthor] = useState('')
+    const [author, setAuthor] = useState(localStorage.getItem(String('username')) ? localStorage.getItem(String('username')) : '')
     const [autoGet, setAutoGet] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
@@ -15,7 +15,7 @@ function MessageView() {
     const postMessage = () => {
         const newMessage = {
             "message": text,
-            "author": author
+            "author": localStorage.getItem(String('username')) ? localStorage.getItem(String('username')) : author
         }
         MessageService.createMessage(newMessage)
             .then(response => {
