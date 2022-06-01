@@ -1,6 +1,6 @@
 /*mobile*/
 .text {
-font-size: 4vh;
+    font-size: 4vh;
     text-align: center;
     color: steelblue;
 }
@@ -15,7 +15,8 @@ font-size: 4vh;
 
 .headerContainer {
     max-width: 100%;
-    margin: 0;
+    height: 50px;
+    margin: 25px;
     padding: 0;
     background-color: #A2D8FA;
 }

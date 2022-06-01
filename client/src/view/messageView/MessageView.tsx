@@ -79,8 +79,8 @@ function MessageView() {
                 <br/>
                 <label htmlFor="description">
                     <textarea data-testid='textArea' className={css.labelTextArea}
-                              id="description" cols={70} rows={5}
-                              onChange={event => handleChange(event)}></textarea></label>
+                              id="description" cols={45} rows={7}
+                              onChange={event => handleChange(event)}>message..</textarea></label>
             </section>
             <section className={css.sectionButton}>
                 <button data-testid='buttonText' className={css.buttonPost} onClick={postMessage}>Skicka</button>
