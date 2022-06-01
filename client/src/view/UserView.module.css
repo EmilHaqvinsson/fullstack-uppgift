@@ -1,54 +1,47 @@
 /*mobile*/
-/*.myDIV {
-    height: 300px;
-    display: grid;
-    gap: 10px;
-    background: whitesmoke;
-    padding: 10px;
-    grid-template-areas: 'myArea myArea .' 'myArea myArea .';
-}*/
-
-/*.myDIV div {
-!*    background-color: rgba(255, 255, 255, 0.8);*!
-    text-align: center;
-!*    padding: 20px 0;*!
-!*    font-size: 30px;*!
-}
-
-.item1 {
-    grid-area: myArea;
-}*/
-
 .section {
-    border-radius: 12px;
+    border-radius: 15px;
     padding: 5px;
-    /*    background-color: chocolate;*/
+    background: linear-gradient(to right, rgba(162, 216, 250, 1) 0%, rgba(237, 162, 161, 1) 100%);
     text-align: center;
-    margin: auto auto 70px auto;
+    margin: 25px 25px 25px 25px;
     color: black;
 }
-
-/*.userDiv {
-    border: solid 2px grey;
-    border-radius: 15px;
-    margin-top: 50px;
-    background: whitesmoke;
-
-}*/
 
 .imageUser {
-    max-width: 50%;
-
+    max-width: 100%;
+    border-radius: 15px;
 }
-/*.grid-container{
-    border-radius: 12px;
-    padding: 5px;
-    background-color: chocolate;
-    text-align: center;
-    margin: auto auto 70px auto;
-    color: black;
-}*/
 
 /*tablet*/
+@media screen and (min-device-width: 768px) {
+    .imageUser {
+        max-width: 50%;
+        border-radius: 15px;
+    }
+
+    .section {
+        border-radius: 15px;
+        padding: 15px;
+        background-color: whitesmoke;
+        text-align: center;
+        margin: 50px 50px 25px 50px;
+        color: black;
+    }
+}
 
 /*desktop*/
+@media screen and (min-width: 1200px ) {
+    .imageUser {
+        max-width: 25%;
+        border-radius: 15px;
+    }
+
+    .section {
+        border-radius: 15px;
+        padding: 10px;
+        background-color: whitesmoke;
+        text-align: center;
+        color: black;
+    }
+}
