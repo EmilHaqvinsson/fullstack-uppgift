@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import RoutingPath from "../../utils/routing/RoutingPath";
 import { useUserContext } from '../../utils/context/UserProvider'
 import css from '../navigationBar/NavigationBar.module.css'
-import Profile from '../Auth/Profile';
+/ import Profile from '../Auth/Profile';
 
 function NavigationBar() {
     const {authenticatedUser} = useUserContext()

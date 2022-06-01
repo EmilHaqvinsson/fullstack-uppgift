@@ -1,6 +1,6 @@
 export interface CreateMessage {
     message: string,
-    author: string
+    author?: string
 }
 
 export interface ReadMessage {
