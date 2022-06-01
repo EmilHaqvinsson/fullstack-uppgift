@@ -13,52 +13,19 @@ import { useNavigate } from 'react-router-dom';
 
 function StartView() {
     const [modal, setModal] = useState(false)
-    const [fullName, setFullName] = useState<string>('')
-    const [eMail, setEMail] = useState<string>('')
-    const [isAuth] = useState(false)
+    const [fullname, setFullname] = useState<string>('')
+    const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [text, setText] = useState<string>('')
 
     const toggleModal = () => {
         setModal(!modal);
     }
-
-    const navigate = useNavigate()
-    // const saltRounds: number = 10
-    async function userLogin() {
-        const payload: LoginU = {
-            email: eMail,
-            pass: password,
-            authenticated: isAuth
-        };
-
-        UserService.userLogin(payload)
-            .then((
-                response: { data: object }) => {
-                sessionStorage.setItem('AUTH', JSON.stringify(response.data))
-                setText(JSON.stringify(response.data))
-                console.log(response.data)
-                console.log((text))
-                navigate(RoutingPath.message)
-            })
-            .catch((error: any) => {
-                console.error(error)
-                setText(error)
-            }
-            )
-    }
-
-    // const mapObject = ({ text }: { text: object; }) => {
-    //     Object.keys(text).map(function(key, index) {
-    //         console.log(text[key])
-    //     })
-    // }
-
     const createUser = () => {
         const payload: CreateOrUpdateUser = {
-            fullName: fullName,
-            eMail: eMail,
-            pass: password
+            fullname: fullname,
+            username: username,
+            password: password
         }
 
         UserService.createUser(payload)
@@ -69,28 +36,27 @@ function StartView() {
             .catch(error => {
                 console.log(error)
             })
-    }
-    let solved;
+        }
     return (
         <div className={css.mainGridContainer}>
             <section className={css.section}>
                 <input
                        className={css.input}
                     type="text"
-                    placeholder='fullName/e-mail'
+                    placeholder='fullname/e-mail'
                     name='user'
-                    onChange={event => setEMail(event.target.value)} />
+                    onChange={event => setUsername(event.target.value)} />
                 <br />
                 <article>
                     <input className={css.input}
                         type="text"
                         placeholder='Password'
-                        name='pass'
+                        name='password:'
                         onChange={event => setPassword(event.target.value)}
                         required={true} />
                 </article>
                 <br />
-                <button className={css.button} onClick={userLogin}>Log in</button>
+                {/* <button className={css.button} onClick={userLogin}>Log in</button> */}
 
                 <p>{text && `${JSON.stringify(text)}`}</p>
 
@@ -104,21 +70,17 @@ function StartView() {
                                 <h2>Sign up</h2>
                                 <input className={css.input}
                                     type="text"
-                                    placeholder="fullName"
-                                    onChange={event => setFullName(event.target.value)} />
+                                    placeholder="fullname"
+                                    onChange={event => setFullname(event.target.value)} />
                                 <input className={css.input}
                                     type="text"
-                                    placeholder="eMail"
-                                    onChange={event => setEMail(event.target.value)} />
+                                    placeholder="username"
+                                    onChange={event => setUsername(event.target.value)} />
                                 <input className={css.input}
                                     type="password"
                                     placeholder="password"
                                     onChange={event => setPassword(event.target.value)} />
                                 <br />
-                                <p>
-                                    {text ? solved = JSON.stringify(text) : solved = 'Nothing found.'}
-                                    {solved}
-                                </p>
                                 <br />
                                 <button className={css.buttonPopupWindow} onClick={createUser}>Sign up</button>
                             </div>

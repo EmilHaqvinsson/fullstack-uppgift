@@ -2,7 +2,7 @@ const RoutingPath = {
     home: '/',
     user: '/user',
     message: '/message',
-    login: '/login',
+    login: '/verifyUser',
     logOut: '/logout'
 }
 

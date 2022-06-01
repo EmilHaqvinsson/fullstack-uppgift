@@ -7,9 +7,9 @@ import bcrypt from 'bcrypt'
 // import { ReadMessage } from "../interface/IMessage";
 
 const saltRounds: number = 10
-export const encryptedPassword = async (pass: string) => {
+export const encryptedPassword = async (password: string) => {
     let newPass: string = ''
-    await bcrypt.hash(pass, saltRounds).then(function (hash: any) {
+    await bcrypt.hash(password, saltRounds).then(function (hash: any) {
         newPass = hash;
     })
     return newPass
@@ -18,13 +18,13 @@ export const encryptedPassword = async (pass: string) => {
 const registerUser = async (req: Request, res: Response) => {
     try {
         Logger.http(req.body)
-        let {fullName, pass, eMail}: CreateU = req.body
-        pass = await encryptedPassword(pass)
-        if (fullName && pass && eMail) {
+        let {fullname, password, username}: CreateU = req.body
+        password = await encryptedPassword(password)
+        if (fullname && password && username) {
             const newObject: CreateU = {
-                fullName,
-                pass,
-                eMail: eMail
+                fullname,
+                password,
+                username
             }
             Logger.http(newObject)
             const user = new UModel(newObject)
@@ -32,7 +32,7 @@ const registerUser = async (req: Request, res: Response) => {
             Logger.http(dbResponse)
             res.status(StatusCode.CREATED).send(dbResponse)
         } else {
-            Logger.error('fullName, pass or eMail faild')
+            Logger.error('fullname, password or username faild')
             res.status(StatusCode.BAD_REQUEST).send({
                 message: 'Incorect body'
             })
@@ -44,6 +44,45 @@ const registerUser = async (req: Request, res: Response) => {
         })
     }
 }
+
+interface SearchForUser {
+    username: string
+}
+
+interface VerifyUser {
+	message: boolean
+}
+
+const verifyUser = async (req: Request, res: Response) => {
+	try {
+		const {username, password} = req.body
+		Logger.http(req.body)
+		
+		// Query
+		const query: SearchForUser = {username: String(username)}
+        Logger.debug(query)
+		const dbQuery = await UModel.find(query)
+		Logger.debug(dbQuery)
+		
+		// Verify password in bcrypt
+		let response: VerifyUser | undefined
+		await bcrypt.compare(String(password), dbQuery[0].password)
+			.then(function (result) {
+				Logger.debug('bcrypt')
+				response = {
+					message: result
+				}
+			})
+		res.status(StatusCode.OK).send(response)
+		
+	} catch (error) {
+		res.status(StatusCode.INTERNAL_SERVER_ERROR)
+			.send({
+				message: `Error occurred while trying to retrieve user with username: ${ req.query.username }`
+			})
+	}
+}
+
 
 function getAllUsers(req: Request, res: Response) {
     try {
@@ -94,8 +133,8 @@ const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
         // @ts-ignore
         UModel.find({
-            fullName: req.params.name,
-            eMail: req.params.eMail
+            fullname: req.params.name,
+            username: req.params.username
         }, '', (error: any, user: Array<ReadU>) => {
             if (error) {
                 Logger.error(error)
@@ -110,7 +149,7 @@ const getUserByNameAndEmail = (req: Request, res: Response) => {
     } catch (error) {
         Logger.error(error)
         res.status(StatusCode.BAD_REQUEST).send({
-            error: 'Det gick inte att hämta användaren efter namn och eMail'
+            error: 'Det gick inte att hämta användaren efter namn och username'
         })
     }
 }
@@ -120,9 +159,9 @@ const updateUserById = (req: Request, res: Response) => {
         Logger.debug(req.params.id)
         Logger.debug(req.body)
         const updatedUser: CreateU = {
-            fullName: req.body.fullName,
-            eMail: req.body.eMail,
-            pass: req.body.pass
+            fullname: req.body.fullname,
+            username: req.body.username,
+            password: req.body.password
         }
         Logger.debug(updatedUser)
         UModel.findByIdAndUpdate(req.params.id, updatedUser, {new: true}, (error: any, user: any) => {
@@ -172,6 +211,7 @@ const deleteUserById = (req: Request, res: Response) => {
 
 export default {
     registerUser,
+    verifyUser,
     getAllUsers,
     getUserById,
     getUserByNameAndEmail,

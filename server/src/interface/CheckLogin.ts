@@ -5,6 +5,6 @@ export interface CheckLogin {
 }
 
 export interface LoginU {
-    eMail: string,
-    pass: string,
+    username: string,
+    password: string,
 }

@@ -3,15 +3,11 @@ import MessageService from '../..//utils/api/service/MessageService'
 import { ReadMessage } from '../../utils/interface/IMessage'
 import Card from '../../components/card/Card'
 import css from './MessageView.module.css'
-import { AuthContext } from '../../utils/context/AuthContext'
-
-
 
 function MessageView() {
-    const loggedIn = useContext(AuthContext)
     const [message, setMessage] = useState<Array<ReadMessage>>([])
     const [text, setText] = useState('')
-    const [author, setAuthor] = useState('')
+    const [author, setAuthor] = useState(localStorage.getItem(String('username')) ? localStorage.getItem(String('username')) : 'Okänd avsändare')
     const [autoGet, setAutoGet] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
     const [isUpdated, setIsUpdated] = useState(false)
@@ -19,7 +15,7 @@ function MessageView() {
     const postMessage = () => {
         const newMessage = {
             "message": text,
-            "author": author
+            "author": localStorage.getItem(String('username')) ? localStorage.getItem(String('username')) : author
         }
         MessageService.createMessage(newMessage)
             .then(response => {
@@ -53,11 +49,6 @@ function MessageView() {
                 .then(response => {
                     setMessage(response.data)
                     message === oldMessage ? setIsUpdated(false) : setIsUpdated(true)
-                    console.log(`the Old: ${oldMessage}\n\nthe New: ${message}`)
-                    console.log('isLoading is false')
-                    console.log(message)
-                    console.log(isLoading, isUpdated)
-                    console.log(`pausing so we can see the change of state.`)
                     setTimeout(() => {
                         console.log(`Done pausing.`)
                         setIsLoading(false)
@@ -77,8 +68,12 @@ function MessageView() {
         <>
             <section className={css.sectionContainer}>
                 <h2 data-testid='messageText' className={css.h1Text}>Lämna en smurfs</h2>
-                <div className={css.usernameInput}>Namn:
-                    <input className={css.input} id={'author'} onChange={e => setAuthor(e.target.value)} placeholder={String(loggedIn.fullName)}/>
+                <div className={css.usernameInput}>Du kommenterar som:&nbsp;
+                    <input className={css.input} 
+                        id={'author'} 
+                        // onChange={e => setAuthor(e.target.value)}
+                        defaultValue={String(localStorage.getItem('username'))}
+                        disabled={true}/>
 
                 </div>
                 <br/>

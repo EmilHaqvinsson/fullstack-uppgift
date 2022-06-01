@@ -12,18 +12,18 @@ Chai.use(chaiHttp)
 const expect = Chai.expect
 
 const newU = {
-    fullName: 'Lars',
-    eMail: 'lars@lars.com',
-    pass: 'Lars10'
+    fullname: 'Lars',
+    username: 'lars@lars.com',
+    password: 'Lars10'
 };
 
 let global_id = ''
 Logger.http(global_id)
 
 const updatedU = {
-    fullName: 'Alexis',
-    eMail: 'alexis@alexis.com',
-    pass: 'alexis10'
+    fullname: 'Alexis',
+    username: 'alexis@alexis.com',
+    password: 'alexis10'
 };
 
 const registerUser = () => {
@@ -34,7 +34,7 @@ const registerUser = () => {
                 .send(newU)
                 .then((response) => {
                     expect(response).to.have.a.status(StatusCode.CREATED)
-                    expect(response.body.fullName).to.equal('Lars')
+                    expect(response.body.fullname).to.equal('Lars')
                     global_id = response.body._id
                     done()
                 })
@@ -67,8 +67,8 @@ const getUserById = () => {
                     expect(response).to.have.a.status(StatusCode.OK)
                     const body = response.body
                     expect(body).to.be.an('object')
-                    expect(body.fullName).to.equal('Lars')
-                    expect(body.eMail).to.equal('lars@lars.com')
+                    expect(body.fullname).to.equal('Lars')
+                    expect(body.username).to.equal('lars@lars.com')
                     done()
                 })
         })
@@ -76,16 +76,16 @@ const getUserById = () => {
 }
 
 const getUserByNameAndEmail = () => {
-    describe('Check a users name and email', () => {
-        test('Look after a name and email', (done) => {
+    describe('Check a users name and username', () => {
+        test('Look after a name and username', (done) => {
             Chai.request(server)
-                .get(`/user/name/${newU.fullName}/${newU.eMail}`)
+                .get(`/user/name/${newU.fullname}/${newU.username}`)
                 .end((error, response) => {
                     expect(response).to.have.a.status(StatusCode.OK)
                     const body = response.body[0]
                     expect(body).to.be.an('object')
-                    expect(body.fullName).to.equal('Lars')
-                    expect(body.eMail).to.equal('lars@lars.com')
+                    expect(body.fullname).to.equal('Lars')
+                    expect(body.username).to.equal('lars@lars.com')
                     done()
                 })
         })
@@ -102,7 +102,7 @@ const updateUserById = () => {
                     expect(response).to.have.a.status(StatusCode.OK)
                     const body = response.body
                     expect(body).to.be.an('object')
-                    expect(body.fullName).to.equal('Alexis')
+                    expect(body.fullname).to.equal('Alexis')
                     done()
                 })
         })

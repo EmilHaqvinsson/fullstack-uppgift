@@ -1,20 +1,20 @@
 export interface CreateOrUpdateUser {
-	fullName: string;
-	eMail: string;
-	pass: string; 
+	fullname?: string;
+	username: string;
+	password: string; 
 }
 
 export interface LoginU {
-    email: string,
-    pass: string,
-    authenticated: string | boolean,
+	fullname?: string,
+    username: string,
+    password: string,
 }
 
 export interface ReadUser {
 	_id: string;
-	fullName: string;
-	eMail: string;
-	pass: string;
+	fullname: string;
+	username: string;
+	password: string;
 	createdAt: Date,
 	updatedAt: Date,
 	message?: string;
