@@ -74,13 +74,13 @@ function MessageView() {
                         // onChange={e => setAuthor(e.target.value)}
                         defaultValue={String(localStorage.getItem('username'))}
                         disabled={true}/>
-
                 </div>
                 <br/>
                 <label htmlFor="description">
                     <textarea data-testid='textArea' className={css.labelTextArea}
                               id="description" cols={45} rows={7}
-                              onChange={event => handleChange(event)}>message..</textarea></label>
+                              onChange={event => handleChange(event)}
+                              placeholder={'Skriv ett meddelande..'}></textarea></label>
             </section>
             <section className={css.sectionButton}>
                 <button data-testid='buttonText' className={css.buttonPost} onClick={postMessage}>Skicka</button>
