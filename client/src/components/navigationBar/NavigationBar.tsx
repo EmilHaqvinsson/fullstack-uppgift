@@ -7,19 +7,29 @@ import Profile from '../Profile/Profile'
 
 function NavigationBar() {
     const {authenticatedUser} = useUserContext()
+
+    const showNavigation = () => {
+        const nav = document.getElementById('navbar')
+        if (authenticatedUser) {
+            console.log(nav?.classList)
+        }
+    }
 	
 	const displayUserIfAuthenticated = () => {
 		return (authenticatedUser)
-			? <li><Profile/></li>
+			? <>
+            <li  className={css.li}><Profile /></li>
+            <li className={css.li}>
+                <Link to={RoutingPath.user}>Home</Link>
+                </li>
+            <li className={css.li}>
+                <Link to={RoutingPath.message}>Messages</Link></li>
+            </>
 			: <li><Link to={ RoutingPath.login }>Sign In</Link></li>
 	}
         return (
-            <nav className={css.nav}>
+            <nav id='navbar' className={css.nav}>
                 <ul className={css.ul}>
-                    <li className={css.li}><Link to={RoutingPath.user}>Home</Link></li>
-                    <li className={css.li}><Link to={RoutingPath.message}>Message</Link></li>
-                    <li className={css.li}><Link to={RoutingPath.login}>Log Out</Link></li>
-
                     { displayUserIfAuthenticated() }
                 </ul>
             </nav>

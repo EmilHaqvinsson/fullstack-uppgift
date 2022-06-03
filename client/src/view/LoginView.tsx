@@ -18,7 +18,7 @@ export const SignInView = () => {
             username: username,
             password: password
         }
-        console.log('This is the first thing that happens in verifyUser: ' + payload)
+        console.log('This is the first thing that happens in verifyUser: ' + payload.username)
 		
 		UserService.verifyUser(payload)
 			.then(function(response: { data: { message: boolean } }) {
@@ -28,12 +28,20 @@ export const SignInView = () => {
 				console.log(error)
 			})
 	}
+
+	function isLoggedIn() {
+		if (authenticatedUser) {
+			navigate(RoutingPath.user)
+		} else {
+			navigate(RoutingPath.login)
+		}
+	}
 	
 	function login(apiResponse: boolean) {
 		if (apiResponse) {
 			setAuthenticatedUser(username)
 			localStorage.setItem('username', username)
-			navigate(RoutingPath.home)
+			navigate(RoutingPath.user)
 		} else {
 			setLoginText('Wrong username or password')
 		}
@@ -41,7 +49,7 @@ export const SignInView = () => {
 	
 	return (
 		<div>
-			<h1>Sign In</h1>
+			<h1>Logga in</h1>
 			<div>
 				<span>Username: </span>
 				<input type='text' onChange={ event => setUsername(event.target.value) }/>
@@ -49,8 +57,9 @@ export const SignInView = () => {
 				<input type='password' onChange={ event => setPassword(event.target.value) }/>
 			</div>
 			<h3>{ loginText }</h3>
-			<button onClick={ () => verifyUser() } children={ 'Log In' }/>
-			<button onClick={ () => alert(authenticatedUser) } children={ 'Show user' }/>
+			{!authenticatedUser && <button onClick={ () => verifyUser() } children={ 'Log In' }/>}
+			{authenticatedUser && <button onClick={ () => alert(authenticatedUser) } children={ 'Show user' }/>}
+			
 		</div>
 	)
 }

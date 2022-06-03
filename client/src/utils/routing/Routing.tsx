@@ -12,10 +12,10 @@ const Routing = (props: { children?: ReactNode }) => {
             <BrowserRouter>
                 {props.children}
                 <Routes>
-                    <Route path={RoutingPath.home} element={<StartView/>}/>
+                    <Route path={RoutingPath.home} element={<SignInView/>}/>
                     <Route path={RoutingPath.user} element={<UserView/>}/>
                     <Route path={RoutingPath.message} element={<MessageView/>}/>
-                    <Route path={RoutingPath.login} element={<SignInView/>}/>
+                    <Route path={RoutingPath.login} element={<StartView/>}/>
                 </Routes>
             </BrowserRouter>
         </>
