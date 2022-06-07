@@ -4,6 +4,7 @@ import RoutingPath from '../utils/routing/RoutingPath'
 import UserService from '../utils/api/service/UService'
 import { useUserContext } from '../utils/context/UserProvider'
 import { LoginU } from '../utils/interface/Users'
+import css from './LoginView.module.css'
 
 export const SignInView = () => {
 	const [username, setUsername] = useState<string>('')
@@ -50,12 +51,33 @@ export const SignInView = () => {
 	return (
 		<div>
 			<h1>Logga in</h1>
-			<div>
+			<div className={css.mainGridContainer}>
+            <section className={css.section}>
+                <input
+                       className={css.input}
+                    type="text"
+                    placeholder='fullname/e-mail'
+                    name='user'
+                    onChange={event => setUsername(event.target.value)} />
+                <br />
+                <article>
+                    <input className={css.input}
+                        type="text"
+                        placeholder='Password'
+                        name='password:'
+                        onChange={event => setPassword(event.target.value)}
+                        required={true} />
+                </article>
+                <br />
+                <button className={css.button} onClick={() => verifyUser()}>Log in</button>
+				</section>
+				</div>
+			{/* <div>
 				<span>Username: </span>
 				<input type='text' onChange={ event => setUsername(event.target.value) }/>
 				<span>Password: </span>
 				<input type='password' onChange={ event => setPassword(event.target.value) }/>
-			</div>
+			</div> */}
 			<h3>{ loginText }</h3>
 			{!authenticatedUser && <button onClick={ () => verifyUser() } children={ 'Log In' }/>}
 			{authenticatedUser && <button onClick={ () => alert(authenticatedUser) } children={ 'Show user' }/>}
