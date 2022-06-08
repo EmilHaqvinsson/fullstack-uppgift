@@ -19,12 +19,13 @@ const Profile = () => {
 		<div className={css.profileWrapper}>
 			{/* <img src={ imgUrl } className={css.profilePic}/> */}
 			<p>{ authenticatedUser }</p>
+			<span onClick={ () => logout() }>Logout</span>
 			
-			<div className={css.profileDropdown}>
+			
+			{/* <div className={css.profileDropdown}>
 				<span onClick={ () => navigate(RoutingPath.home)} className={css.disabledLink}>Settings</span><br/>
 				<span onClick={ () => navigate(RoutingPath.home)} className={css.disabledLink}>Profile</span><br/>
-				<span onClick={ () => logout() }>Logout</span>
-			</div>
+			</div> */}
 		</div>
 	)
 }

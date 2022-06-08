@@ -4,8 +4,8 @@
 }
 
 .profileWrapper {
-    padding: 5px;
     color: #333;
+    position: flex;
 }
 
 .disabledLink {
@@ -17,13 +17,12 @@
     position: absolute;
     background-color: #f1f1f1;
     min-width: 200px;
-    padding: 12px 16px;
     z-index: 10;
     /* margin-top: 5px; */
-}
+}                                       
 
 .profileWrapper:hover .profileDropdown {
-    display: block;
+    display: none;
 }
 
 /* 
