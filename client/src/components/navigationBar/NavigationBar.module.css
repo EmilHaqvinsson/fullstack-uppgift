@@ -48,7 +48,7 @@ li a:hover:not(.active) {
 @media screen and (min-width: 1200px) {
     .nav {
         background-color: #eda2a1;
-        margin: 100px 0;
+        margin: 5% 0;
         padding: 15px;
     }
     li {

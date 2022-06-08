@@ -1,16 +1,18 @@
 /*mobile*/
 .text {
     font-size: 4vh;
-    text-align: center;
+    text-align: left;
     color: steelblue;
 }
+
 .imageSmurfar {
     height: 70px;
 }
+
 .containerDiv {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-left: 100px;
+    margin: inherit;
 }
 
 .headerContainer {
@@ -26,20 +28,22 @@
     .headerContainer {
         height: 8vh;
     }
+
     .text {
-        font-size: 3vh;
+        font-size: 5vh;
         text-align: center;
         margin-left: 100px;
     }
+
     .imageSmurfar {
-        height: 70px;
+        height: 10vh;
     }
 }
 
 /*desktop*/
 @media only screen and (min-width: 1200px) {
     .headerContainer {
-        height: 190px;
+        height: 6vh;
     }
 
     .containerDiv {
@@ -55,11 +59,13 @@
     .itemB {
         background-color: #A2D8FA;
     }
+
     .text {
         margin-left: 150px;
-        font-size: 10vh;
+        font-size: 6vh;
     }
+
     .imageSmurfar {
-        height: 140px;
+        height: 15vh;
     }
 }

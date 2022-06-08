@@ -1,6 +1,6 @@
 import './utils/styles/global.css';
 // import Alive from './components/Alive'
-// import Header from "./components/header/Header";
+import Header from "./components/header/Header";
 import Routing from "./utils/routing/Routing";
 import NavigationBar from "./components/navigationBar/NavigationBar";
 import React, { useEffect, useState } from 'react'
@@ -23,6 +23,7 @@ function App() {
 	return (
 		<UserContext.Provider value={{ authenticatedUser, setAuthenticatedUser}}>
 			<Routing>
+				<Header/>
 				<NavigationBar/>
 			</Routing>
 		</UserContext.Provider>
