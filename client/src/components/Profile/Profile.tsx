@@ -18,7 +18,7 @@ const Profile = () => {
 	return (
 		<div className={css.profileWrapper}>
 			{/* <img src={ imgUrl } className={css.profilePic}/> */}
-			<p>{ authenticatedUser }</p>
+			Välkommen tillbaka, { authenticatedUser }
 			<span onClick={ () => logout() }>Logout</span>
 			
 			

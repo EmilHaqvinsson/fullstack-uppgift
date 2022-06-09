@@ -5,25 +5,36 @@
 
 .profileWrapper {
     color: #333;
-    position: flex;
+    position: absolute;
+    right: 20px;
+    flex-direction: row;
+    padding: .5em;
+}
+
+span {
+    margin: 0 .5em;
+}
+
+span:hover {
+    color: whitesmoke;
 }
 
 .disabledLink {
     text-decoration: line-through;
 }
 
-.profileDropdown {
+/* .profileDropdown {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 200px;
     z-index: 10;
     /* margin-top: 5px; */
-}                                       
+/* }                                        */
 
-.profileWrapper:hover .profileDropdown {
+/* .profileWrapper:hover .profileDropdown {
     display: none;
-}
+} */
 
 /* 
 span {
