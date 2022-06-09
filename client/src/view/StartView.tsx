@@ -40,53 +40,27 @@ function StartView() {
     return (
         <div className={css.mainGridContainer}>
             <section className={css.section}>
-                <input
+                <><input
                        className={css.input}
                     type="text"
-                    placeholder='fullname/e-mail'
+                    placeholder='e-mail/username'
                     name='user'
                     onChange={event => setUsername(event.target.value)} />
                 <br />
-                <article>
                     <input className={css.input}
                         type="text"
                         placeholder='Password'
-                        name='password:'
+                        name='password'
                         onChange={event => setPassword(event.target.value)}
                         required={true} />
-                </article>
-                <br />
                 {/* <button className={css.button} onClick={userLogin}>Log in</button> */}
-
                 <p>{text && `${JSON.stringify(text)}`}</p>
 
                 <button onClick={toggleModal} className={css.buttonCreateNewAccount}>Create new account</button>
 
                 {modal && (
-                    <div className={css.popup}>
-                        <div className={css.overlay}>
-                            <div className={css.popupWindow}>
-                                <img src={close} alt="close" className={css.close} onClick={toggleModal} />
-                                <h2>Sign up</h2>
-                                <input className={css.input}
-                                    type="text"
-                                    placeholder="fullname"
-                                    onChange={event => setFullname(event.target.value)} />
-                                <input className={css.input}
-                                    type="text"
-                                    placeholder="username"
-                                    onChange={event => setUsername(event.target.value)} />
-                                <input className={css.input}
-                                    type="password"
-                                    placeholder="password"
-                                    onChange={event => setPassword(event.target.value)} />
-                                <br />
-                                <br />
-                                <button className={css.buttonPopupWindow} onClick={createUser}>Sign up</button>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                    console.log('Lol modal')
+                )}</>
             </section>
             <section>
                 <img className={css.imageSmurf} src={smurf} alt="smurf" />

@@ -6,24 +6,26 @@
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display:  flex;
+    
 }
 
 .ul {
     list-style-type: none;
     margin: 0;
-    padding: 0 20px 0;
+    /* padding: 0 20px 0; */
+    width: 100%;
 }
 
-.li {
+/* .li {
     float: left;
     padding: 0 20px 0 0;
-}
+} */
 
 li a {
-    display: block;
     color: white;
     text-align: center;
-    padding: 10px;
+    /* padding: 10px; */
     text-decoration: none;
 }
 
@@ -32,9 +34,9 @@ li a:hover:not(.active) {
     color: darkslategrey;
 }
 
-li:last-child {
-    place-self: flex-end;
-
+.liLast {
+    /* margin: auto;
+    place-self: flex-end; */
 }
 
 /*Tablet*/

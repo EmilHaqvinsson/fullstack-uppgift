@@ -18,13 +18,14 @@ const Profile = () => {
 	return (
 		<div className={css.profileWrapper}>
 			{/* <img src={ imgUrl } className={css.profilePic}/> */}
-			<p>{ authenticatedUser }</p>
+			Välkommen tillbaka, { authenticatedUser }
+			<span onClick={ () => logout() }>Logout</span>
 			
-			<div className={css.profileDropdown}>
+			
+			{/* <div className={css.profileDropdown}>
 				<span onClick={ () => navigate(RoutingPath.home)} className={css.disabledLink}>Settings</span><br/>
 				<span onClick={ () => navigate(RoutingPath.home)} className={css.disabledLink}>Profile</span><br/>
-				<span onClick={ () => logout() }>Logout</span>
-			</div>
+			</div> */}
 		</div>
 	)
 }
