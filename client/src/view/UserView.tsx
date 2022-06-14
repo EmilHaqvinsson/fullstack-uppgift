@@ -3,6 +3,8 @@ import smurffen from '../utils/image/smurffen.jpg'
 import { useUserContext } from '../utils/context/UserProvider'
 import UService from '../utils/api/service/UService'
 import { useEffect, useState } from 'react'
+import UserService from '../utils/api/service/userService'
+import { CreateOrUpdateUser } from '../utils/interface/Users'
 
 
 function UserView() {
@@ -32,13 +34,31 @@ function UserView() {
         });
         }
     }
-    
 
-    // const [ fullName, setFullName ] = useState(findUser)
-    
     useEffect(() => {
       findUser()
     }, [findUser])
+
+    function saveChanges() {
+		const payload: CreateOrUpdateUser = {
+            username: userEmail,
+            firstName: userFirstName,
+            lastName: userLastName,
+            password: ''
+        }
+        
+        userId && UserService.updateUserById(userId, payload)
+			.then(function (response) {
+                const result = response.data
+				console.log(result)
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
+            setIsEdit(!isEdit)
+            return
+        }
+	
     
     return (
         <>
@@ -47,12 +67,25 @@ function UserView() {
                 <section>
                     <img className={css.imageUser} src={smurffen} alt="user"/>
                     <p>
-                        <input type="text" placeholder="FirstName" value={userFirstName} disabled={isEdit}/>                                                                                                
-                        <input type="text" placeholder="LastName" value={userLastName} disabled={isEdit}/>
+                        <input 
+                            type="text" 
+                            placeholder="FirstName" 
+                            value={userFirstName} 
+                            disabled={isEdit} 
+                            onChange={ event => setUserFirstName(event.target.value) 
+                        }/> 
+
+                        <input type="text" placeholder="LastName" value={userLastName} disabled={isEdit} onChange={ event => setUserLastName(event.target.value) }/>
                         <br/>
-                        <input type="text" placeholder="E-mail" value={userEmail} disabled={isEdit}/>
-                        <input type="text" placeholder="Work" value={userWork} disabled={isEdit}/>
+                        <input type="text" placeholder="E-mail" value={userEmail} disabled={isEdit} onChange={ event => setUserEmail(event.target.value) }/>
+                        <input type="text" placeholder="Work" value={userWork} disabled={true}/>
                     </p>
+                </section>
+                <section>
+                    {isEdit 
+                        ? <button onClick={() => setIsEdit(false)}>ENABLE EDITING</button>
+                        : <button onClick={() => saveChanges()}>SAVE CHANGES</button>
+                    }
                 </section>
             </div>
         </>
