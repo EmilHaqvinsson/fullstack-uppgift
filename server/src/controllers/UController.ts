@@ -18,11 +18,12 @@ export const encryptedPassword = async (password: string) => {
 const registerUser = async (req: Request, res: Response) => {
     try {
         Logger.http(req.body)
-        let {fullname, password, username}: CreateU = req.body
+        let {firstName, lastName, password, username}: CreateU = req.body
         password = await encryptedPassword(password)
-        if (fullname && password && username) {
+        if (firstName && lastName && password && username) {
             const newObject: CreateU = {
-                fullname,
+                firstName,
+                lastName,
                 password,
                 username
             }
@@ -32,7 +33,7 @@ const registerUser = async (req: Request, res: Response) => {
             Logger.http(dbResponse)
             res.status(StatusCode.CREATED).send(dbResponse)
         } else {
-            Logger.error('fullname, password or username faild')
+            Logger.error('First or last name, password or username failed')
             res.status(StatusCode.BAD_REQUEST).send({
                 message: 'Incorect body'
             })
@@ -68,10 +69,10 @@ const verifyUser = async (req: Request, res: Response) => {
 		let response: VerifyUser | undefined
 		await bcrypt.compare(String(password), dbQuery[0].password)
 			.then(function (result) {
-				Logger.debug('bcrypt')
 				response = {
 					message: result
 				}
+                Logger.debug('bcrypt resulted in: ' + response)
 			})
 		res.status(StatusCode.OK).send(response)
 		
@@ -159,7 +160,8 @@ const updateUserById = (req: Request, res: Response) => {
         Logger.debug(req.params.id)
         Logger.debug(req.body)
         const updatedUser: CreateU = {
-            fullname: req.body.fullname,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             username: req.body.username,
             password: req.body.password
         }

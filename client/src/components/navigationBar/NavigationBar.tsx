@@ -26,7 +26,7 @@ function NavigationBar() {
                 <Link to={RoutingPath.message}>Messages</Link></li>
                 <li  className={css.liLast}><Profile /></li>
             </p>
-			: <li><Link to={ RoutingPath.login }>Sign In</Link></li>
+			: <li><Link to={ RoutingPath.login }>Create new user!</Link></li>
 	}
         return (
             <nav id='navbar' className={css.nav}>
