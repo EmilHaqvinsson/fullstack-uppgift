@@ -10,22 +10,16 @@ const Profile = () => {
 	// const imgUrl = 'https://thispersondoesnotexist.com/image'
 	
 	const logout = () => {
-		localStorage.removeItem('username')
+		localStorage.removeItem('auth')
+		localStorage.removeItem('userId')
 		setAuthenticatedUser('')
 		navigate(RoutingPath.home)
 	}
 	
 	return (
 		<div className={css.profileWrapper}>
-			{/* <img src={ imgUrl } className={css.profilePic}/> */}
 			Välkommen tillbaka, { authenticatedUser }
 			<span onClick={ () => logout() }>Logout</span>
-			
-			
-			{/* <div className={css.profileDropdown}>
-				<span onClick={ () => navigate(RoutingPath.home)} className={css.disabledLink}>Settings</span><br/>
-				<span onClick={ () => navigate(RoutingPath.home)} className={css.disabledLink}>Profile</span><br/>
-			</div> */}
 		</div>
 	)
 }

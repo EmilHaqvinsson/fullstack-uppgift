@@ -70,12 +70,11 @@ const verifyUser = async (req: Request, res: Response) => {
 		let response: VerifyUser | undefined
 		await bcrypt.compare(String(password), dbQuery[0].password)
 			.then(function (result) {
-				Logger.debug('bcrypt')
 				response = {
                     message: result,
 					userId: String(dbQuery[0].id )                   
 				}
-                Logger.debug('bcrypt resulted in: ' + response.message + response.userId + ', which hopefully is the users ID')
+                Logger.debug('bcrypt resulted in: ' + response.message + ', '+ response.userId + ', which hopefully is the users ID')
 			})
 		res.status(StatusCode.OK).send(response)
 		

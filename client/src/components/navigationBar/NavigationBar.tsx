@@ -17,16 +17,15 @@ function NavigationBar() {
 	
 	const displayUserIfAuthenticated = () => {
 		return (authenticatedUser)
-			? <p>
-            
-            <li className={css.li}>
+			?
+            <><li className={css.li}>
                 <Link to={RoutingPath.user}>Home</Link>
-                </li>
-            <li className={css.li}>
-                <Link to={RoutingPath.message}>Messages</Link></li>
-                <li  className={css.liLast}><Profile /></li>
-            </p>
-			: <li><Link to={ RoutingPath.login }>Sign In</Link></li>
+            </li><li className={css.li}>
+                    <Link to={RoutingPath.message}>Messages</Link></li><li className={css.liLast}><Profile /></li></>
+			: <>
+                <li><Link to={ RoutingPath.home }>Sign In</Link></li>
+                <li><Link to={ RoutingPath.login }>Register user</Link></li>
+                </>
 	}
         return (
             <nav id='navbar' className={css.nav}>
