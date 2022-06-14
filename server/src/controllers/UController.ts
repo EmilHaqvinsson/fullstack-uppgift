@@ -4,6 +4,7 @@ import {Request, Response} from "express";
 import {CreateU, ReadU} from "../interface/InterFace";
 import UModel from "../models/UModel";
 import bcrypt from 'bcrypt'
+import { ObjectId } from "mongoose";
 // import { ReadMessage } from "../interface/IMessage";
 
 const saltRounds: number = 10
@@ -50,19 +51,20 @@ interface SearchForUser {
 }
 
 interface VerifyUser {
-	message: boolean
+    message: boolean
+	userId: string
 }
 
 const verifyUser = async (req: Request, res: Response) => {
 	try {
 		const {username, password} = req.body
-		Logger.http(req.body)
+		Logger.http('the req.body is: ' + req.body.valueOf())
 		
 		// Query
 		const query: SearchForUser = {username: String(username)}
-        Logger.debug(query)
+        Logger.debug('the query is: ' + query)
 		const dbQuery = await UModel.find(query)
-		Logger.debug(dbQuery)
+		Logger.debug('the answer from the db is: ' + dbQuery)
 		
 		// Verify password in bcrypt
 		let response: VerifyUser | undefined
@@ -70,8 +72,10 @@ const verifyUser = async (req: Request, res: Response) => {
 			.then(function (result) {
 				Logger.debug('bcrypt')
 				response = {
-					message: result
+                    message: result,
+					userId: String(dbQuery[0].id )                   
 				}
+                Logger.debug('bcrypt resulted in: ' + response.message + response.userId + ', which hopefully is the users ID')
 			})
 		res.status(StatusCode.OK).send(response)
 		
@@ -156,14 +160,15 @@ const getUserByNameAndEmail = (req: Request, res: Response) => {
 
 const updateUserById = (req: Request, res: Response) => {
     try {
-        Logger.debug(req.params.id)
-        Logger.debug(req.body)
+        Logger.debug(req.params.id + '= req.params.id')
+        Logger.debug(req.body + '= req.body')
         const updatedUser: CreateU = {
             fullname: req.body.fullname,
             username: req.body.username,
             password: req.body.password
         }
-        Logger.debug(updatedUser)
+        Logger.debug(updatedUser + '= updatedUser')
+
         UModel.findByIdAndUpdate(req.params.id, updatedUser, {new: true}, (error: any, user: any) => {
             if (error) {
                 Logger.error(error)
@@ -198,7 +203,7 @@ const deleteUserById = (req: Request, res: Response) => {
                 Logger.http(user)
                 res.status(StatusCode.OK).json(
                     user ? {message: `Användare med id ${req.params.id} har tagits bort från databasen!`}
-                        : {message: `Användare med id '${req.params.id}'hittades inte!`})
+                        : {message: `Användare med id '${req.params.id}' hittades inte!`})
             }
         })
     } catch (error) {

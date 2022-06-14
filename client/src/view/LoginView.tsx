@@ -8,6 +8,7 @@ import css from './LoginView.module.css'
 
 export const SignInView = () => {
 	const [username, setUsername] = useState<string>('')
+	// const [userId, setUserId] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [loginText, setLoginText] = useState<string>('')
 	const {authenticatedUser, setAuthenticatedUser} = useUserContext()
@@ -22,8 +23,13 @@ export const SignInView = () => {
         console.log('This is the first thing that happens in verifyUser: ' + payload.username)
 		
 		UserService.verifyUser(payload)
-			.then(function(response: { data: { message: boolean } }) {
-				login(response.data.message)
+			.then(function(response: { data: { message: boolean, userId: string } }) {
+				login(username)
+				console.log('Your password matches? ' + response.data.message)
+				console.log('The ID of the user that\'s logging in is: ' + String(response.data.userId))
+				const userInfo = {userId: response.data.userId, authenticated: response.data.message}
+				console.log('The line before this one SHOULD HAVE SAVED THAT SHIT INTO THE OBJECT userInfo... This is that object:')
+				console.log(userInfo)
 			})
 			.catch(function (error: any) {
 				console.log(error)
@@ -38,10 +44,10 @@ export const SignInView = () => {
 		}
 	}
 	
-	function login(apiResponse: boolean) {
+	function login(apiResponse: any) {
 		if (apiResponse) {
-			setAuthenticatedUser(username)
-			localStorage.setItem('username', username)
+			setAuthenticatedUser(apiResponse)
+			localStorage.setItem("auth", apiResponse)
 			navigate(RoutingPath.user)
 		} else {
 			setLoginText('Wrong username or password')
@@ -80,7 +86,7 @@ export const SignInView = () => {
 			</div> */}
 			<h3>{ loginText }</h3>
 			{!authenticatedUser && <button onClick={ () => verifyUser() } children={ 'Log In' }/>}
-			{authenticatedUser && <button onClick={ () => alert(authenticatedUser) } children={ 'Show user' }/>}
+			{/* {authenticatedUser && <button onClick={ () => alert(authenticatedUser) } children={ 'Show user' }/>} */}
 			
 		</div>
 	)
