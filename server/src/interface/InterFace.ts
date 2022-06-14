@@ -1,12 +1,14 @@
 export interface CreateU {
-    fullname: string,
+    firstName: string,
+    lastName: string,
     username: string,
     password: string
 }
 
 export interface ReadU {
     _id: string;
-    fullname: string;
+    firstName: string;
+    lastName: string;
     username: string;
     password: string;
     authenticated: string | boolean;

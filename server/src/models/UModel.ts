@@ -6,7 +6,11 @@ dotenv.config()
 const dbCollection = process.env.MONGODB_COLLECTION_USERS || ''
 
 const USchema = new Schema<CreateU>({
-    fullname: {
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
         type: String,
         required: true
     },
