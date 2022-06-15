@@ -26,11 +26,18 @@ function StartView() {
 
         UserService.createUser(payload)
             .then(response => {
-                setText(response.data)
+                if (response.status === 201) {
                 console.log(response.data)
-            })
+                const newUsername = response.data.username
+                const newPass = response.data.password
+                setText(`User ${newUsername}, with password ${newPass} created successfully!`)
+            } else {
+                setText('Could not create new user! Please try again')
+            }
+        })
             .catch(error => {
                 console.log(error)
+                setText(error)
             })
         }
     return (

@@ -15,7 +15,7 @@ function UserView() {
     const [userEmail, setUserEmail] = useState<string>('')
     const [userWork, setUserWork] = useState<string>('')
 
-    console.log('value of "authenticatedUser": ' + authenticatedUser.authenticatedUser)
+    console.log('value of "authenticatedUser": ' + user)
 
     const [isEdit, setIsEdit] = useState(true)
     
