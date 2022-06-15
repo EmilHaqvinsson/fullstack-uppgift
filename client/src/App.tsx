@@ -10,9 +10,9 @@ function App() {
 	const [authenticatedUser, setAuthenticatedUser] = useState<string>('')
 
 	const checkIfUserIsAuthenticatedInBrowser = () => {
-		const username = localStorage.getItem('username')
-		if (typeof username === 'string') {
-			setAuthenticatedUser(username)
+		const userId = localStorage.getItem('userId')
+		if (typeof userId === 'string') {
+			setAuthenticatedUser(userId)
 		}
 	}
 	
