@@ -14,6 +14,7 @@ function UserView() {
     const [userLastName, setUserLastName] = useState<string>('')
     const [userEmail, setUserEmail] = useState<string>('')
     const [userWork, setUserWork] = useState<string>('')
+    const [userPassword, setUserPassword] = useState<string>('')
 
     console.log('value of "authenticatedUser": ' + user)
 
@@ -28,6 +29,7 @@ function UserView() {
             setUserLastName(result.data.lastName)
             setUserEmail(result.data.username)
             setUserWork('ARBETSLÖS')
+            setUserPassword(result.data.password)
         }).catch((err) => {
             console.log(err)
         });
@@ -43,7 +45,7 @@ function UserView() {
             username: userEmail,
             firstName: userFirstName,
             lastName: userLastName,
-            password: ''
+            password: userPassword
         }
         
         userId && UserService.updateUserById(userId, payload)
@@ -78,6 +80,7 @@ function UserView() {
                         <br/>
                         <input type="text" placeholder="E-mail" value={userEmail} disabled={isEdit} onChange={ event => setUserEmail(event.target.value) }/>
                         <input type="text" placeholder="Work" value={userWork} disabled={true}/>
+                        <input type="password" placeholder="password" value={userPassword} disabled={true} onChange={ event => setUserPassword(event.target.value) }/>
                     </p>
                 </section>
                 <section>
