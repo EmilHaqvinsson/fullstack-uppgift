@@ -86,7 +86,7 @@ const getUserByNameAndEmail = () => {
                     expect(response).to.have.a.status(StatusCode.OK)
                     const body = response.body[0]
                     expect(body).to.be.an('object')
-                    expect(body.fullname).to.equal('Lars')
+                    expect(body.firstName).to.equal('Lars')
                     expect(body.username).to.equal('lars@lars.com')
                     done()
                 })

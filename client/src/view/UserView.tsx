@@ -13,14 +13,18 @@ function UserView() {
     const [userFirstName, setUserFirstName] = useState<string>('')
     const [userLastName, setUserLastName] = useState<string>('')
     const [userEmail, setUserEmail] = useState<string>('')
-    const [userWork, setUserWork] = useState<string>('')
     const [userPassword, setUserPassword] = useState<string>('')
+
+    const [editedFirstName, setEditedFirstName] = useState<string>('')
+    const [editedLastName, setEditedLastName] = useState<string>('')
+    const [editedEmail, setEditedEmail] = useState<string>('')
+
 
     console.log('value of "authenticatedUser": ' + user)
 
     const [isEdit, setIsEdit] = useState(true)
     
-    function findUser() {
+    const findUser = () => {
         if (userId) {
         const theUser = UService.getById(userId)
         theUser.then((result) => {
@@ -28,23 +32,20 @@ function UserView() {
             setUserFirstName(result.data.firstName)
             setUserLastName(result.data.lastName)
             setUserEmail(result.data.username)
-            setUserWork('ARBETSLÖS')
             setUserPassword(result.data.password)
+            return
         }).catch((err) => {
             console.log(err)
         });
         }
     }
 
-    useEffect(() => {
-      findUser()
-    }, [findUser])
 
     function saveChanges() {
 		const payload: CreateOrUpdateUser = {
-            username: userEmail,
-            firstName: userFirstName,
-            lastName: userLastName,
+            username: editedEmail,
+            firstName: editedFirstName,
+            lastName: editedLastName,
             password: userPassword
         }
         
@@ -63,29 +64,27 @@ function UserView() {
     
     return (
         <>
-        {findUser()}
             <div className={css.section}>
                 <section>
                     <img className={css.imageUser} src={smurffen} alt="user"/>
+                    <>{findUser()}</>
+                    <h4>Namn: {userFirstName} {userLastName}</h4>
+                    <h4>Email: {userEmail}</h4>
+                    </section>
+                    <section className={css.editing} hidden={isEdit}>
                     <p>
-                        <input 
-                            type="text" 
-                            placeholder="FirstName" 
-                            value={userFirstName} 
-                            disabled={isEdit} 
-                            onChange={ event => setUserFirstName(event.target.value) 
-                        }/> 
-
-                        <input type="text" placeholder="LastName" value={userLastName} disabled={isEdit} onChange={ event => setUserLastName(event.target.value) }/>
+                        <input data-testid='inputFullName' type="text" placeholder="FirstName" disabled={isEdit} onChange={ event => setEditedFirstName(event.target.value) }/> 
+                        <input data-testid='inputLastName' type="text" placeholder="LastName" disabled={isEdit} onChange={ event => setEditedLastName(event.target.value) }/>
                         <br/>
-                        <input type="text" placeholder="E-mail" value={userEmail} disabled={isEdit} onChange={ event => setUserEmail(event.target.value) }/>
-                        <input type="text" placeholder="Work" value={userWork} disabled={true}/>
-                        <input type="password" placeholder="password" value={userPassword} disabled={true} onChange={ event => setUserPassword(event.target.value) }/>
+                        <input data-testid='inputEmail' type="text" placeholder="E-mail" disabled={isEdit} onChange={ event => setEditedEmail(event.target.value) }/>
+                        <input data-testid='inputWork' type="text" placeholder="Work" disabled={true}/>
+                        <br/>
+                        <input data-testid='inputPassword' type="password" placeholder="password" disabled={true}/>
                     </p>
                 </section>
                 <section>
                     {isEdit 
-                        ? <button onClick={() => setIsEdit(false)}>ENABLE EDITING</button>
+                        ? <button onClick={() => setIsEdit(false)}>Uppdatera användaruppgifter</button>
                         : <button onClick={() => saveChanges()}>SAVE CHANGES</button>
                     }
                 </section>

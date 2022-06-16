@@ -104,9 +104,9 @@ const deleteMessageById = () => {
 }
 
 describe('Testing message routes', () => {
-    registerMessage()
-    getAllMessages()
-    getMessageById()
-    updateMessageById()
-    deleteMessageById()
+    // registerMessage()
+    // getAllMessages()
+    // getMessageById()
+    // updateMessageById()
+    // deleteMessageById()
 })

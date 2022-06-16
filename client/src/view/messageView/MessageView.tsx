@@ -55,7 +55,7 @@ function MessageView() {
                     setTimeout(() => {
                         console.log(`Done pausing.`)
                         setIsLoading(false)
-                    }, 1000)
+                    }, 100)
                     
                 })
         }
