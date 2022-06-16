@@ -82,13 +82,13 @@ export const SignInView = () => {
                 <input
                        className={css.input}
                     type="text"
-                    placeholder='fullname/e-mail'
+                    placeholder='e-mail'
                     name='user'
                     onChange={event => setUsername(event.target.value)} />
                 <br />
                 <article>
                     <input className={css.input}
-                        type="text"
+                        type="password"
                         placeholder='Password'
                         name='password:'
                         onChange={event => setPassword(event.target.value)}
