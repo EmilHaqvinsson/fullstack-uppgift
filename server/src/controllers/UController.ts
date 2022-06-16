@@ -163,8 +163,8 @@ const updateUserById = (req: Request, res: Response) => {
         Logger.debug(req.params.id + '= req.params.id')
         Logger.debug(req.body + '= req.body')
         const updatedUser: CreateU = {
-            firstName: req.body.firstname,
-            lastName: req.body.lastname,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             username: req.body.username,
             password: req.body.password
         }
