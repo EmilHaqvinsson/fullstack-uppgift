@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction, useContext } from 'react'
+import { useState, useEffect, SetStateAction } from 'react'
 import MessageService from '../..//utils/api/service/MessageService'
 import { ReadMessage } from '../../utils/interface/IMessage'
 import Card from '../../components/card/Card'

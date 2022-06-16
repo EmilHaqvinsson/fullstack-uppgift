@@ -10,6 +10,7 @@ function UserView() {
     const authenticatedUser = useUserContext()
     const user = authenticatedUser.authenticatedUser
     const userId = localStorage.getItem('userId')
+    
     const [userFirstName, setUserFirstName] = useState<string>('')
     const [userLastName, setUserLastName] = useState<string>('')
     const [userEmail, setUserEmail] = useState<string>('')
