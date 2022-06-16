@@ -5,17 +5,16 @@
 
 .profileWrapper {
     color: #333;
-    position: absolute;
     right: 20px;
     flex-direction: row;
-    padding: .5em;
+    padding: 25px 0 0 0;
 }
 
-span {
+button {
     margin: 0 .5em;
 }
 
-span:hover {
+button:hover {
     color: whitesmoke;
 }
 
@@ -23,32 +22,13 @@ span:hover {
     text-decoration: line-through;
 }
 
-/* .profileDropdown {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 200px;
-    z-index: 10;
-    /* margin-top: 5px; */
-/* }                                        */
 
-/* .profileWrapper:hover .profileDropdown {
-    display: none;
-} */
-
-/* 
-span {
-  display: block;
-  align-self: center;
-  cursor: pointer;
-  padding: 5px 10px;
+@media screen and (min-width: 1200px) {
+    .profileWrapper {
+        color: #333;
+            position: absolute;
+        right: 20px;
+        flex-direction: row;
+        padding: 25px 0 0 0;
+    }
 }
-
-span {
-  display: block;
-  align-self: center;
-  cursor: pointer;
-  padding: 5px 10px;
-  color: yellowgreen;
-}
-*/

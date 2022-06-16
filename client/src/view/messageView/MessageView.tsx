@@ -33,14 +33,14 @@ function MessageView() {
             }
     )}
 
-    const countdown: number = 30000
+    const countdown: number = 100
 
     function handleChange(e: { target: { value: SetStateAction<string> } }) {
         setText(e.target.value)
     }
 
     useEffect(() => {
-        console.log(`The timeout between checks for new messages is: ${countdown / 1000}s. Starting..`)
+        console.log(`The timeout between checks for new messages is: ${countdown / 100}s. Starting..`)
         const intervalCall = setInterval(() => {
             autoGet && getAllMessage()
         }, countdown);
@@ -91,9 +91,6 @@ function MessageView() {
                 <input type={"checkbox"} checked={autoGet} onChange={() => {
                     setAutoGet(!autoGet)
                 }} name={'autoget'} value={String(autoGet)}/>
-                <div className={css.statusOfMessages}>
-                    {isLoading ? `Looking for new messages on the server..` : `List of messages is up to date.`}
-                </div>
             </section>
 
             <div className={css.messageWrap}>

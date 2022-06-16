@@ -6,6 +6,7 @@
     grid-template-rows: repeat(1, 1fr);
     background-color: #A2D8FA;
     height: 200px;
+    text-align: center;
 }
 
 .text {
@@ -69,7 +70,7 @@
         width: 200px;
         margin: 0 100px 5px;
     }
-    
+
     .section {
         margin: 70px;
         border: solid 1px;
@@ -83,11 +84,13 @@
         margin-left: 0;
 
     }
-    .button{
+
+    .button {
         background-color: #22577E;
         width: 220px;
         margin: 10px 100px 10px;
     }
+
     .buttonCreateNewAccount {
         background-color: #00a854;
         width: 220px;
@@ -144,13 +147,14 @@
 /*desktop*/
 @media only screen and (min-width: 1200px) {
 
+    .section {
+        text-align: center;
+    }
 
     .imageSmurf {
         max-width: 28%;
         margin-top: auto;
     }
 
-    .section {
-        margin-left: auto;
-    }
 }
+
