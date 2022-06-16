@@ -7,8 +7,6 @@ import UserService from '../utils/api/service/userService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RoutingPath from '../utils/routing/RoutingPath';
-import { setTimeout } from 'timers';
-
 
 function RegisterView() {
     const [firstName, setFirstName] = useState<string>('')
@@ -18,10 +16,6 @@ function RegisterView() {
     const [text, setText] = useState<string>('')
     const [userCreated, setUserCreated] = useState<boolean>(false)
     const navigate = useNavigate()
-
-    // const toggleModal = () => {
-    //     setModal(!modal);
-    // }
     
     const createUser = () => {
         const payload: CreateOrUpdateUser = {
@@ -36,10 +30,10 @@ function RegisterView() {
                 if (response.status === 201) {
                     setUserCreated(true)
                     setText('New user "' + response.data.username + '" was created! Redirecting you to login..')
-                    sessionStorage.setItem('didCreateUser', 'true')
+                    localStorage.setItem('createdUser', response.data.username)
                     navigate(RoutingPath.home) 
                } else {
-                setText(response.data)
+                setText('Wrong username or password!')
                 }
                 console.log(response.data)
             })

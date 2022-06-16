@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RoutingPath from '../utils/routing/RoutingPath'
 import UserService from '../utils/api/service/UService'
@@ -13,6 +13,7 @@ export const SignInView = () => {
 	const [loginText, setLoginText] = useState<string>('')
 	const [userData, setUserData] = useState<object>({userId:'', authenticated: false})
 	const {authenticatedUser, setAuthenticatedUser} = useUserContext()
+	const [newUserCheck, setNewUserCheck] = useState<boolean>()
 	
 	const navigate = useNavigate()
 	
@@ -31,6 +32,8 @@ export const SignInView = () => {
 				localStorage.setItem("auth", String(response.data.message))
 				localStorage.setItem("userId", response.data.userId)
 				setLoginText('Login successful!')
+				console.log(userInfo)
+				return userInfo
 			})
 			.catch(function (error: any) {
 				console.log(error)
@@ -56,14 +59,23 @@ export const SignInView = () => {
 		}
 	}
 
+	const whatsInStore = localStorage.getItem('createdUser')
+
 	function checkCreatedUser() {
-		sessionStorage.getItem('didCreateUser') && setLoginText('New user was created!')
-		sessionStorage.clear()
+		if (whatsInStore) {
+			console.log('New user identified.. Proceed to update "loginText".')
+			setLoginText('New user with username ' + localStorage.getItem('createdUser')?.valueOf() + ' was created!')
+			localStorage.removeItem('createdUser')
+			setNewUserCheck(false)
+		}
 	}
+	useEffect(() => {
+	  !newUserCheck && checkCreatedUser()
+	  }, [])
 	
+	checkCreatedUser()
 	return (
 		<div>
-			<>{checkCreatedUser()}</>
 			<h1>Logga in</h1>
 			<div className={css.mainGridContainer}>
             <section className={css.section}>
@@ -84,6 +96,7 @@ export const SignInView = () => {
                 </article>
                 <br />
                 <button className={css.button} onClick={() => verifyUser()}>Log in</button>
+				<h3>{ loginText }</h3>
 				</section>
 				</div>
 			{/* <div>
@@ -92,7 +105,7 @@ export const SignInView = () => {
 				<span>Password: </span>
 				<input type='password' onChange={ event => setPassword(event.target.value) }/>
 			</div> */}
-			<h3>{ loginText }</h3>
+			
 			{/* {!authenticatedUser && <button onClick={ () => verifyUser() } children={ 'Log In' }/>} */}
 			{/* {authenticatedUser && <button onClick={ () => alert(authenticatedUser) } children={ 'Show user' }/>} */}
 			
