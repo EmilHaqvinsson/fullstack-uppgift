@@ -53,6 +53,7 @@ export const SignInView = () => {
 			setAuthenticatedUser(apiResponse)
 			// const savedUser = localStorage.getItem("auth")
 			// console.log(savedUser ? JSON.parse(savedUser) : undefined )
+			localStorage.setItem('username', username)
 			navigate(RoutingPath.user)
 		} else {
 			setLoginText('Wrong username or password')
