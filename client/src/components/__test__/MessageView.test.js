@@ -27,5 +27,5 @@ test('Change message in textarea', () => {
             value: ''
         }
     })
-    expect(inputElement.placeholder).toBe('')
+    expect(inputElement.placeholder).toBe('Skriv ett meddelande..')
 })

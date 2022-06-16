@@ -68,7 +68,8 @@ function UserView() {
                 <section>
                     <img className={css.imageUser} src={smurffen} alt="user"/>
                     <p>
-                        <input 
+                        <input
+                            data-testid='inputFullName'
                             type="text" 
                             placeholder="FirstName" 
                             value={userFirstName} 
@@ -76,11 +77,11 @@ function UserView() {
                             onChange={ event => setUserFirstName(event.target.value) 
                         }/> 
 
-                        <input type="text" placeholder="LastName" value={userLastName} disabled={isEdit} onChange={ event => setUserLastName(event.target.value) }/>
+                        <input data-testid='inputLastName' type="text" placeholder="LastName" value={userLastName} disabled={isEdit} onChange={ event => setUserLastName(event.target.value) }/>
                         <br/>
-                        <input type="text" placeholder="E-mail" value={userEmail} disabled={isEdit} onChange={ event => setUserEmail(event.target.value) }/>
-                        <input type="text" placeholder="Work" value={userWork} disabled={true}/>
-                        <input type="password" placeholder="password" value={userPassword} disabled={true} onChange={ event => setUserPassword(event.target.value) }/>
+                        <input data-testid='inputEmail' type="text" placeholder="E-mail" value={userEmail} disabled={isEdit} onChange={ event => setUserEmail(event.target.value) }/>
+                        <input data-testid='inputWork' type="text" placeholder="Work" value={userWork} disabled={true}/>
+                        <input data-testid='inputPassword' type="password" placeholder="password" value={userPassword} disabled={true} onChange={ event => setUserPassword(event.target.value) }/>
                     </p>
                 </section>
                 <section>
