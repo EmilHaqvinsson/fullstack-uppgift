@@ -61,8 +61,9 @@ export const SignInView = () => {
 	
 	return (
 		<div>
-			<h1>Logga in</h1>
+
 			<div className={css.mainGridContainer}>
+				<h1>Logga in</h1>
             <section className={css.section}>
                 <input
                        className={css.input}
@@ -89,8 +90,8 @@ export const SignInView = () => {
 				<span>Password: </span>
 				<input type='password' onChange={ event => setPassword(event.target.value) }/>
 			</div> */}
-			<h3>{ loginText }</h3>
-			{!authenticatedUser && <button onClick={ () => verifyUser() } children={ 'Log In' }/>}
+{/*			<h3>{ loginText }</h3>
+			{!authenticatedUser && <button onClick={ () => verifyUser() } children={ 'Log In' }/>}*/}
 			{/* {authenticatedUser && <button onClick={ () => alert(authenticatedUser) } children={ 'Show user' }/>} */}
 			
 		</div>
