@@ -71,12 +71,13 @@ function MessageView() {
         <>
             <section className={css.sectionContainer}>
                 <h2 data-testid='messageText' className={css.h1Text}>Lämna en smurfs</h2>
-                <div className={css.usernameInput}>Du kommenterar som &nbsp;
-                    <input className={css.input} 
+                <div className={css.usernameInput}>Du kommenterar som&nbsp;
+                    {/* <input className={css.input} 
                         id={'author'} 
                         // onChange={e => setAuthor(e.target.value)}
-                        value={String(authenticatedUser)}
-                        disabled={true}/>
+                        value='usernaem'
+                        disabled={true}/> */}
+                        <strong>{String(localStorage.getItem('username'))}</strong>
                 </div>
                 <br/>
                 <label htmlFor="description">
