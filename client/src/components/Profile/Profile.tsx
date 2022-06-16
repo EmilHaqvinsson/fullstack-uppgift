@@ -18,8 +18,8 @@ const Profile = () => {
 	
 	return (
 		<div className={css.profileWrapper}>
-			Välkommen tillbaka, { authenticatedUser }
-			<span onClick={ () => logout() }>Logout</span>
+			 { authenticatedUser }
+			<button onClick={ () => logout() }>Log out</button>
 		</div>
 	)
 }
