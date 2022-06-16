@@ -59,6 +59,8 @@ function UserView() {
 				console.log(error)
 			})
             setIsEdit(!isEdit)
+            localStorage.removeItem('username')
+            localStorage.setItem('username', editedEmail)
             return
         }
 	
