@@ -1,5 +1,5 @@
 import http from '../MyApi'
-import { CreateOrUpdateUser, LoginU } from '../../interface/Users'
+import { CreateOrUpdateUser } from '../../interface/Users'
 
 const verifyUserUrl = '/verifyUser'
 

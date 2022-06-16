@@ -34,7 +34,7 @@ const registerUser = async (req: Request, res: Response) => {
             Logger.http(dbResponse)
             res.status(StatusCode.CREATED).send(dbResponse)
         } else {
-            Logger.error('first- or lastname, password or username faild')
+            Logger.error('First or last name, password or username failed')
             res.status(StatusCode.BAD_REQUEST).send({
                 message: 'Incorect body'
             })
@@ -137,7 +137,7 @@ const getUserByNameAndEmail = (req: Request, res: Response) => {
     try {
         // @ts-ignore
         UModel.find({
-            firstName: req.params.name,
+            firstName: req.params.firstName,
             username: req.params.username
         }, '', (error: any, user: Array<ReadU>) => {
             if (error) {
@@ -145,9 +145,13 @@ const getUserByNameAndEmail = (req: Request, res: Response) => {
                 res.status(StatusCode.BAD_REQUEST).send({
                     error: 'Det gick inte att hämta användaren'
                 })
-            } else {
+            } else if (user.length > 1) {
                 Logger.http(user)
-                res.status(StatusCode.OK).send(user)
+                res.status(StatusCode.FORBIDDEN).send(user[0])
+            } else {
+                res.status(StatusCode.NOT_FOUND).send({
+                    message: `Could not find a user with firstname ${req.params.firstName} and email adress ${req.params.username}` 
+                })
             }
         })
     } catch (error) {
@@ -173,12 +177,15 @@ const updateUserById = (req: Request, res: Response) => {
         UModel.findByIdAndUpdate(req.params.id, updatedUser, {new: true}, (error: any, user: any) => {
             if (error) {
                 Logger.error(error)
-                res.status(StatusCode.BAD_REQUEST).send({
+                res.status(StatusCode.INTERNAL_SERVER_ERROR).send({
                     error: 'Fel vid uppdatering av användare'
                 })
             } else {
-                Logger.debug(user)
-                res.status(StatusCode.OK).send(user ? user : {
+                Logger.debug('THIS IS THE UPDATED USER: ' + user)
+                res.status(StatusCode.OK).send(
+                    user ? {
+                    message: `Succseffully updated user!\n${user}`} 
+                    : {
                     message: `Användare med id '${req.params.id}' hittades inte`
                 })
             }

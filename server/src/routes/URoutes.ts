@@ -7,7 +7,7 @@ const URoutes = (server: Express) => {
 
     server.get('/user/all', UController.getAllUsers)
     server.get('/user/:id', UController.getUserById)
-    server.get('/user/name/:name/:username', UController.getUserByNameAndEmail)
+    server.get('/user/name/:firstName/:username', UController.getUserByNameAndEmail)
 
     server.put('/user/:id', UController.updateUserById)
 
