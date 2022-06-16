@@ -19,6 +19,10 @@ const UService = {
 	getByName: (name: string) => {
 		return http.get(`/user/name/${ name }`)
 	},
+
+	getByEmail: (email: string) => {
+		return http.get(`/user/email/${ email }`)
+	},
 	
 	getById: (id: string) => {
 		return http.get(`/user/${ id }`)

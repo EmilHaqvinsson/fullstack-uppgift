@@ -13,7 +13,7 @@ const expect = Chai.expect
 
 const newU = {
     firstName: 'Lars',
-    lastName: 'Stromberg',
+    lastName: 'Strömben',
     username: 'lars@lars.com',
     password: 'Lars10'
 };
@@ -24,7 +24,7 @@ Logger.http(global_id)
 const updatedU = {
     firstName: 'Alexis',
     lastName: 'Flach',
-    username: 'alexis@alexis.com',
+    username: 'alexis@örnöga.com',
     password: 'alexis10'
 };
 

@@ -3,8 +3,10 @@ import MessageService from '../..//utils/api/service/MessageService'
 import { ReadMessage } from '../../utils/interface/IMessage'
 import Card from '../../components/card/Card'
 import css from './MessageView.module.css'
+import { useUserContext } from '../../utils/context/UserProvider'
 
 function MessageView() {
+    const {authenticatedUser} = useUserContext()
     const [message, setMessage] = useState<Array<ReadMessage>>([])
     const [text, setText] = useState('')
     const [author, setAuthor] = useState(localStorage.getItem(String('username')) ? localStorage.getItem(String('username')) : undefined)
@@ -15,7 +17,7 @@ function MessageView() {
     const postMessage = () => {
         const newMessage = {
             "message": text,
-            "author": author ? author : ''
+            "author": author ? author : authenticatedUser
         }
         MessageService.createMessage(newMessage)
             .then(response => {
@@ -25,10 +27,11 @@ function MessageView() {
             )
             .catch(error => {
                 console.log(error)
-            })
+            }).finally(() => {
         setAuthor('')
         setText('')
-    }
+            }
+    )}
 
     const countdown: number = 30000
 
@@ -68,11 +71,11 @@ function MessageView() {
         <>
             <section className={css.sectionContainer}>
                 <h2 data-testid='messageText' className={css.h1Text}>Lämna en smurfs</h2>
-                <div className={css.usernameInput}>Du kommenterar som:&nbsp;
+                <div className={css.usernameInput}>Du kommenterar som &nbsp;
                     <input className={css.input} 
                         id={'author'} 
                         // onChange={e => setAuthor(e.target.value)}
-                        defaultValue={String(localStorage.getItem('username'))}
+                        value={String(authenticatedUser)}
                         disabled={true}/>
                 </div>
                 <br/>
