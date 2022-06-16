@@ -68,16 +68,27 @@ const verifyUser = async (req: Request, res: Response) => {
 		Logger.debug('the answer from the db is: ' + dbQuery)
 		
 		// Verify password in bcrypt
-		let response: VerifyUser | undefined
+		let response: VerifyUser | undefined 
 		await bcrypt.compare(String(password), dbQuery[0].password)
 			.then(function (result) {
-				response = {
-                    message: result,
-					userId: String(dbQuery[0].id )                   
-				}
-                Logger.debug('bcrypt resulted in: ' + response.message + ', '+ response.userId + ', which hopefully is the users ID')
-			})
-		res.status(StatusCode.OK).send(response)
+                if (result === true) {
+                    response = {
+                        message: result,
+					    userId: String(dbQuery[0].id)
+				    }
+                    res.status(StatusCode.OK)
+                } else {
+                        response = {
+                            message: result,
+                            userId: String(dbQuery[0].id)
+                    }
+                    const message = 'Wrong username or password!'
+                    res.status(StatusCode.FORBIDDEN)
+                    return message
+                }
+                Logger.debug('The authentification was: ' + response.message + ', and the users ID is ' + response.userId)
+    })
+		res.send(response)
 		
 	} catch (error) {
 		res.status(StatusCode.INTERNAL_SERVER_ERROR)
