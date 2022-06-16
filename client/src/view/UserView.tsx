@@ -13,14 +13,11 @@ function UserView() {
     const [userFirstName, setUserFirstName] = useState<string>('')
     const [userLastName, setUserLastName] = useState<string>('')
     const [userEmail, setUserEmail] = useState<string>('')
-    const [userWork, setUserWork] = useState<string>('Går på a-kassa')
     const [userPassword, setUserPassword] = useState<string>('')
 
     const [editedFirstName, setEditedFirstName] = useState<string>('')
     const [editedLastName, setEditedLastName] = useState<string>('')
     const [editedEmail, setEditedEmail] = useState<string>('')
-    const [editedWork, setEditedWork] = useState<string>('Går på a-kassa')
-    const [editedPassword, setEditedPassword] = useState<string>('')
 
 
     console.log('value of "authenticatedUser": ' + user)
@@ -35,7 +32,6 @@ function UserView() {
             setUserFirstName(result.data.firstName)
             setUserLastName(result.data.lastName)
             setUserEmail(result.data.username)
-            setUserWork('')
             setUserPassword(result.data.password)
             return
         }).catch((err) => {
@@ -83,7 +79,7 @@ function UserView() {
                         <input data-testid='inputEmail' type="text" placeholder="E-mail" disabled={isEdit} onChange={ event => setEditedEmail(event.target.value) }/>
                         <input data-testid='inputWork' type="text" placeholder="Work" disabled={true}/>
                         <br/>
-                        <input data-testid='inputPassword' type="password" placeholder="password" disabled={true} onChange={ event => setEditedPassword(event.target.value) }/>
+                        <input data-testid='inputPassword' type="password" placeholder="password" disabled={true}/>
                     </p>
                 </section>
                 <section>
