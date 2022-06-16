@@ -5,8 +5,9 @@ import { findAllByDisplayValue } from "@testing-library/react";
 import { CreateOrUpdateUser } from '../utils/interface/Users';
 import UserService from '../utils/api/service/userService';
 import { useState } from 'react';
-import { setTimeout } from 'timers/promises';
 import { useNavigate } from 'react-router-dom';
+import RoutingPath from '../utils/routing/RoutingPath';
+import { setTimeout } from 'timers';
 
 
 function RegisterView() {
@@ -17,9 +18,11 @@ function RegisterView() {
     const [text, setText] = useState<string>('')
     const [userCreated, setUserCreated] = useState<boolean>(false)
     const navigate = useNavigate()
+
     // const toggleModal = () => {
     //     setModal(!modal);
     // }
+    
     const createUser = () => {
         const payload: CreateOrUpdateUser = {
             firstName: firstName, 
@@ -33,6 +36,8 @@ function RegisterView() {
                 if (response.status === 201) {
                     setUserCreated(true)
                     setText('New user "' + response.data.username + '" was created! Redirecting you to login..')
+                    sessionStorage.setItem('didCreateUser', 'true')
+                    navigate(RoutingPath.home) 
                } else {
                 setText(response.data)
                 }

@@ -21,19 +21,16 @@ export const SignInView = () => {
             username: username,
             password: password
         }
-
+		
 		UserService.verifyUser(payload)
 			.then(function(response: { data: { message: boolean, userId: string } }) {
 				login(username)
-				console.log('Your password matches? ' + response.data.message)
-				console.log('The ID of the user that\'s logging in is: ' + response.data.userId)
 				setUserId(response.data.userId)
 				const userInfo = {userId: response.data.userId, authenticated: response.data.message}
 				setUserData(userInfo)
-				console.log('The line before this one SHOULD HAVE SAVED THAT SHIT INTO THE OBJECT userInfo... This is that object:')
-				console.log(userInfo.userId)
 				localStorage.setItem("auth", String(response.data.message))
 				localStorage.setItem("userId", response.data.userId)
+				setLoginText('Login successful!')
 			})
 			.catch(function (error: any) {
 				console.log(error)
@@ -44,7 +41,7 @@ export const SignInView = () => {
 		if (authenticatedUser) {
 			navigate(RoutingPath.user)
 		} else {
-			navigate(RoutingPath.login)
+			navigate(RoutingPath.home)
 		}
 	}
 	
@@ -58,9 +55,15 @@ export const SignInView = () => {
 			setLoginText('Wrong username or password')
 		}
 	}
+
+	function checkCreatedUser() {
+		sessionStorage.getItem('didCreateUser') && setLoginText('New user was created!')
+		sessionStorage.clear()
+	}
 	
 	return (
 		<div>
+			<>{checkCreatedUser()}</>
 			<h1>Logga in</h1>
 			<div className={css.mainGridContainer}>
             <section className={css.section}>
@@ -90,7 +93,7 @@ export const SignInView = () => {
 				<input type='password' onChange={ event => setPassword(event.target.value) }/>
 			</div> */}
 			<h3>{ loginText }</h3>
-			{!authenticatedUser && <button onClick={ () => verifyUser() } children={ 'Log In' }/>}
+			{/* {!authenticatedUser && <button onClick={ () => verifyUser() } children={ 'Log In' }/>} */}
 			{/* {authenticatedUser && <button onClick={ () => alert(authenticatedUser) } children={ 'Show user' }/>} */}
 			
 		</div>

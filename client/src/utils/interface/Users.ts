@@ -1,7 +1,6 @@
 export interface CreateOrUpdateUser {
-	firstName?: string
-	lastName?: string
-	userId?: string
+	firstName: string
+	lastName: string
 	username: string
 	password: string
 }
