@@ -44,9 +44,9 @@ function UserView() {
 
     function saveChanges() {
 		const payload: CreateOrUpdateUser = {
-            username: editedEmail,
-            firstName: editedFirstName,
-            lastName: editedLastName,
+            username: editedEmail.length < 1 ? userEmail : editedEmail,
+            firstName: editedFirstName.length < 1 ? userFirstName : editedFirstName,
+            lastName: editedLastName.length < 1 ? userLastName : editedLastName,
             password: userPassword
         }
         
