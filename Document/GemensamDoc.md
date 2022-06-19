@@ -9,7 +9,8 @@ Frontend kopplad med React, hela projektet ska vara skrivet i TypeScript.
 
 Vår projektplan hittar du nedan på länken.
 
-[Trello]()
+[Trello](https://trello.com/b/B8JAMQuX/fullstack)
+
 
 Vi har använt oss av följande npm-paket till vårt arbete:
 
@@ -62,13 +63,13 @@ med användare som inte fanns. Men det beslutades att vi skulle följa kod vi ha
 
 ### Reflektioner:
 
-Arbetet har gått relativt bra. Det har varit svårt att få till våra srum möten ibland och då har vi fått skriva i
+Arbetet har gått relativt bra. Det har varit svårt att få till våra scrum möten ibland och då har vi fått skriva i
 Discord istället för att ingen ska behöva stå stilla i sitt arbete. Vi har även fått dela upp backend då vi alla har
 velat jobba i backend sen har vi fått hjälpas åt så gott vi kan med frontend biten. Testerna har tex bara en person
 gjort. Allt annat har vi fått dela upp och hjälpas åt med, så man har fått ta en fil åt gången så inte fler sitter och
 jobbar med samma. Namngivandet har varit lite förvirrande i både filer och funktioner då dom varit "förkortade" tex
 uController, det är inte så beskrivande vad den innehåller.
 
-Sen har vi fått arbeta mer med GitHub hur man anväder det i en grupp. Oftast har det gått smärtfritt, men ibland har vi
+Sen har vi fått arbeta mer med GitHub hur man använder det i en grupp. Oftast har det gått smärtfritt, men ibland har vi
 stött på konflikter. Det har varit lärorikt och man har fått tänka både en oh två gånger och se till så man står i rätt
 branch.

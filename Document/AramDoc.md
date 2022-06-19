@@ -21,11 +21,11 @@ Jag felsökte genom inspektorn.
 * #### Vad gick bra
 
 Med tiden blev vi mycket bättre på Scram. Det är lite svårt i början när man inte känner varandra så mycket eller hur mycket kunskap finns i gruppen. 
-Men jag tycker att vi gjorde ett fantastisk jobb tillsammans. Jag är glad över att få jobbat med Emil och Micheala.
+Men jag tycker att vi gjorde ett fantastiskt jobb tillsammans. Jag är glad över att få jobbat med Emil och Micheala.
 
 * #### Vad gick dåligt
 
-Jira planeringen gick sådär. vi har inte vant oss vid det ännu.
+Jira planeringen gick sådär. Vi har inte vant oss vid det ännu.
 
 * #### Vad har du lärt dig
 
@@ -44,7 +44,7 @@ Det gjorde jag för att ifall om någon annan skulle ta över den delen så finn
 ### Lämna förslag på förbättringar av din kod.
 
 Med Lite mer tid hade jag gjort bättre och lite mer proffsigt.
-Jag hade velat förbättra utseendet på inloggnings sidan. det ser sådär ut. men jag är okej med det.
+Jag hade velat förbättra utseendet på inloggnings sidan, det ser sådär ut nu.
 
 ### Lämna exempel på lösningar du valde att inte implementera
 
